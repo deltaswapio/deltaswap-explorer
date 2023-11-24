@@ -2,9 +2,9 @@ package types
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/deltaswapio/deltaswap/sdk/vaa"
+	"github.com/gagliardetto/solana-go"
+	"strings"
 )
 
 type Address struct {

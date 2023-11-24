@@ -20,7 +20,7 @@ import { SuiWatcher } from './SuiWatcher';
 import { makeVAAInput, WatcherOptionTypes } from './types';
 import { SeiExplorerWatcher } from './SeiExplorerWatcher';
 import { checkIfDateIsInMilliseconds } from '../utils/date';
-import { WormchainWatcher } from './WormchainWatcher';
+import { DeltachainWatcher } from './DeltachainWatcher';
 
 export function makeFinalizedWatcher(chainName: ChainName): WatcherOptionTypes {
   if (chainName === 'solana') {
@@ -55,8 +55,8 @@ export function makeFinalizedWatcher(chainName: ChainName): WatcherOptionTypes {
     return new SuiWatcher();
   } else if (chainName === 'sei') {
     return new SeiExplorerWatcher();
-  } else if (chainName === 'wormchain') {
-    return new WormchainWatcher();
+  } else if (chainName === 'deltachain') {
+    return new DeltachainWatcher();
   } else {
     throw new Error(`Attempted to create Event Watcher for unsupported chain: [${chainName}]`);
   }

@@ -3068,7 +3068,7 @@ const docTemplate = `{
                 "ChainIDBtc",
                 "ChainIDBase",
                 "ChainIDSei",
-                "ChainIDWormchain",
+                "ChainIDDeltachain",
                 "ChainIDSepolia"
             ]
         },

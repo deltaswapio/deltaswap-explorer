@@ -5,6 +5,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
 	"github.com/deltaswapio/deltaswap-explorer/api/middleware" // required by swaggo
 	_ "github.com/deltaswapio/deltaswap-explorer/api/response" // required by swaggo
+	"github.com/gofiber/fiber/v2"
 	"go.uber.org/zap"
 )
 

@@ -9,7 +9,7 @@ import (
 
 	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/token"
 	"github.com/deltaswapio/deltaswap-explorer/analytics/internal/metrics"
-	wormscanNotionalCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
+	deltaswapscanNotionalCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
 	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
@@ -35,7 +35,7 @@ type Metric struct {
 	apiBucketInfinite        api.WriteAPIBlocking
 	apiBucket30Days          api.WriteAPIBlocking
 	apiBucket24Hours         api.WriteAPIBlocking
-	notionalCache            wormscanNotionalCache.NotionalLocalCacheReadable
+	notionalCache            deltaswapscanNotionalCache.NotionalLocalCacheReadable
 	metrics                  metrics.Metrics
 	getTransferredTokenByVaa token.GetTransferredTokenByVaa
 	logger                   *zap.Logger
@@ -50,7 +50,7 @@ func New(
 	bucketInifite string,
 	bucket30Days string,
 	bucket24Hours string,
-	notionalCache wormscanNotionalCache.NotionalLocalCacheReadable,
+	notionalCache deltaswapscanNotionalCache.NotionalLocalCacheReadable,
 	metrics metrics.Metrics,
 	getTransferredTokenByVaa token.GetTransferredTokenByVaa,
 	logger *zap.Logger,

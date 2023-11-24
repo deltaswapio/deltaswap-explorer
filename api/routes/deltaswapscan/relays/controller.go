@@ -6,6 +6,7 @@ import (
 
 	"github.com/deltaswapio/deltaswap-explorer/api/handlers/relays"
 	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
+	"github.com/gofiber/fiber/v2"
 	"go.uber.org/zap"
 )
 

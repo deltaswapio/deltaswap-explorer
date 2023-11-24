@@ -276,14 +276,14 @@ require (
 
 require (
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
-	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20231124191152-bbb28b8d69ea
 )
 
 // Needed for cosmos-sdk based chains.  See
 // https://github.com/cosmos/cosmos-sdk/issues/10925 for more details.
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
-replace github.com/wormhole-foundation/wormchain => github.com/deltaswapio/deltaswap/wormchain v0.0.0-20231121163344-bcc59b69f4af
+replace github.com/wormhole-foundation/deltachain => github.com/deltaswapio/deltaswap/deltachain v0.0.0-20231121163344-bcc59b69f4af
 
 replace github.com/CosmWasm/wasmd v0.30.0 => github.com/wormhole-foundation/wasmd v0.30.0-wormchain-1
 

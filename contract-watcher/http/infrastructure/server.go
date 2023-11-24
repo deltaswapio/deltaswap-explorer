@@ -18,7 +18,7 @@ func NewServer(logger *zap.Logger, port string, pprofEnabled bool, checks ...hea
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
 
 	// Configure middleware
-	prometheus := fiberprometheus.New("wormscan-contract-watcher")
+	prometheus := fiberprometheus.New("deltaswapscan-contract-watcher")
 	prometheus.RegisterAt(app, "/metrics")
 	app.Use(prometheus.Middleware)
 

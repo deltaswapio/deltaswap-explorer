@@ -17,7 +17,7 @@ type Server struct {
 
 func NewServer(logger *zap.Logger, port string, pprofEnabled bool, vaaController *vaa.Controller, checks ...health.Check) *Server {
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
-	prometheus := fiberprometheus.New("wormscan-tx-tracker")
+	prometheus := fiberprometheus.New("deltaswapscan-tx-tracker")
 	prometheus.RegisterAt(app, "/metrics")
 
 	// config use of middlware.

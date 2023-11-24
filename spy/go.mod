@@ -18,7 +18,7 @@ require (
 
 require (
 	github.com/go-redis/redis/v8 v8.11.5
-	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20231124191152-bbb28b8d69ea
 )
 
 require (

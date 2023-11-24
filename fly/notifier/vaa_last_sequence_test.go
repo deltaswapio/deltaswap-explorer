@@ -12,7 +12,7 @@ func TestNewLastSequenceNotifier(t *testing.T) {
 
 	l := NewLastSequenceNotifier(nil, "mainnet-staging")
 
-	assert.Equal(t, "mainnet-staging:wormscan:vaa-max-sequence", l.prefix)
+	assert.Equal(t, "mainnet-staging:deltaswapscan:vaa-max-sequence", l.prefix)
 }
 
 func TestNewLastSequenceNotifierBackwardsCompat(t *testing.T) {
@@ -21,7 +21,7 @@ func TestNewLastSequenceNotifierBackwardsCompat(t *testing.T) {
 
 	l := NewLastSequenceNotifier(nil, prefix)
 
-	assert.Equal(t, "wormscan:vaa-max-sequence", l.prefix)
+	assert.Equal(t, "deltaswapscan:vaa-max-sequence", l.prefix)
 }
 
 func TestNewLastSequenceNotifierWithPrefix(t *testing.T) {
@@ -33,5 +33,5 @@ func TestNewLastSequenceNotifierWithPrefix(t *testing.T) {
 
 	l := NewLastSequenceNotifier(nil, prefix)
 
-	assert.Equal(t, "mainnet-staging:wormscan:vaa-max-sequence", l.prefix)
+	assert.Equal(t, "mainnet-staging:deltaswapscan:vaa-max-sequence", l.prefix)
 }

@@ -28,7 +28,7 @@ const ChainIDOsmosis sdk.ChainID = 20
 const ChainIDEvmos sdk.ChainID = 4001
 const ChainIDKujira sdk.ChainID = 4002
 
-type WormchainTxDetail struct {
+type DeltachainTxDetail struct {
 }
 type TxDetail struct {
 	// From is the address that signed the transaction, encoded in the chain's native format.
@@ -81,7 +81,7 @@ func Initialize(cfg *config.RpcProviderSettings) {
 	rateLimitersByChain[sdk.ChainIDTerra2] = convertToRateLimiter(cfg.Terra2RequestsPerMinute)
 	rateLimitersByChain[sdk.ChainIDSui] = convertToRateLimiter(cfg.SuiRequestsPerMinute)
 	rateLimitersByChain[sdk.ChainIDXpla] = convertToRateLimiter(cfg.XplaRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDWormchain] = convertToRateLimiter(cfg.WormchainRequestsPerMinute)
+	rateLimitersByChain[sdk.ChainIDDeltachain] = convertToRateLimiter(cfg.DeltachainRequestsPerMinute)
 	rateLimitersByChain[ChainIDOsmosis] = convertToRateLimiter(cfg.OsmosisRequestsPerMinute)
 	rateLimitersByChain[sdk.ChainIDSei] = convertToRateLimiter(cfg.SeiRequestsPerMinute)
 
@@ -109,7 +109,7 @@ func Initialize(cfg *config.RpcProviderSettings) {
 	baseUrlsByChain[sdk.ChainIDTerra2] = cfg.Terra2BaseUrl
 	baseUrlsByChain[sdk.ChainIDSui] = cfg.SuiBaseUrl
 	baseUrlsByChain[sdk.ChainIDXpla] = cfg.XplaBaseUrl
-	baseUrlsByChain[sdk.ChainIDWormchain] = cfg.WormchainBaseUrl
+	baseUrlsByChain[sdk.ChainIDDeltachain] = cfg.DeltachainBaseUrl
 	baseUrlsByChain[sdk.ChainIDSei] = cfg.SeiBaseUrl
 }
 
@@ -152,12 +152,12 @@ func FetchTx(
 		sdk.ChainIDOptimism,
 		sdk.ChainIDPolygon:
 		fetchFunc = fetchEthTx
-	case sdk.ChainIDWormchain:
+	case sdk.ChainIDDeltachain:
 		rateLimiter, ok := rateLimitersByChain[ChainIDOsmosis]
 		if !ok {
 			return nil, errors.New("found no rate limiter for chain osmosis")
 		}
-		apiWormchain := &apiWormchain{
+		apiDeltachain := &apiDeltachain{
 			osmosisUrl:         cfg.OsmosisBaseUrl,
 			osmosisRateLimiter: rateLimiter,
 			evmosUrl:           cfg.EvmosBaseUrl,
@@ -166,16 +166,16 @@ func FetchTx(
 			kujiraRateLimiter:  rateLimiter,
 			p2pNetwork:         p2pNetwork,
 		}
-		fetchFunc = apiWormchain.fetchWormchainTx
+		fetchFunc = apiDeltachain.fetchDeltachainTx
 	case sdk.ChainIDSei:
-		rateLimiter, ok := rateLimitersByChain[sdk.ChainIDWormchain]
+		rateLimiter, ok := rateLimitersByChain[sdk.ChainIDDeltachain]
 		if !ok {
 			return nil, errors.New("found no rate limiter for chain osmosis")
 		}
 		apiSei := &apiSei{
-			wormchainRateLimiter: rateLimiter,
-			wormchainUrl:         cfg.WormchainBaseUrl,
-			p2pNetwork:           p2pNetwork,
+			deltachainRateLimiter: rateLimiter,
+			deltachainUrl:         cfg.DeltachainBaseUrl,
+			p2pNetwork:            p2pNetwork,
 		}
 		fetchFunc = apiSei.fetchSeiTx
 

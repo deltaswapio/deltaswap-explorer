@@ -2,7 +2,7 @@ package metrics
 
 import sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 
-const serviceName = "wormscan-fly"
+const serviceName = "deltaswapscan-fly"
 
 type Metrics interface {
 	// vaa metrics

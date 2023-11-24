@@ -1,4 +1,4 @@
-package wormscan
+package deltaswapscan
 
 import (
 	"time"
@@ -10,13 +10,13 @@ import (
 	relayssvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/relays"
 	trxsvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/transactions"
 	vaasvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/address"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/governor"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/infrastructure"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/observations"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/relays"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/transactions"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/address"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/observations"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/relays"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/transactions"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan/vaa"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/cors"

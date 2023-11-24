@@ -8,6 +8,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
 	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
+	"github.com/gofiber/fiber/v2"
 	"github.com/shopspring/decimal"
 	"go.uber.org/zap"
 )

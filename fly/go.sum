@@ -142,7 +142,7 @@ github.com/cenkalti/backoff/v4 v4.1.0/go.mod h1:scbssz8iZGpm3xbr14ovlUdkxfGXNInq
 github.com/cenkalti/backoff/v4 v4.2.0 h1:HN5dHm3WBOgndBH6E8V0q2jIYIR3s9yglV8k/+MN3u4=
 github.com/cenkalti/backoff/v4 v4.2.0/go.mod h1:Y3VNntkOUPxTVeUxJ/G5vcM//AlwfmyYozVcomhLiZE=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
-github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af h1:YtbGlv19JuZctztesiRfOj+t3QDrhPsUi9tLrTBHqxc=
+github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af h1:HDN7Fm+NmMtVM3R21H9SfUzhGijRe7Rtbn5Jv+XZxTU=
 github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af/go.mod h1:ZxIOuzMQQ1T5PmbmQSRpN9r8Wjj+7H/xQJ9jG9EScPM=
 github.com/cespare/xxhash v1.1.0 h1:a6HrQnmkObjyL+Gs60czilIUGqrzKutQD6XZog3p+ko=
 github.com/cespare/xxhash v1.1.0/go.mod h1:XrSqR1VqqWfGrhpAt58auRo0WTKS1nRRg3ghfAqPWnc=
@@ -926,7 +926,7 @@ github.com/wormhole-foundation/cosmos-sdk v0.45.9-wormhole h1:oWRuBpqReZoLX3pXeq
 github.com/wormhole-foundation/cosmos-sdk v0.45.9-wormhole/go.mod h1:Z5M4TX7PsHNHlF/1XanI2DIpORQ+Q/st7oaeufEjnvU=
 github.com/wormhole-foundation/wasmd v0.30.0-wormchain-1 h1:1+u753gKU44slOOLNdk7LiE5QtZU+3joVuQuU2xW1Bg=
 github.com/wormhole-foundation/wasmd v0.30.0-wormchain-1/go.mod h1:BcwmiI8b2fR2MGioz3HeVvON5QjSDfrnUbGu0gKRk5U=
-github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5 h1:rrOyHd+H9a6Op1iUyZNCaI5v9D1syq8jDAYyX/2Q4L8=
+github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5 h1:lnRmENxP/tvIL5E216KmlyScER5+oMSZKTY8He8cjkk=
 github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5/go.mod h1:jmbK+tPMlEdZQfYU7LP0vwDf6ADVZH5XgEAbfKFOT1I=
 github.com/xdg-go/pbkdf2 v1.0.0 h1:Su7DPu48wXMwC3bs7MCNG+z4FhcyEuz5dlvchbq0B0c=
 github.com/xdg-go/pbkdf2 v1.0.0/go.mod h1:jrpuAogTd400dnrH08LKmI/xc1MbPOebTwRqcT5RDeI=

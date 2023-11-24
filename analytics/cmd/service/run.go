@@ -21,12 +21,13 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/analytics/internal/metrics"
 	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
 	"github.com/deltaswapio/deltaswap-explorer/analytics/queue"
-	wormscanNotionalCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
+	deltaswapscanNotionalCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
 	"github.com/deltaswapio/deltaswap-explorer/common/client/parser"
 	sqs_client "github.com/deltaswapio/deltaswap-explorer/common/client/sqs"
 	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
 	health "github.com/deltaswapio/deltaswap-explorer/common/health"
 	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/go-redis/redis/v8"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
@@ -221,13 +222,13 @@ func newNotionalCache(
 	ctx context.Context,
 	cfg *config.Configuration,
 	logger *zap.Logger,
-) (wormscanNotionalCache.NotionalLocalCacheReadable, error) {
+) (deltaswapscanNotionalCache.NotionalLocalCacheReadable, error) {
 
 	// use a distributed cache and for notional a pubsub to sync local cache.
 	redisClient := redis.NewClient(&redis.Options{Addr: cfg.CacheURL})
 
 	// get notional cache client and init load to local cache
-	notionalCache, err := wormscanNotionalCache.NewNotionalCache(ctx, redisClient, cfg.CachePrefix, cfg.CacheChannel, logger)
+	notionalCache, err := deltaswapscanNotionalCache.NewNotionalCache(ctx, redisClient, cfg.CachePrefix, cfg.CacheChannel, logger)
 	if err != nil {
 		return nil, fmt.Errorf("failed to create notional cache client: %w", err)
 	}

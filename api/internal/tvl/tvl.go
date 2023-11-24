@@ -6,21 +6,21 @@ import (
 	"time"
 
 	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
-	wormscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
+	deltaswapscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
 	"go.uber.org/zap"
 )
 
 // Tvl is the tvl client.
 type Tvl struct {
 	api        *TvlAPI
-	cache      wormscanCache.Cache
+	cache      deltaswapscanCache.Cache
 	tvlKey     string
 	expiration time.Duration
 	logger     *zap.Logger
 }
 
 // NewTVL init a new tvl client.
-func NewTVL(p2pNetwork string, cache wormscanCache.Cache, tvlKey string, expiration int, logger *zap.Logger) *Tvl {
+func NewTVL(p2pNetwork string, cache deltaswapscanCache.Cache, tvlKey string, expiration int, logger *zap.Logger) *Tvl {
 	return &Tvl{
 		api:        NewTvlAPI(p2pNetwork),
 		cache:      cache,
@@ -37,7 +37,7 @@ func (t *Tvl) Get(ctx context.Context) (string, error) {
 	if err == nil {
 		return tvl, nil
 	}
-	if errors.Is(err, wormscanCache.ErrInternal) {
+	if errors.Is(err, deltaswapscanCache.ErrInternal) {
 		t.logger.Error("error getting tvl from cache",
 			zap.Error(err),
 			zap.String("key", t.tvlKey))

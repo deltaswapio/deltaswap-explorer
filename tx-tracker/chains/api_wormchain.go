@@ -11,7 +11,7 @@ import (
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
-type apiWormchain struct {
+type apiDeltachain struct {
 	osmosisUrl         string
 	osmosisRateLimiter *time.Ticker
 	kujiraUrl          string
@@ -21,7 +21,7 @@ type apiWormchain struct {
 	p2pNetwork         string
 }
 
-type wormchainTxDetail struct {
+type deltachainTxDetail struct {
 	Jsonrpc string `json:"jsonrpc"`
 	ID      int    `json:"id"`
 	Result  struct {
@@ -70,14 +70,14 @@ type worchainTx struct {
 	srcChannel, dstChannel, sender, receiver, timestamp, sequence string
 }
 
-func fetchWormchainDetail(ctx context.Context, baseUrl string, rateLimiter *time.Ticker, txHash string) (*worchainTx, error) {
+func fetchDeltachainDetail(ctx context.Context, baseUrl string, rateLimiter *time.Ticker, txHash string) (*worchainTx, error) {
 	uri := fmt.Sprintf("%s/tx?hash=%s", baseUrl, txHash)
 	body, err := httpGet(ctx, rateLimiter, uri)
 	if err != nil {
 		return nil, err
 	}
 
-	var tx wormchainTxDetail
+	var tx deltachainTxDetail
 	err = json.Unmarshal(body, &tx)
 	if err != nil {
 		return nil, err
@@ -372,7 +372,7 @@ type WorchainAttributeTxDetail struct {
 	OriginAddress string      `bson:"originAddress"`
 }
 
-func (a *apiWormchain) fetchWormchainTx(
+func (a *apiDeltachain) fetchDeltachainTx(
 	ctx context.Context,
 	rateLimiter *time.Ticker,
 	baseUrl string,
@@ -381,66 +381,66 @@ func (a *apiWormchain) fetchWormchainTx(
 
 	txHash = txHashLowerCaseWith0x(txHash)
 
-	wormchainTx, err := fetchWormchainDetail(ctx, baseUrl, rateLimiter, txHash)
+	deltachainTx, err := fetchDeltachainDetail(ctx, baseUrl, rateLimiter, txHash)
 	if err != nil {
 		return nil, err
 	}
 
-	// Verify if this transaction is from osmosis by wormchain
-	if a.isOsmosisTx(wormchainTx) {
-		osmosisTx, err := fetchOsmosisDetail(ctx, a.osmosisUrl, a.osmosisRateLimiter, wormchainTx.sequence, wormchainTx.timestamp, wormchainTx.srcChannel, wormchainTx.dstChannel)
+	// Verify if this transaction is from osmosis by deltachain
+	if a.isOsmosisTx(deltachainTx) {
+		osmosisTx, err := fetchOsmosisDetail(ctx, a.osmosisUrl, a.osmosisRateLimiter, deltachainTx.sequence, deltachainTx.timestamp, deltachainTx.srcChannel, deltachainTx.dstChannel)
 		if err != nil {
 			return nil, err
 		}
 		return &TxDetail{
 			NativeTxHash: txHash,
-			From:         wormchainTx.receiver,
+			From:         deltachainTx.receiver,
 			Attribute: &AttributeTxDetail{
-				Type: "wormchain-gateway",
+				Type: "deltachain-gateway",
 				Value: &WorchainAttributeTxDetail{
 					OriginChainID: ChainIDOsmosis,
 					OriginTxHash:  osmosisTx.txHash,
-					OriginAddress: wormchainTx.sender,
+					OriginAddress: deltachainTx.sender,
 				},
 			},
 		}, nil
 	}
 
-	// Verify if this transaction is from kujira by wormchain
-	if a.isKujiraTx(wormchainTx) {
-		kujiraTx, err := fetchKujiraDetail(ctx, a.kujiraUrl, a.kujiraRateLimiter, wormchainTx.sequence, wormchainTx.timestamp, wormchainTx.srcChannel, wormchainTx.dstChannel)
+	// Verify if this transaction is from kujira by deltachain
+	if a.isKujiraTx(deltachainTx) {
+		kujiraTx, err := fetchKujiraDetail(ctx, a.kujiraUrl, a.kujiraRateLimiter, deltachainTx.sequence, deltachainTx.timestamp, deltachainTx.srcChannel, deltachainTx.dstChannel)
 		if err != nil {
 			return nil, err
 		}
 		return &TxDetail{
 			NativeTxHash: txHash,
-			From:         wormchainTx.receiver,
+			From:         deltachainTx.receiver,
 			Attribute: &AttributeTxDetail{
-				Type: "wormchain-gateway",
+				Type: "deltachain-gateway",
 				Value: &WorchainAttributeTxDetail{
 					OriginChainID: ChainIDKujira,
 					OriginTxHash:  kujiraTx.txHash,
-					OriginAddress: wormchainTx.sender,
+					OriginAddress: deltachainTx.sender,
 				},
 			},
 		}, nil
 	}
 
-	// Verify if this transaction is from evmos by wormchain
-	if a.isEvmosTx(wormchainTx) {
-		evmosTx, err := fetchEvmosDetail(ctx, a.evmosUrl, a.evmosRateLimiter, wormchainTx.sequence, wormchainTx.timestamp, wormchainTx.srcChannel, wormchainTx.dstChannel)
+	// Verify if this transaction is from evmos by deltachain
+	if a.isEvmosTx(deltachainTx) {
+		evmosTx, err := fetchEvmosDetail(ctx, a.evmosUrl, a.evmosRateLimiter, deltachainTx.sequence, deltachainTx.timestamp, deltachainTx.srcChannel, deltachainTx.dstChannel)
 		if err != nil {
 			return nil, err
 		}
 		return &TxDetail{
 			NativeTxHash: txHash,
-			From:         wormchainTx.receiver,
+			From:         deltachainTx.receiver,
 			Attribute: &AttributeTxDetail{
-				Type: "wormchain-gateway",
+				Type: "deltachain-gateway",
 				Value: &WorchainAttributeTxDetail{
 					OriginChainID: ChainIDEvmos,
 					OriginTxHash:  evmosTx.txHash,
-					OriginAddress: wormchainTx.sender,
+					OriginAddress: deltachainTx.sender,
 				},
 			},
 		}, nil
@@ -448,11 +448,11 @@ func (a *apiWormchain) fetchWormchainTx(
 
 	return &TxDetail{
 		NativeTxHash: txHash,
-		From:         wormchainTx.receiver,
+		From:         deltachainTx.receiver,
 	}, nil
 }
 
-func (a *apiWormchain) isOsmosisTx(tx *worchainTx) bool {
+func (a *apiDeltachain) isOsmosisTx(tx *worchainTx) bool {
 	if a.p2pNetwork == domain.P2pMainNet {
 		return tx.srcChannel == "channel-2186" && tx.dstChannel == "channel-3"
 	}
@@ -462,7 +462,7 @@ func (a *apiWormchain) isOsmosisTx(tx *worchainTx) bool {
 	return false
 }
 
-func (a *apiWormchain) isKujiraTx(tx *worchainTx) bool {
+func (a *apiDeltachain) isKujiraTx(tx *worchainTx) bool {
 	if a.p2pNetwork == domain.P2pMainNet {
 		return tx.srcChannel == "channel-113" && tx.dstChannel == "channel-9"
 	}
@@ -473,7 +473,7 @@ func (a *apiWormchain) isKujiraTx(tx *worchainTx) bool {
 	return false
 }
 
-func (a *apiWormchain) isEvmosTx(tx *worchainTx) bool {
+func (a *apiDeltachain) isEvmosTx(tx *worchainTx) bool {
 	if a.p2pNetwork == domain.P2pMainNet {
 		return tx.srcChannel == "channel-94" && tx.dstChannel == "channel-5"
 	}

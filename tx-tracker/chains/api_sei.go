@@ -30,9 +30,9 @@ func seiTxSearchExtractor(tx *cosmosTxSearchResponse, logs []cosmosLogWrapperRes
 }
 
 type apiSei struct {
-	wormchainUrl         string
-	wormchainRateLimiter *time.Ticker
-	p2pNetwork           string
+	deltachainUrl         string
+	deltachainRateLimiter *time.Ticker
+	p2pNetwork            string
 }
 
 func fetchSeiDetail(ctx context.Context, baseUrl string, rateLimiter *time.Ticker, sequence, timestamp, srcChannel, dstChannel string) (*seiTx, error) {
@@ -47,19 +47,19 @@ func (a *apiSei) fetchSeiTx(
 	txHash string,
 ) (*TxDetail, error) {
 	txHash = txHashLowerCaseWith0x(txHash)
-	wormchainTx, err := fetchWormchainDetail(ctx, a.wormchainUrl, a.wormchainRateLimiter, txHash)
+	deltachainTx, err := fetchDeltachainDetail(ctx, a.deltachainUrl, a.deltachainRateLimiter, txHash)
 	if err != nil {
 		return nil, err
 	}
-	seiTx, err := fetchSeiDetail(ctx, baseUrl, rateLimiter, wormchainTx.sequence, wormchainTx.timestamp, wormchainTx.srcChannel, wormchainTx.dstChannel)
+	seiTx, err := fetchSeiDetail(ctx, baseUrl, rateLimiter, deltachainTx.sequence, deltachainTx.timestamp, deltachainTx.srcChannel, deltachainTx.dstChannel)
 	if err != nil {
 		return nil, err
 	}
 	return &TxDetail{
 		NativeTxHash: txHash,
-		From:         wormchainTx.receiver,
+		From:         deltachainTx.receiver,
 		Attribute: &AttributeTxDetail{
-			Type: "wormchain-gateway",
+			Type: "deltachain-gateway",
 			Value: &WorchainAttributeTxDetail{
 				OriginChainID: vaa.ChainIDSei,
 				OriginTxHash:  seiTx.TxHash,

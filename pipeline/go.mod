@@ -20,7 +20,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/test-go/testify v1.1.4
-	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20231124191152-bbb28b8d69ea
 	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 )
 

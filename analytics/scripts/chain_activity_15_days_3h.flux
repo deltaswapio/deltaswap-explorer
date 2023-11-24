@@ -5,8 +5,8 @@ option task = {
     every: 3h,
 }
 
-sourceBucket = "wormscan"
-destinationBucket = "wormscan-24hours"
+sourceBucket = "deltaswapscan"
+destinationBucket = "deltaswapscan-24hours"
 execution = date.truncate(t: now(), unit: 1h)
 start = date.truncate(t: -15d, unit: 24h)
 

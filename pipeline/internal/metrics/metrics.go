@@ -1,6 +1,6 @@
 package metrics
 
-const serviceName = "wormscan-pipeline"
+const serviceName = "deltaswapscan-pipeline"
 
 // Metrics is a metrics interface.
 type Metrics interface {

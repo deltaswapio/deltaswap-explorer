@@ -4,7 +4,7 @@ import (
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
-const serviceName = "wormscan-contract-watcher"
+const serviceName = "deltaswapscan-contract-watcher"
 
 type Metrics interface {
 	SetLastBlock(chain sdk.ChainID, block uint64)

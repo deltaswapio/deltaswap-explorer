@@ -26,11 +26,11 @@ type Service struct {
 }
 
 const (
-	lastTxsKey                     = "wormscan:last-txs"
-	scorecardsKey                  = "wormscan:scorecards"
-	topAssetsByVolumeKey           = "wormscan:top-assets-by-volume"
-	topChainPairsByNumTransfersKey = "wormscan:top-chain-pairs-by-num-transfers"
-	chainActivityKey               = "wormscan:chain-activity"
+	lastTxsKey                     = "deltaswapscan:last-txs"
+	scorecardsKey                  = "deltaswapscan:scorecards"
+	topAssetsByVolumeKey           = "deltaswapscan:top-assets-by-volume"
+	topChainPairsByNumTransfersKey = "deltaswapscan:top-chain-pairs-by-num-transfers"
+	chainActivityKey               = "deltaswapscan:chain-activity"
 )
 
 // NewService create a new Service.

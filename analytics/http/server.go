@@ -20,7 +20,7 @@ func NewServer(logger *zap.Logger, port string, pprofEnabled bool, vaaController
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
 
 	// Configure prometheus middleware
-	prometheus := fiberprometheus.New("wormscan-analytics")
+	prometheus := fiberprometheus.New("deltaswapscan-analytics")
 	prometheus.RegisterAt(app, "/metrics")
 	app.Use(prometheus.Middleware)
 

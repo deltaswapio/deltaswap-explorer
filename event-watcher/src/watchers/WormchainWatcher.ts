@@ -5,9 +5,9 @@ import { makeBlockKey, makeVaaKey, makeWHTransaction } from '../databases/utils'
 import { CosmwasmBlockResult, CosmwasmWatcher } from './CosmwasmWatcher';
 import { makeSerializedVAA } from './utils';
 
-export class WormchainWatcher extends CosmwasmWatcher {
+export class DeltachainWatcher extends CosmwasmWatcher {
   constructor() {
-    super('wormchain' as CosmWasmChainName);
+    super('deltachain' as CosmWasmChainName);
     this.rpc = NETWORK_RPCS_BY_CHAIN[this.chain];
     if (!this.rpc) {
       throw new Error(`${this.chain} RPC is not defined!`);

@@ -12,7 +12,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.16.0
-	github.com/deltaswapio/deltaswap-explorer/api v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/api v0.0.0-20231124191152-bbb28b8d69ea
 	go.mongodb.org/mongo-driver v1.11.2
 )
 

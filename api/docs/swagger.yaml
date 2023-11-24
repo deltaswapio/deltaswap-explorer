@@ -853,7 +853,7 @@ definitions:
     - ChainIDBtc
     - ChainIDBase
     - ChainIDSei
-    - ChainIDWormchain
+    - ChainIDDeltachain
     - ChainIDSepolia
   vaa.VaaDoc:
     properties:

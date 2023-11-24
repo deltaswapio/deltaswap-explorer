@@ -12,6 +12,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"github.com/deltaswapio/deltaswap-explorer/api/types"
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
+	"github.com/gofiber/fiber/v2"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

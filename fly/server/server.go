@@ -24,7 +24,7 @@ func NewServer(port uint, phylaxCheck *health.PhylaxCheck, logger *zap.Logger, r
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
 
 	// Configure middleware
-	prometheus := fiberprometheus.New("wormscan-fly")
+	prometheus := fiberprometheus.New("deltaswapscan-fly")
 	prometheus.RegisterAt(app, "/metrics")
 	app.Use(prometheus.Middleware)
 

@@ -220,7 +220,7 @@ func EncodeTrxHashByChainID(chainID sdk.ChainID, txHash []byte) (string, error) 
 		return hex.EncodeToString(txHash), nil
 	case sdk.ChainIDSei:
 		return hex.EncodeToString(txHash), nil
-	case sdk.ChainIDWormchain:
+	case sdk.ChainIDDeltachain:
 		//TODO: check if this is correct
 		return hex.EncodeToString(txHash), nil
 	case sdk.ChainIDSepolia:

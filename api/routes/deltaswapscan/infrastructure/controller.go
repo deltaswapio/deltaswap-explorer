@@ -3,6 +3,7 @@ package infrastructure
 import (
 	"github.com/deltaswapio/deltaswap-explorer/api/handlers/infrastructure"
 	"github.com/deltaswapio/deltaswap-explorer/api/internal/build"
+	"github.com/gofiber/fiber/v2"
 )
 
 // Controller definition.

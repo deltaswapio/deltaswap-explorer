@@ -214,7 +214,7 @@ func (s *Service) GetVaaCount(ctx context.Context) (*response.Response[[]*VaaSta
 // the cached value of the sequence for this chainID, address.
 // If the sequence does not exist we can not discard the request.
 func (s *Service) discardVaaNotIndexed(ctx context.Context, chain sdk.ChainID, emitter *types.Address, seq string) bool {
-	key := fmt.Sprintf("%s:%d:%s", "wormscan:vaa-max-sequence", chain, emitter.Hex())
+	key := fmt.Sprintf("%s:%d:%s", "deltaswapscan:vaa-max-sequence", chain, emitter.Hex())
 	sequence, err := s.getCacheFunc(ctx, key)
 	if err != nil {
 		if errors.Is(err, cache.ErrInternal) {

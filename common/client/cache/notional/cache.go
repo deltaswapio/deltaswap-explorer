@@ -14,9 +14,9 @@ import (
 )
 
 const (
-	wormscanNotionalUpdated            = "NOTIONAL_UPDATED"
-	wormscanTokenNotionalCacheKeyRegex = "WORMSCAN:NOTIONAL:TOKEN:*"
-	KeyTokenFormatString               = "WORMSCAN:NOTIONAL:TOKEN:%s"
+	deltaswapscanNotionalUpdated            = "NOTIONAL_UPDATED"
+	deltaswapscanTokenNotionalCacheKeyRegex = "WORMSCAN:NOTIONAL:TOKEN:*"
+	KeyTokenFormatString                    = "WORMSCAN:NOTIONAL:TOKEN:%s"
 )
 
 var (
@@ -128,7 +128,7 @@ func (c *NotionalCache) subscribe(ctx context.Context) {
 	go func() {
 		for msg := range ch {
 			c.logger.Info("receive message from channel", zap.String("channel", msg.Channel), zap.String("payload", msg.Payload))
-			if wormscanNotionalUpdated == msg.Payload {
+			if deltaswapscanNotionalUpdated == msg.Payload {
 				// update notional cache
 				c.loadCache(ctx)
 			}
@@ -175,7 +175,7 @@ func (c *NotionalCache) renderKey(key string) string {
 }
 
 func (c *NotionalCache) renderRegExp() string {
-	return "*" + c.renderKey(wormscanTokenNotionalCacheKeyRegex)
+	return "*" + c.renderKey(deltaswapscanTokenNotionalCacheKeyRegex)
 }
 
 func formatChannel(prefix string, channel string) string {

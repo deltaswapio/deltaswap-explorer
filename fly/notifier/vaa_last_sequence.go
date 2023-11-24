@@ -41,9 +41,9 @@ type LastSequenceNotifier struct {
 
 func NewLastSequenceNotifier(c *redis.Client, prefix string) *LastSequenceNotifier {
 	if prefix == "" {
-		prefix = "wormscan:vaa-max-sequence"
+		prefix = "deltaswapscan:vaa-max-sequence"
 	} else {
-		prefix = fmt.Sprintf("%s:wormscan:vaa-max-sequence", prefix)
+		prefix = fmt.Sprintf("%s:deltaswapscan:vaa-max-sequence", prefix)
 	}
 
 	return &LastSequenceNotifier{

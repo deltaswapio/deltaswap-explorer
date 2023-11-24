@@ -9,6 +9,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
 	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	_ "github.com/deltaswapio/deltaswap-explorer/api/response" // required by swaggo
+	"github.com/gofiber/fiber/v2"
 	"github.com/pkg/errors"
 	"go.uber.org/zap"
 )

@@ -31,15 +31,16 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/api/internal/tvl"
 	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
 	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/deltaswapscan"
 	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax"
-	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan"
 	rpcApi "github.com/deltaswapio/deltaswap-explorer/api/rpc"
-	wormscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
+	deltaswapscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
 	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
 	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
 	xlogger "github.com/deltaswapio/deltaswap-explorer/common/logger"
 	"github.com/deltaswapio/deltaswap-explorer/common/utils"
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
+	"github.com/gofiber/fiber/v2"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"go.uber.org/zap"
 )
@@ -167,7 +168,7 @@ func main() {
 	})
 
 	// Configure middleware
-	labels := map[string]string{"service": "wormscan-api", "environment": cfg.Environment}
+	labels := map[string]string{"service": "deltaswapscan-api", "environment": cfg.Environment}
 	prometheus := fiberprometheus.NewWithLabels(labels, "http", "")
 	prometheus.RegisterAt(app, "/metrics")
 	app.Use(prometheus.Middleware)
@@ -199,7 +200,7 @@ func main() {
 
 	// Set up route handlers
 	app.Get("/swagger.json", GetSwagger)
-	wormscan.RegisterRoutes(app, rootLogger, addressService, vaaService, obsService, governorService, infrastructureService, transactionsService, relaysService)
+	deltaswapscan.RegisterRoutes(app, rootLogger, addressService, vaaService, obsService, governorService, infrastructureService, transactionsService, relaysService)
 	phylax.RegisterRoutes(cfg, app, rootLogger, vaaService, governorService, heartbeatsService)
 
 	// Set up gRPC handlers
@@ -250,11 +251,11 @@ func main() {
 }
 
 // NewCache get a CacheGetFunc to get a value by a Key from cache and a CacheReadable to get a value by a Key from notional local cache.
-func NewCache(ctx context.Context, cfg *config.AppConfig, logger *zap.Logger) (wormscanCache.Cache, error) {
+func NewCache(ctx context.Context, cfg *config.AppConfig, logger *zap.Logger) (deltaswapscanCache.Cache, error) {
 
 	// if run mode is development with cache is disabled, return a dummy cache client and a dummy notional cache client.
 	if cfg.RunMode == config.RunModeDevelopmernt && !cfg.Cache.Enabled {
-		dummyCacheClient := wormscanCache.NewDummyCacheClient()
+		dummyCacheClient := deltaswapscanCache.NewDummyCacheClient()
 		return dummyCacheClient, nil
 	}
 
@@ -262,7 +263,7 @@ func NewCache(ctx context.Context, cfg *config.AppConfig, logger *zap.Logger) (w
 	redisClient := redis.NewClient(&redis.Options{Addr: cfg.Cache.URL})
 
 	// get cache client
-	cacheClient, err := wormscanCache.NewCacheClient(redisClient, cfg.Cache.Enabled, cfg.Cache.Prefix, logger)
+	cacheClient, err := deltaswapscanCache.NewCacheClient(redisClient, cfg.Cache.Enabled, cfg.Cache.Prefix, logger)
 	if err != nil {
 		return nil, fmt.Errorf("failed to initialize cache client: %w", err)
 	}

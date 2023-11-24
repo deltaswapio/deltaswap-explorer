@@ -24,7 +24,7 @@ func NewServer(logger *zap.Logger, port string, pprofEnabled bool, isQueueConsum
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
 
 	// config use of middlware.
-	prometheus := fiberprometheus.New("wormscan-pipeline")
+	prometheus := fiberprometheus.New("deltaswapscan-pipeline")
 	prometheus.RegisterAt(app, "/metrics")
 	app.Use(prometheus.Middleware)
 
