@@ -9,7 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
-	pipeline "github.com/wormhole-foundation/wormhole-explorer/pipeline/pipeline"
+	pipeline "github.com/deltaswapio/deltaswap-explorer/pipeline/pipeline"
 )
 
 // MockIRepository is a mock of IRepository interface.

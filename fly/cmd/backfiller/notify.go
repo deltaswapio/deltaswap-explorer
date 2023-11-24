@@ -7,10 +7,10 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/sns"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/producer"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/sns"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/producer"
 	"go.uber.org/zap"
 )
 

@@ -1,8 +1,8 @@
 package vaa
 
 import (
+	"github.com/deltaswapio/deltaswap-explorer/parser/processor"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/processor"
 	"go.uber.org/zap"
 )
 

@@ -6,9 +6,9 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

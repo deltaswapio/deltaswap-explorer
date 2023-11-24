@@ -3,7 +3,7 @@ package alert
 import (
 	"fmt"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
 )
 
 // alert key constants definition.

@@ -3,7 +3,7 @@ package queue
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // VAAInMemoryOption represents a VAA queue in memory option function.

@@ -116,11 +116,11 @@ spec:
       tolerations:
         - key: "dedicated"
           operator: "Equal"
-          value: "wormholescan"
+          value: "deltaswapscan"
           effect: "NoSchedule"
         - key: "dedicated"
           operator: "Equal"
-          value: "wormholescan"
+          value: "deltaswapscan"
           effect: "NoExecute"
       nodeSelector:
-        eks.amazonaws.com/nodegroup-selector: "wormholescan"
+        eks.amazonaws.com/nodegroup-selector: "deltaswapscan"

@@ -1,9 +1,9 @@
 package vaa
 
 import (
+	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/metric"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 

@@ -1,11 +1,11 @@
 import { createServer } from '../../builder/server';
 import { env } from '../../config';
 import { InfrastructureController } from '../../infrastructure/infrastructure.controller';
-import { getLogger, WormholeLogger } from '../../utils/logger';
+import { getLogger, DeltaswapLogger } from '../../utils/logger';
 
 class WebServer {
   private server?: Awaited<ReturnType<typeof createServer>>;
-  private logger: WormholeLogger;
+  private logger: DeltaswapLogger;
 
   constructor(private infrastructureController: InfrastructureController) {
     this.logger = getLogger('WebServer');

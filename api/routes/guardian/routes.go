@@ -1,19 +1,19 @@
-package guardian
+package phylax
 
 import (
+	govsvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	heartbeatssvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/heartbeats"
+	vaasvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/config"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax/heartbeats"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax/phylax"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax/vaa"
 	"github.com/gofiber/fiber/v2"
-	govsvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	heartbeatssvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/heartbeats"
-	vaasvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/config"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/guardian/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/guardian/guardian"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/guardian/heartbeats"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/guardian/vaa"
 	"go.uber.org/zap"
 )
 
-// RegisterRoutes sets up the handlers for the Guardian API.
+// RegisterRoutes sets up the handlers for the Phylax API.
 func RegisterRoutes(
 	cfg *config.AppConfig,
 	app *fiber.App,
@@ -26,7 +26,7 @@ func RegisterRoutes(
 	// Set up controllers
 	vaaCtrl := vaa.NewController(vaaService, rootLogger)
 	governorCtrl := governor.NewController(governorService, rootLogger)
-	guardianCtrl := guardian.NewController(rootLogger, cfg.P2pNetwork)
+	phylaxCtrl := phylax.NewController(rootLogger, cfg.P2pNetwork)
 	heartbeatsCtrl := heartbeats.NewController(heartbeatsService, rootLogger, cfg.P2pNetwork)
 
 	// Set up route handlers
@@ -38,9 +38,9 @@ func RegisterRoutes(
 	signedBatchVAA := apiV1.Group("/signed_batch_vaa")
 	signedBatchVAA.Get("/:chain/:trxID/:nonce", vaaCtrl.FindSignedBatchVAAByID)
 
-	// guardianSet resource
-	guardianSet := apiV1.Group("/guardianset")
-	guardianSet.Get("/current", guardianCtrl.GetGuardianSet)
+	// phylaxSet resource
+	phylaxSet := apiV1.Group("/phylaxset")
+	phylaxSet.Get("/current", phylaxCtrl.GetPhylaxSet)
 
 	// heartbeats resource
 	heartbeats := apiV1.Group("/heartbeats")

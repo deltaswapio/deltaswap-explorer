@@ -3,10 +3,10 @@ package heartbeats
 import (
 	"strconv"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/heartbeats"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/phylax"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/guardian"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/heartbeats"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
 	"go.uber.org/zap"
 )
 
@@ -14,7 +14,7 @@ import (
 type Controller struct {
 	srv    *heartbeats.Service
 	logger *zap.Logger
-	gs     guardian.GuardianSet
+	gs     phylax.PhylaxSet
 }
 
 // NewController create a new controler.
@@ -22,7 +22,7 @@ func NewController(srv *heartbeats.Service, logger *zap.Logger, p2pNetwork strin
 	return &Controller{
 		srv:    srv,
 		logger: logger.With(zap.String("module", "HeartbeatsController")),
-		gs:     guardian.GetByEnv(p2pNetwork),
+		gs:     phylax.GetByEnv(p2pNetwork),
 	}
 }
 
@@ -32,9 +32,9 @@ type HeartbeatsResponse struct {
 }
 
 type HeartbeatResponse struct {
-	VerifiedGuardianAddr string        `json:"verifiedGuardianAddr"`
-	P2PNodeAddr          string        `json:"p2pNodeAddr"`
-	RawHeartbeat         *RawHeartbeat `json:"rawHeartbeat"`
+	VerifiedPhylaxAddr string        `json:"verifiedPhylaxAddr"`
+	P2PNodeAddr        string        `json:"p2pNodeAddr"`
+	RawHeartbeat       *RawHeartbeat `json:"rawHeartbeat"`
 }
 
 type RawHeartbeat struct {
@@ -43,7 +43,7 @@ type RawHeartbeat struct {
 	Timestamp     string                      `json:"timestamp"`
 	Networks      []*HeartbeatNetworkResponse `json:"networks"`
 	Version       string                      `json:"version"`
-	GuardianAddr  string                      `json:"guardianAddr"`
+	PhylaxAddr    string                      `json:"phylaxAddr"`
 	BootTimestamp string                      `json:"bootTimestamp"`
 	Features      []string                    `json:"features"`
 }
@@ -56,34 +56,34 @@ type HeartbeatNetworkResponse struct {
 	ErrorCount      string `bson:"errorcount" json:"errorCount"`
 }
 
-// GetGuardianSet godoc
-// @Description Get heartbeats for guardians
-// @Tags Guardian
-// @ID guardians-hearbeats
+// GetPhylaxSet godoc
+// @Description Get heartbeats for phylaxs
+// @Tags Phylax
+// @ID phylaxs-hearbeats
 // @Success 200 {object} HeartbeatsResponse
 // @Failure 400
 // @Failure 500
 // @Router /v1/heartbeats [get]
 func (c *Controller) GetLastHeartbeats(ctx *fiber.Ctx) error {
 
-	// check guardianSet exists.
+	// check phylaxSet exists.
 	if len(c.gs.GstByIndex) == 0 {
 		err := response.NewApiError(
 			ctx,
 			fiber.StatusServiceUnavailable,
 			response.Unavailable,
-			"guardian set not fetched from chain yet",
+			"phylax set not fetched from chain yet",
 			nil,
 		)
 		return err
 	}
 
-	// get the latest guardianSet.
-	guardianSet := c.gs.GetLatest()
-	guardianAddresses := guardianSet.KeysAsHexStrings()
+	// get the latest phylaxSet.
+	phylaxSet := c.gs.GetLatest()
+	phylaxAddresses := phylaxSet.KeysAsHexStrings()
 
 	// get last heartbeats by ids.
-	heartbeats, err := c.srv.GetHeartbeatsByIds(ctx.Context(), guardianAddresses)
+	heartbeats, err := c.srv.GetHeartbeatsByIds(ctx.Context(), phylaxAddresses)
 	if err != nil {
 		return err
 	}
@@ -112,15 +112,15 @@ func buildHeartbeatResponse(heartbeats []*heartbeats.HeartbeatDoc) *HeartbeatsRe
 		}
 
 		hr := HeartbeatResponse{
-			VerifiedGuardianAddr: heartbeat.ID,
-			P2PNodeAddr:          "", // not exists in heartbeats mongo collection.
+			VerifiedPhylaxAddr: heartbeat.ID,
+			P2PNodeAddr:        "", // not exists in heartbeats mongo collection.
 			RawHeartbeat: &RawHeartbeat{
 				NodeName:      heartbeat.NodeName,
 				Counter:       strconv.Itoa(int(heartbeat.Counter)),
 				Timestamp:     strconv.Itoa(int(heartbeat.Timestamp)),
 				Networks:      networkResponses,
 				Version:       heartbeat.Version,
-				GuardianAddr:  heartbeat.GuardianAddr,
+				PhylaxAddr:    heartbeat.PhylaxAddr,
 				BootTimestamp: strconv.Itoa(int(heartbeat.BootTimestamp)),
 				Features:      heartbeat.Features,
 			},

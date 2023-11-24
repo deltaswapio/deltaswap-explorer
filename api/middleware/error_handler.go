@@ -2,9 +2,9 @@
 package middleware
 
 import (
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"github.com/pkg/errors"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
 
 	"github.com/gofiber/fiber/v2"
 )

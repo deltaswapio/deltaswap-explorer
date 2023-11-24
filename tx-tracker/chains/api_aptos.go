@@ -39,7 +39,7 @@ func fetchAptosTx(
 	var events []aptosEvent
 	{
 		// Build the URI for the events endpoint
-		uri := fmt.Sprintf("%s/accounts/%s/events/%s::state::WormholeMessageHandle/event?start=%d&limit=1",
+		uri := fmt.Sprintf("%s/accounts/%s/events/%s::state::DeltaswapMessageHandle/event?start=%d&limit=1",
 			baseUrl,
 			aptosCoreContractAddress,
 			aptosCoreContractAddress,

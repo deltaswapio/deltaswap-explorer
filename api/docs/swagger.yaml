@@ -7,7 +7,7 @@ definitions:
           $ref: '#/definitions/vaa.VaaDoc'
         type: array
     type: object
-  github_com_wormhole-foundation_wormhole-explorer_api_routes_guardian_guardian.GuardianSet:
+  github_com_deltaswapio_deltaswap-explorer_api_routes_phylax_phylax.PhylaxSet:
     properties:
       addresses:
         items:
@@ -266,10 +266,10 @@ definitions:
       price:
         type: number
     type: object
-  guardian.GuardianSetResponse:
+  phylax.PhylaxSetResponse:
     properties:
-      guardianSet:
-        $ref: '#/definitions/github_com_wormhole-foundation_wormhole-explorer_api_routes_guardian_guardian.GuardianSet'
+      phylaxSet:
+        $ref: '#/definitions/github_com_deltaswapio_deltaswap-explorer_api_routes_phylax_phylax.PhylaxSet'
     type: object
   heartbeats.HeartbeatNetworkResponse:
     properties:
@@ -288,7 +288,7 @@ definitions:
         type: string
       rawHeartbeat:
         $ref: '#/definitions/heartbeats.RawHeartbeat'
-      verifiedGuardianAddr:
+      verifiedPhylaxAddr:
         type: string
     type: object
   heartbeats.HeartbeatsResponse:
@@ -308,7 +308,7 @@ definitions:
         items:
           type: string
         type: array
-      guardianAddr:
+      phylaxAddr:
         type: string
       networks:
         items:
@@ -340,7 +340,7 @@ definitions:
         type: string
       emitterChain:
         $ref: '#/definitions/vaa.ChainID'
-      guardianAddr:
+      phylaxAddr:
         type: string
       hash:
         items:
@@ -858,7 +858,7 @@ definitions:
   vaa.VaaDoc:
     properties:
       appId:
-        description: AppId is an extension field - it is not present in the guardian
+        description: AppId is an extension field - it is not present in the phylax
           API.
         type: string
       emitterAddr:
@@ -867,7 +867,7 @@ definitions:
         $ref: '#/definitions/vaa.ChainID'
       emitterNativeAddr:
         type: string
-      guardianSetIndex:
+      phylaxSetIndex:
         type: integer
       id:
         type: string
@@ -875,13 +875,13 @@ definitions:
         type: string
       payload:
         additionalProperties: true
-        description: Payload is an extension field - it is not present in the guardian
+        description: Payload is an extension field - it is not present in the phylax
           API.
         type: object
       timestamp:
         type: string
       txHash:
-        description: TxHash is an extension field - it is not present in the guardian
+        description: TxHash is an extension field - it is not present in the phylax
           API.
         type: string
       updatedAt:
@@ -906,18 +906,18 @@ info:
     name: API Support
     url: https://discord.com/invite/wormholecrypto
   description: |-
-    Wormhole Guardian API
-    This is the API for the Wormhole Guardian and Explorer.
-    The API has two namespaces: wormholescan and guardian.
-    wormholescan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.
-    guardian is the legacy namespace backguard compatible with guardian node API. The prefix is /v1.
+    Deltaswap Phylax API
+    This is the API for the Deltaswap Phylax and Explorer.
+    The API has two namespaces: deltaswapscan and phylax.
+    deltaswapscan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.
+    phylax is the legacy namespace backguard compatible with phylax node API. The prefix is /v1.
     This API is public and does not require authentication although some endpoints are rate limited.
     Check each endpoint documentation for more information.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: https://wormhole.com/
-  title: Wormholescan API
+  title: Deltaswapscan API
   version: "1.0"
 paths:
   /api/v1/address/{address}:
@@ -950,7 +950,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/global-tx/{chain_id}/{emitter}/{seq}:
     get:
       description: |-
@@ -986,10 +986,10 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/config:
     get:
-      description: Returns governor configuration for all guardians.
+      description: Returns governor configuration for all phylaxs.
       operationId: governor-config
       parameters:
       - description: Page number.
@@ -1010,11 +1010,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
-  /api/v1/governor/config/:guardian_address:
+      - deltaswapscan
+  /api/v1/governor/config/:phylax_address:
     get:
-      description: Returns governor configuration for a given guardian.
-      operationId: governor-config-by-guardian-address
+      description: Returns governor configuration for a given phylax.
+      operationId: governor-config-by-phylax-address
       responses:
         "200":
           description: OK
@@ -1025,7 +1025,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/enqueued_vaas/:
     get:
       description: Returns enqueued VAAs for each blockchain.
@@ -1056,11 +1056,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/enqueued_vaas/:chain:
     get:
       description: Returns all enqueued VAAs for a given blockchain.
-      operationId: guardians-enqueued-vaas-by-chain
+      operationId: phylaxs-enqueued-vaas-by-chain
       parameters:
       - description: Page number.
         in: query
@@ -1087,7 +1087,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/limit:
     get:
       description: Returns the governor limit for all blockchains.
@@ -1111,7 +1111,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/notional/available:
     get:
       description: Returns the amount of notional value available for each blockchain.
@@ -1142,7 +1142,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/notional/available/:chain:
     get:
       description: Returns the amount of notional value available for a given blockchain.
@@ -1166,7 +1166,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/notional/limit:
     get:
       description: Returns the detailed notional limit for all blockchains.
@@ -1190,7 +1190,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/notional/limit/:chain:
     get:
       description: Returns the detailed notional limit available for a given blockchain.
@@ -1214,7 +1214,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/notional/max_available/:chain:
     get:
       description: Returns the maximum amount of notional value available for a given
@@ -1230,10 +1230,10 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/governor/status:
     get:
-      description: Returns the governor status for all guardians.
+      description: Returns the governor status for all phylaxs.
       operationId: governor-status
       parameters:
       - description: Page number.
@@ -1254,11 +1254,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
-  /api/v1/governor/status/:guardian_address:
+      - deltaswapscan
+  /api/v1/governor/status/:phylax_address:
     get:
-      description: Returns the governor status for a given guardian.
-      operationId: governor-status-by-guardian-address
+      description: Returns the governor status for a given phylax.
+      operationId: governor-status-by-phylax-address
       parameters:
       - description: Page number.
         in: query
@@ -1278,7 +1278,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/health:
     get:
       description: Health check
@@ -1296,7 +1296,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/last-txs:
     get:
       description: Returns the number of transactions by a defined time span and sample
@@ -1325,7 +1325,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/observations:
     get:
       description: Returns all observations, sorted in descending timestamp order.
@@ -1358,7 +1358,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/observations/:chain:
     get:
       description: Returns all observations for a given blockchain, sorted in descending
@@ -1392,7 +1392,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/observations/:chain/:emitter:
     get:
       description: Returns all observations for a specific emitter address, sorted
@@ -1426,7 +1426,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/observations/:chain/:emitter/:sequence:
     get:
       description: Find observations identified by emitter chain, emitter address
@@ -1460,7 +1460,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/observations/:chain/:emitter/:sequence/:signer/:hash:
     get:
       description: Find a specific observation.
@@ -1493,7 +1493,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/ready:
     get:
       description: Ready check
@@ -1511,7 +1511,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/relays/:chain/:emitter/:sequence:
     get:
       description: Get a specific relay information by chainID, emitter address and
@@ -1527,11 +1527,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/scorecards:
     get:
       description: |-
-        Returns a list of KPIs for Wormhole.
+        Returns a list of KPIs for Deltaswap.
         TVL is total value locked by token bridge contracts in USD.
         Volume is the all-time total volume transferred through the token bridge in USD.
         24h volume is the volume transferred through the token bridge in the last 24 hours, in USD.
@@ -1547,7 +1547,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/token/{chain_id}/{token_address}:
     get:
       description: Returns a token symbol, coingecko id and address by chain and token
@@ -1574,7 +1574,7 @@ paths:
         "404":
           description: Not Found
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/top-assets-by-volume:
     get:
       description: |-
@@ -1595,7 +1595,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/top-chain-pairs-by-num-transfers:
     get:
       description: Returns a list of the emitter_chain and destination_chain pair
@@ -1615,7 +1615,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/transactions/:
     get:
       description: Returns transactions. Output is paginated.
@@ -1650,7 +1650,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/transactions/{chain_id}/{emitter}/{seq}:
     get:
       description: Find VAA metadata by ID.
@@ -1681,7 +1681,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/:
     get:
       description: Returns all VAAs. Output is paginated and can also be be sorted.
@@ -1724,7 +1724,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/{chain_id}:
     get:
       description: Returns all the VAAs generated in specific blockchain.
@@ -1760,7 +1760,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/{chain_id}/{emitter}:
     get:
       description: Returns all all the VAAs generated by a specific emitter address.
@@ -1805,7 +1805,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/{chain_id}/{emitter}/{seq}:
     get:
       description: Find a VAA by ID.
@@ -1840,7 +1840,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/parse:
     post:
       description: Parse a VAA.
@@ -1857,7 +1857,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/vaas/vaa-counts:
     get:
       description: Returns the total number of VAAs emitted for each blockchain.
@@ -1872,7 +1872,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/version:
     get:
       description: Get version/release information.
@@ -1887,7 +1887,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /api/v1/x-chain-activity:
     get:
       description: |-
@@ -1919,7 +1919,7 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /swagger.json:
     get:
       description: Returns the swagger specification for this API.
@@ -1934,14 +1934,14 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - wormholescan
+      - deltaswapscan
   /v1/governor/available_notional_by_chain:
     get:
       description: |-
         Get available notional by chainID
-        Since from the wormhole-explorer point of view it is not a node, but has the information of all nodes,
+        Since from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,
         in order to build the endpoints it was assumed:
-        There are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of guardians
+        There are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of phylaxs
         for a chainID. The smallest remainingAvailableNotional value for a chainID is used for the endpoint response.
       operationId: governor-available-notional-by-chain
       responses:
@@ -1954,11 +1954,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/governor/enqueued_vaas:
     get:
       description: Get enqueued VAAs
-      operationId: guardians-enqueued-vaas
+      operationId: phylaxs-enqueued-vaas
       responses:
         "200":
           description: OK
@@ -1969,11 +1969,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/governor/is_vaa_enqueued/{chain_id}/{emitter}/{seq}:
     get:
       description: Check if vaa is enqueued
-      operationId: guardians-is-vaa-enqueued
+      operationId: phylaxs-is-vaa-enqueued
       parameters:
       - description: id of the blockchain
         in: path
@@ -2000,16 +2000,16 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/governor/token_list:
     get:
       description: |-
         Get token list
-        Since from the wormhole-explorer point of view it is not a node, but has the information of all nodes,
+        Since from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,
         in order to build the endpoints it was assumed:
         For tokens with the same originChainId and originAddress and different price values for each node,
         the price that has most occurrences in all the nodes for an originChainId and originAddress is returned.
-      operationId: guardians-token-list
+      operationId: phylaxs-token-list
       responses:
         "200":
           description: OK
@@ -2022,26 +2022,26 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
-  /v1/guardianset/current:
+      - Phylax
+  /v1/phylaxset/current:
     get:
-      description: Get current guardian set.
-      operationId: guardian-set
+      description: Get current phylax set.
+      operationId: phylax-set
       responses:
         "200":
           description: OK
           schema:
-            $ref: '#/definitions/guardian.GuardianSetResponse'
+            $ref: '#/definitions/phylax.PhylaxSetResponse'
         "400":
           description: Bad Request
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/heartbeats:
     get:
-      description: Get heartbeats for guardians
-      operationId: guardians-hearbeats
+      description: Get heartbeats for phylaxs
+      operationId: phylaxs-hearbeats
       responses:
         "200":
           description: OK
@@ -2052,11 +2052,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/signed_batch_vaa/{chain_id}/{emitter}/sequence/{seq}:
     get:
       description: get a batch of VAA []byte from a chainID, emitter address and sequence.
-      operationId: guardians-find-signed-batch-vaa
+      operationId: phylaxs-find-signed-batch-vaa
       parameters:
       - description: id of the blockchain
         in: path
@@ -2088,11 +2088,11 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
   /v1/signed_vaa/{chain_id}/{emitter}/{seq}:
     get:
       description: get a VAA []byte from a chainID, emitter address and sequence.
-      operationId: guardians-find-signed-vaa
+      operationId: phylaxs-find-signed-vaa
       parameters:
       - description: id of the blockchain
         in: path
@@ -2124,5 +2124,5 @@ paths:
         "500":
           description: Internal Server Error
       tags:
-      - Guardian
+      - Phylax
 swagger: "2.0"

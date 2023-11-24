@@ -3,23 +3,23 @@ package wormscan
 import (
 	"time"
 
+	addrsvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/address"
+	govsvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	infrasvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/infrastructure"
+	obssvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/observations"
+	relayssvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/relays"
+	trxsvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/transactions"
+	vaasvc "github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/address"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/observations"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/relays"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/transactions"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan/vaa"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cache"
 	"github.com/gofiber/fiber/v2/middleware/cors"
-	addrsvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/address"
-	govsvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	infrasvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/infrastructure"
-	obssvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/observations"
-	relayssvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/relays"
-	trxsvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/transactions"
-	vaasvc "github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/address"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/infrastructure"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/observations"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/relays"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/transactions"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan/vaa"
 
 	"go.uber.org/zap"
 )
@@ -103,11 +103,11 @@ func RegisterRoutes(
 
 	governorConfigs := governor.Group("/config")
 	governorConfigs.Get("/", governorCtrl.FindGovernorConfigurations)
-	governorConfigs.Get("/:guardian_address", governorCtrl.FindGovernorConfigurationByGuardianAddress)
+	governorConfigs.Get("/:phylax_address", governorCtrl.FindGovernorConfigurationByPhylaxAddress)
 
 	governorStatus := governor.Group("/status")
 	governorStatus.Get("/", governorCtrl.FindGovernorStatus)
-	governorStatus.Get("/:guardian_address", governorCtrl.FindGovernorStatusByGuardianAddress)
+	governorStatus.Get("/:phylax_address", governorCtrl.FindGovernorStatusByPhylaxAddress)
 
 	governorNotional := governor.Group("/notional")
 	governorNotional.Get("/limit/", governorCtrl.FindNotionalLimit)

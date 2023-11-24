@@ -7,8 +7,8 @@ import (
 
 	algorand_types "github.com/algorand/go-algorand-sdk/types"
 	"github.com/cosmos/btcutil/bech32"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/mr-tron/base58"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 var (

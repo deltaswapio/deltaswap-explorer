@@ -2,8 +2,8 @@ import {
   ChainName,
   CosmWasmChainName,
   EVMChainName,
-} from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
-import { Other, Payload, serialiseVAA, VAA } from '@certusone/wormhole-sdk';
+} from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
+import { Other, Payload, serialiseVAA, VAA } from '@deltaswapio/deltaswap-sdk';
 import { AlgorandWatcher } from './AlgorandWatcher';
 import { AptosWatcher } from './AptosWatcher';
 import { ArbitrumWatcher } from './ArbitrumWatcher';
@@ -87,7 +87,7 @@ export const makeSerializedVAA = async ({
 
   const vaaObject: VAA<Payload | Other> = {
     version: 1,
-    guardianSetIndex: 0,
+    phylaxSetIndex: 0,
     signatures: [],
     timestamp: Math.floor(parsedTimestamp),
     nonce,

@@ -5,10 +5,10 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/sns"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/sns"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

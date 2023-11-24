@@ -29,7 +29,7 @@ const docTemplate = `{
             "get": {
                 "description": "Lookup an address",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-address-by-id",
                 "parameters": [
@@ -76,7 +76,7 @@ const docTemplate = `{
             "get": {
                 "description": "Find a global transaction by VAA ID\nGlobal transactions is a logical association of two transactions that are related to each other by a unique VAA ID.\nThe first transaction is created on the origin chain when the VAA is emitted.\nThe second transaction is created on the destination chain when the VAA is redeemed.\nIf the response only contains an origin tx the VAA was not redeemed.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-global-transaction-by-id",
                 "parameters": [
@@ -120,9 +120,9 @@ const docTemplate = `{
         },
         "/api/v1/governor/config": {
             "get": {
-                "description": "Returns governor configuration for all guardians.",
+                "description": "Returns governor configuration for all phylaxs.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-config",
                 "parameters": [
@@ -155,13 +155,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/governor/config/:guardian_address": {
+        "/api/v1/governor/config/:phylax_address": {
             "get": {
-                "description": "Returns governor configuration for a given guardian.",
+                "description": "Returns governor configuration for a given phylax.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
-                "operationId": "governor-config-by-guardian-address",
+                "operationId": "governor-config-by-phylax-address",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -182,7 +182,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns enqueued VAAs for each blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-enqueued-vaas",
                 "parameters": [
@@ -229,9 +229,9 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all enqueued VAAs for a given blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
-                "operationId": "guardians-enqueued-vaas-by-chain",
+                "operationId": "phylaxs-enqueued-vaas-by-chain",
                 "parameters": [
                     {
                         "type": "integer",
@@ -276,7 +276,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the governor limit for all blockchains.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-notional-limit",
                 "parameters": [
@@ -313,7 +313,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the amount of notional value available for each blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-notional-available",
                 "parameters": [
@@ -360,7 +360,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the amount of notional value available for a given blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-notional-available-by-chain",
                 "parameters": [
@@ -397,7 +397,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the detailed notional limit for all blockchains.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-notional-limit-detail",
                 "parameters": [
@@ -434,7 +434,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the detailed notional limit available for a given blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-notional-limit-detail-by-chain",
                 "parameters": [
@@ -471,7 +471,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the maximum amount of notional value available for a given blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-max-notional-available-by-chain",
                 "responses": {
@@ -492,9 +492,9 @@ const docTemplate = `{
         },
         "/api/v1/governor/status": {
             "get": {
-                "description": "Returns the governor status for all guardians.",
+                "description": "Returns the governor status for all phylaxs.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "governor-status",
                 "parameters": [
@@ -527,13 +527,13 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/v1/governor/status/:guardian_address": {
+        "/api/v1/governor/status/:phylax_address": {
             "get": {
-                "description": "Returns the governor status for a given guardian.",
+                "description": "Returns the governor status for a given phylax.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
-                "operationId": "governor-status-by-guardian-address",
+                "operationId": "governor-status-by-phylax-address",
                 "parameters": [
                     {
                         "type": "integer",
@@ -568,7 +568,7 @@ const docTemplate = `{
             "get": {
                 "description": "Health check",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "health-check",
                 "responses": {
@@ -596,7 +596,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the number of transactions by a defined time span and sample rate.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-last-transactions",
                 "parameters": [
@@ -636,7 +636,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all observations, sorted in descending timestamp order.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-observations",
                 "parameters": [
@@ -686,7 +686,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all observations for a given blockchain, sorted in descending timestamp order.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-observations-by-chain",
                 "parameters": [
@@ -736,7 +736,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all observations for a specific emitter address, sorted in descending timestamp order.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-observations-by-emitter",
                 "parameters": [
@@ -786,7 +786,7 @@ const docTemplate = `{
             "get": {
                 "description": "Find observations identified by emitter chain, emitter address and sequence.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-observations-by-sequence",
                 "parameters": [
@@ -836,7 +836,7 @@ const docTemplate = `{
             "get": {
                 "description": "Find a specific observation.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-observations-by-id",
                 "parameters": [
@@ -886,7 +886,7 @@ const docTemplate = `{
             "get": {
                 "description": "Ready check",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "ready-check",
                 "responses": {
@@ -914,7 +914,7 @@ const docTemplate = `{
             "get": {
                 "description": "Get a specific relay information by chainID, emitter address and sequence.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-relay-by-vaa-id",
                 "responses": {
@@ -935,9 +935,9 @@ const docTemplate = `{
         },
         "/api/v1/scorecards": {
             "get": {
-                "description": "Returns a list of KPIs for Wormhole.\nTVL is total value locked by token bridge contracts in USD.\nVolume is the all-time total volume transferred through the token bridge in USD.\n24h volume is the volume transferred through the token bridge in the last 24 hours, in USD.\nTotal Tx count is the number of transaction bridging assets since the creation of the network (does not include Pyth or other messages).\n24h tx count is the number of transaction bridging assets in the last 24 hours (does not include Pyth or other messages).\nTotal messages is the number of VAAs emitted since the creation of the network (includes Pyth messages).",
+                "description": "Returns a list of KPIs for Deltaswap.\nTVL is total value locked by token bridge contracts in USD.\nVolume is the all-time total volume transferred through the token bridge in USD.\n24h volume is the volume transferred through the token bridge in the last 24 hours, in USD.\nTotal Tx count is the number of transaction bridging assets since the creation of the network (does not include Pyth or other messages).\n24h tx count is the number of transaction bridging assets in the last 24 hours (does not include Pyth or other messages).\nTotal messages is the number of VAAs emitted since the creation of the network (includes Pyth messages).",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-scorecards",
                 "responses": {
@@ -957,7 +957,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns a token symbol, coingecko id and address by chain and token address.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-token-by-chain-and-address",
                 "parameters": [
@@ -996,7 +996,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns a list of emitter_chain and asset pairs with ordered by volume.\nThe volume is calculated using the notional price of the symbol at the day the VAA was emitted.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-top-assets-by-volume",
                 "parameters": [
@@ -1025,7 +1025,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns a list of the emitter_chain and destination_chain pair ordered by transfer count.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-top-chain-pairs-by-num-transfers",
                 "parameters": [
@@ -1054,7 +1054,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns transactions. Output is paginated.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "list-transactions",
                 "parameters": [
@@ -1107,7 +1107,7 @@ const docTemplate = `{
             "get": {
                 "description": "Find VAA metadata by ID.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-transaction-by-id",
                 "parameters": [
@@ -1153,7 +1153,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all VAAs. Output is paginated and can also be be sorted.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-all-vaas",
                 "parameters": [
@@ -1218,7 +1218,7 @@ const docTemplate = `{
             "post": {
                 "description": "Parse a VAA.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "parse-vaa",
                 "responses": {
@@ -1244,7 +1244,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the total number of VAAs emitted for each blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-vaa-counts",
                 "responses": {
@@ -1267,7 +1267,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all the VAAs generated in specific blockchain.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-vaas-by-chain",
                 "parameters": [
@@ -1321,7 +1321,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns all all the VAAs generated by a specific emitter address.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-vaas-by-emitter",
                 "parameters": [
@@ -1388,7 +1388,7 @@ const docTemplate = `{
             "get": {
                 "description": "Find a VAA by ID.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "find-vaa-by-id",
                 "parameters": [
@@ -1440,7 +1440,7 @@ const docTemplate = `{
             "get": {
                 "description": "Get version/release information.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "get-version",
                 "responses": {
@@ -1463,7 +1463,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns a list of chain pairs by origin chain and destination chain.\nThe list could be rendered by notional or transaction count.\nThe volume is calculated using the notional price of the symbol at the day the VAA was emitted.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "x-chain-activity",
                 "parameters": [
@@ -1506,7 +1506,7 @@ const docTemplate = `{
             "get": {
                 "description": "Returns the swagger specification for this API.",
                 "tags": [
-                    "wormholescan"
+                    "deltaswapscan"
                 ],
                 "operationId": "swagger",
                 "responses": {
@@ -1527,9 +1527,9 @@ const docTemplate = `{
         },
         "/v1/governor/available_notional_by_chain": {
             "get": {
-                "description": "Get available notional by chainID\nSince from the wormhole-explorer point of view it is not a node, but has the information of all nodes,\nin order to build the endpoints it was assumed:\nThere are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of guardians\nfor a chainID. The smallest remainingAvailableNotional value for a chainID is used for the endpoint response.",
+                "description": "Get available notional by chainID\nSince from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,\nin order to build the endpoints it was assumed:\nThere are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of phylaxs\nfor a chainID. The smallest remainingAvailableNotional value for a chainID is used for the endpoint response.",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
                 "operationId": "governor-available-notional-by-chain",
                 "responses": {
@@ -1552,9 +1552,9 @@ const docTemplate = `{
             "get": {
                 "description": "Get enqueued VAAs",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-enqueued-vaas",
+                "operationId": "phylaxs-enqueued-vaas",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1575,9 +1575,9 @@ const docTemplate = `{
             "get": {
                 "description": "Check if vaa is enqueued",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-is-vaa-enqueued",
+                "operationId": "phylaxs-is-vaa-enqueued",
                 "parameters": [
                     {
                         "type": "integer",
@@ -1619,11 +1619,11 @@ const docTemplate = `{
         },
         "/v1/governor/token_list": {
             "get": {
-                "description": "Get token list\nSince from the wormhole-explorer point of view it is not a node, but has the information of all nodes,\nin order to build the endpoints it was assumed:\nFor tokens with the same originChainId and originAddress and different price values for each node,\nthe price that has most occurrences in all the nodes for an originChainId and originAddress is returned.",
+                "description": "Get token list\nSince from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,\nin order to build the endpoints it was assumed:\nFor tokens with the same originChainId and originAddress and different price values for each node,\nthe price that has most occurrences in all the nodes for an originChainId and originAddress is returned.",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-token-list",
+                "operationId": "phylaxs-token-list",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1643,18 +1643,18 @@ const docTemplate = `{
                 }
             }
         },
-        "/v1/guardianset/current": {
+        "/v1/phylaxset/current": {
             "get": {
-                "description": "Get current guardian set.",
+                "description": "Get current phylax set.",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardian-set",
+                "operationId": "phylax-set",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/guardian.GuardianSetResponse"
+                            "$ref": "#/definitions/phylax.PhylaxSetResponse"
                         }
                     },
                     "400": {
@@ -1668,11 +1668,11 @@ const docTemplate = `{
         },
         "/v1/heartbeats": {
             "get": {
-                "description": "Get heartbeats for guardians",
+                "description": "Get heartbeats for phylaxs",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-hearbeats",
+                "operationId": "phylaxs-hearbeats",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1693,9 +1693,9 @@ const docTemplate = `{
             "get": {
                 "description": "get a batch of VAA []byte from a chainID, emitter address and sequence.",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-find-signed-batch-vaa",
+                "operationId": "phylaxs-find-signed-batch-vaa",
                 "parameters": [
                     {
                         "type": "integer",
@@ -1747,9 +1747,9 @@ const docTemplate = `{
             "get": {
                 "description": "get a VAA []byte from a chainID, emitter address and sequence.",
                 "tags": [
-                    "Guardian"
+                    "Phylax"
                 ],
-                "operationId": "guardians-find-signed-vaa",
+                "operationId": "phylaxs-find-signed-vaa",
                 "parameters": [
                     {
                         "type": "integer",
@@ -1810,7 +1810,7 @@ const docTemplate = `{
                 }
             }
         },
-        "github_com_wormhole-foundation_wormhole-explorer_api_routes_guardian_guardian.GuardianSet": {
+        "github_com_deltaswapio_deltaswap-explorer_api_routes_phylax_phylax.PhylaxSet": {
             "type": "object",
             "properties": {
                 "addresses": {
@@ -2209,11 +2209,11 @@ const docTemplate = `{
                 }
             }
         },
-        "guardian.GuardianSetResponse": {
+        "phylax.PhylaxSetResponse": {
             "type": "object",
             "properties": {
-                "guardianSet": {
-                    "$ref": "#/definitions/github_com_wormhole-foundation_wormhole-explorer_api_routes_guardian_guardian.GuardianSet"
+                "phylaxSet": {
+                    "$ref": "#/definitions/github_com_deltaswapio_deltaswap-explorer_api_routes_phylax_phylax.PhylaxSet"
                 }
             }
         },
@@ -2243,7 +2243,7 @@ const docTemplate = `{
                 "rawHeartbeat": {
                     "$ref": "#/definitions/heartbeats.RawHeartbeat"
                 },
-                "verifiedGuardianAddr": {
+                "verifiedPhylaxAddr": {
                     "type": "string"
                 }
             }
@@ -2274,7 +2274,7 @@ const docTemplate = `{
                         "type": "string"
                     }
                 },
-                "guardianAddr": {
+                "phylaxAddr": {
                     "type": "string"
                 },
                 "networks": {
@@ -2323,7 +2323,7 @@ const docTemplate = `{
                 "emitterChain": {
                     "$ref": "#/definitions/vaa.ChainID"
                 },
-                "guardianAddr": {
+                "phylaxAddr": {
                     "type": "string"
                 },
                 "hash": {
@@ -3076,7 +3076,7 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "appId": {
-                    "description": "AppId is an extension field - it is not present in the guardian API.",
+                    "description": "AppId is an extension field - it is not present in the phylax API.",
                     "type": "string"
                 },
                 "emitterAddr": {
@@ -3088,7 +3088,7 @@ const docTemplate = `{
                 "emitterNativeAddr": {
                     "type": "string"
                 },
-                "guardianSetIndex": {
+                "phylaxSetIndex": {
                     "type": "integer"
                 },
                 "id": {
@@ -3098,7 +3098,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "payload": {
-                    "description": "Payload is an extension field - it is not present in the guardian API.",
+                    "description": "Payload is an extension field - it is not present in the phylax API.",
                     "type": "object",
                     "additionalProperties": true
                 },
@@ -3106,7 +3106,7 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "txHash": {
-                    "description": "TxHash is an extension field - it is not present in the guardian API.",
+                    "description": "TxHash is an extension field - it is not present in the phylax API.",
                     "type": "string"
                 },
                 "updatedAt": {
@@ -3143,8 +3143,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "Wormholescan API",
-	Description:      "Wormhole Guardian API\nThis is the API for the Wormhole Guardian and Explorer.\nThe API has two namespaces: wormholescan and guardian.\nwormholescan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.\nguardian is the legacy namespace backguard compatible with guardian node API. The prefix is /v1.\nThis API is public and does not require authentication although some endpoints are rate limited.\nCheck each endpoint documentation for more information.",
+	Title:            "Deltaswapscan API",
+	Description:      "Deltaswap Phylax API\nThis is the API for the Deltaswap Phylax and Explorer.\nThe API has two namespaces: deltaswapscan and phylax.\ndeltaswapscan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.\nphylax is the legacy namespace backguard compatible with phylax node API. The prefix is /v1.\nThis API is public and does not require authentication although some endpoints are rate limited.\nCheck each endpoint documentation for more information.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

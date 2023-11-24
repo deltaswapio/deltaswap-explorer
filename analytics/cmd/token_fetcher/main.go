@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/analytics/coingecko"
 	"github.com/mr-tron/base58"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/coingecko"
 )
 
 func main() {

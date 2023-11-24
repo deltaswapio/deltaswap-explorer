@@ -8,8 +8,8 @@ import (
 
 	"go.uber.org/zap"
 
-	sqs_client "github.com/wormhole-foundation/wormhole-explorer/common/client/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/internal/metrics"
+	sqs_client "github.com/deltaswapio/deltaswap-explorer/common/client/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/internal/metrics"
 )
 
 // SQSOption represents a VAA queue in SQS option function.

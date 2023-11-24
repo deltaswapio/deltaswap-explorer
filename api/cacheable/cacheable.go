@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/cache"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/cache"
 	"go.uber.org/zap"
 )
 

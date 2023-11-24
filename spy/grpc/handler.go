@@ -3,8 +3,8 @@ package grpc
 import (
 	"fmt"
 
-	spyv1 "github.com/certusone/wormhole/node/pkg/proto/spy/v1"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	spyv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/spy/v1"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"

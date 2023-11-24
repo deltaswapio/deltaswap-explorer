@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	pipelineAlert "github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/metrics"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	pipelineAlert "github.com/deltaswapio/deltaswap-explorer/pipeline/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/internal/metrics"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
@@ -38,18 +38,18 @@ type documentKey struct {
 
 // Event represents a database change.
 type Event struct {
-	ID               string     `bson:"_id"`
-	ChainID          uint16     `bson:"emitterChain"`
-	EmitterAddress   string     `bson:"emitterAddr"`
-	Sequence         string     `bson:"sequence"`
-	GuardianSetIndex uint32     `bson:"guardianSetIndex"`
-	Vaa              []byte     `bson:"vaas"`
-	IndexedAt        time.Time  `bson:"indexedAt"`
-	Timestamp        *time.Time `bson:"timestamp"`
-	UpdatedAt        *time.Time `bson:"updatedAt"`
-	TxHash           string     `bson:"txHash"`
-	Version          uint16     `bson:"version"`
-	Revision         uint16     `bson:"revision"`
+	ID             string     `bson:"_id"`
+	ChainID        uint16     `bson:"emitterChain"`
+	EmitterAddress string     `bson:"emitterAddr"`
+	Sequence       string     `bson:"sequence"`
+	PhylaxSetIndex uint32     `bson:"phylaxSetIndex"`
+	Vaa            []byte     `bson:"vaas"`
+	IndexedAt      time.Time  `bson:"indexedAt"`
+	Timestamp      *time.Time `bson:"timestamp"`
+	UpdatedAt      *time.Time `bson:"updatedAt"`
+	TxHash         string     `bson:"txHash"`
+	Version        uint16     `bson:"version"`
+	Revision       uint16     `bson:"revision"`
 }
 
 const queryTemplate = `

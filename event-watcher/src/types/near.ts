@@ -6,7 +6,7 @@ export type EventLog = {
   version?: string; // this is supposed to exist but is missing in WH logs
 };
 
-export type WormholePublishEventLog = {
+export type DeltaswapPublishEventLog = {
   standard: 'wormhole';
   event: 'publish';
   data: string;

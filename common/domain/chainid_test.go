@@ -3,8 +3,8 @@ package domain
 import (
 	"testing"
 
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/test-go/testify/assert"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 func TestEncodeTrxHashByChainID(t *testing.T) {

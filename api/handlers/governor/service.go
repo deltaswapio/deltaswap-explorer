@@ -5,12 +5,12 @@ import (
 	"context"
 	"fmt"
 
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -37,10 +37,10 @@ func (s *Service) FindGovernorConfig(ctx context.Context, p *pagination.Paginati
 	return &res, err
 }
 
-// FindGovernorConfigByGuardianAddress get a governor configuration by guardianAddress.
-func (s *Service) FindGovernorConfigByGuardianAddress(
+// FindGovernorConfigByPhylaxAddress get a governor configuration by phylaxAddress.
+func (s *Service) FindGovernorConfigByPhylaxAddress(
 	ctx context.Context,
-	guardianAddress *types.Address,
+	phylaxAddress *types.Address,
 ) ([]*GovConfig, error) {
 
 	p := pagination.
@@ -48,7 +48,7 @@ func (s *Service) FindGovernorConfigByGuardianAddress(
 		SetLimit(1)
 
 	query := NewGovernorQuery().
-		SetID(guardianAddress).
+		SetID(phylaxAddress).
 		SetPagination(p)
 
 	govConfigs, err := s.repo.FindGovConfigurations(ctx, query)
@@ -66,15 +66,15 @@ func (s *Service) FindGovernorStatus(ctx context.Context, p *pagination.Paginati
 	return &res, err
 }
 
-// FindGovernorStatusByGuardianAddress get a governor status by guardianAddress.
-func (s *Service) FindGovernorStatusByGuardianAddress(
+// FindGovernorStatusByPhylaxAddress get a governor status by phylaxAddress.
+func (s *Service) FindGovernorStatusByPhylaxAddress(
 	ctx context.Context,
-	guardianAddress *types.Address,
+	phylaxAddress *types.Address,
 	p *pagination.Pagination,
 ) (*response.Response[*GovStatus], error) {
 
 	query := NewGovernorQuery().
-		SetID(guardianAddress).
+		SetID(phylaxAddress).
 		SetPagination(p)
 
 	govStatus, err := s.repo.FindOneGovernorStatus(ctx, query)
@@ -171,19 +171,19 @@ func (s *Service) GetGovernorLimit(ctx context.Context, p *pagination.Pagination
 }
 
 // GetAvailNotionByChain get governor limit for each chainID.
-// Guardian api migration.
+// Phylax api migration.
 func (s *Service) GetAvailNotionByChain(ctx context.Context) ([]*AvailableNotionalByChain, error) {
 	return s.repo.GetAvailNotionByChain(ctx)
 }
 
 // Get governor token list.
-// Guardian api migration.
+// Phylax api migration.
 func (s *Service) GetTokenList(ctx context.Context) ([]*TokenList, error) {
 	return s.repo.GetTokenList(ctx)
 }
 
 // GetEnqueuedVaas get enqueued vaas.
-// Guardian api migration.
+// Phylax api migration.
 func (s *Service) GetEnqueuedVaas(ctx context.Context) ([]*EnqueuedVaaItem, error) {
 	entries, err := s.repo.GetEnqueuedVaas(ctx)
 	if err != nil {
@@ -203,7 +203,7 @@ func (s *Service) GetEnqueuedVaas(ctx context.Context) ([]*EnqueuedVaaItem, erro
 }
 
 // IsVaaEnqueued check vaa is enqueued.
-// Guardian api migration.
+// Phylax api migration.
 func (s *Service) IsVaaEnqueued(ctx context.Context, chainID vaa.ChainID, emitter *types.Address, seq string) (bool, error) {
 	isEnqueued, err := s.repo.IsVaaEnqueued(ctx, chainID, emitter, seq)
 	return isEnqueued, err

@@ -12,10 +12,6 @@ import (
 	"time"
 
 	frs "github.com/XLabs/fiber-redis-storage"
-	"github.com/ansrivas/fiberprometheus/v2"
-	"github.com/go-redis/redis/v8"
-	"github.com/gofiber/adaptor/v2"
-	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/limiter"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -23,28 +19,28 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/address"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/heartbeats"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/observations"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/relays"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/transactions"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/config"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/tvl"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/phylax"
+	"github.com/deltaswapio/deltaswap-explorer/api/routes/wormscan"
+	rpcApi "github.com/deltaswapio/deltaswap-explorer/api/rpc"
+	wormscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	xlogger "github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/common/utils"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/address"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/heartbeats"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/infrastructure"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/observations"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/relays"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/transactions"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/config"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/tvl"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/guardian"
-	"github.com/wormhole-foundation/wormhole-explorer/api/routes/wormscan"
-	rpcApi "github.com/wormhole-foundation/wormhole-explorer/api/rpc"
-	wormscanCache "github.com/wormhole-foundation/wormhole-explorer/common/client/cache"
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	xlogger "github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/common/utils"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -53,7 +49,7 @@ var swagger []byte
 
 // GetSwagger godoc
 // @Description Returns the swagger specification for this API.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID swagger
 // @Success 200 {object} object
 // @Failure 400
@@ -73,13 +69,13 @@ func GetSwagger(ctx *fiber.Ctx) error {
 	return err
 }
 
-// @title Wormholescan API
+// @title Deltaswapscan API
 // @version 1.0
-// @description Wormhole Guardian API
-// @description This is the API for the Wormhole Guardian and Explorer.
-// @description The API has two namespaces: wormholescan and guardian.
-// @description wormholescan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.
-// @description guardian is the legacy namespace backguard compatible with guardian node API. The prefix is /v1.
+// @description Deltaswap Phylax API
+// @description This is the API for the Deltaswap Phylax and Explorer.
+// @description The API has two namespaces: deltaswapscan and phylax.
+// @description deltaswapscan is the namespace for the explorer and the new endpoints. The prefix is /api/v1.
+// @description phylax is the legacy namespace backguard compatible with phylax node API. The prefix is /v1.
 // @description This API is public and does not require authentication although some endpoints are rate limited.
 // @description Check each endpoint documentation for more information.
 // @termsOfService https://wormhole.com/
@@ -101,7 +97,7 @@ func main() {
 	}
 
 	// Logging
-	rootLogger := xlogger.New("wormhole-api", xlogger.WithLevel(cfg.LogLevel))
+	rootLogger := xlogger.New("deltaswap-api", xlogger.WithLevel(cfg.LogLevel))
 	defer rootLogger.Sync()
 
 	// Setup DB
@@ -204,7 +200,7 @@ func main() {
 	// Set up route handlers
 	app.Get("/swagger.json", GetSwagger)
 	wormscan.RegisterRoutes(app, rootLogger, addressService, vaaService, obsService, governorService, infrastructureService, transactionsService, relaysService)
-	guardian.RegisterRoutes(cfg, app, rootLogger, vaaService, governorService, heartbeatsService)
+	phylax.RegisterRoutes(cfg, app, rootLogger, vaaService, governorService, heartbeatsService)
 
 	// Set up gRPC handlers
 	handler := rpcApi.NewHandler(vaaService, heartbeatsService, governorService, rootLogger, cfg.P2pNetwork)

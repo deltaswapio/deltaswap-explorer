@@ -5,9 +5,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
 )
 
 // ExtractPagination parses pagination-related query parameters.

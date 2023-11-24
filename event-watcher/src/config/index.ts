@@ -1,4 +1,4 @@
-import { ChainName, EVMChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName, EVMChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 
 export const env = {
   NODE_ENV: process.env.NODE_ENV || 'development',

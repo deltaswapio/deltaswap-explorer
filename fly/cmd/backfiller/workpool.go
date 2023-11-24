@@ -6,9 +6,9 @@ import (
 	"sync"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
 	"github.com/schollz/progressbar/v3"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
 	"go.uber.org/zap"
 )
 

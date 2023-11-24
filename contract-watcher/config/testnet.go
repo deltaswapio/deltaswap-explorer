@@ -3,7 +3,7 @@ package config
 import (
 	"strings"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 var ETHEREUM_TESTNET = WatcherBlockchainAddresses{

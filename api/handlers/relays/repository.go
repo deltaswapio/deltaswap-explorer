@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"time"
 
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/pkg/errors"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"

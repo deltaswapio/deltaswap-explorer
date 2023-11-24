@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gagliardetto/solana-go"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 type Address struct {
@@ -29,12 +28,12 @@ func BytesToAddress(b []byte) (*Address, error) {
 func StringToAddress(s string, acceptSolanaFormat bool) (*Address, error) {
 
 	// Attempt to parse a Solana address (i.e.: 32 bytes encoded as base58).
-	// If it fails, fall back to parsing a regular Wormhole address.
+	// If it fails, fall back to parsing a regular Deltaswap address.
 	if acceptSolanaFormat {
 
 		sig, err := solana.PublicKeyFromBase58(s)
 		if err == nil {
-			// This step is not expected to fail, since Solana and Wormhole addresses have the same size.
+			// This step is not expected to fail, since Solana and Deltaswap addresses have the same size.
 			emitter, err := BytesToAddress(sig[:])
 			if err == nil {
 				return emitter, nil
@@ -42,7 +41,7 @@ func StringToAddress(s string, acceptSolanaFormat bool) (*Address, error) {
 		}
 	}
 
-	// Attempt to parse a regular Wormhole address (i.e.: 32 bytes encoded as hex).
+	// Attempt to parse a regular Deltaswap address (i.e.: 32 bytes encoded as hex).
 	a, err := vaa.StringToAddress(s)
 	if err != nil {
 		return nil, err
@@ -62,7 +61,7 @@ func (addr *Address) Hex() string {
 // this function will trim those bytes.
 //
 // The reason we need this function is that a few database collections
-// (governorConfig, governorStatus, heartbeats) store guardian addresses
+// (governorConfig, governorStatus, heartbeats) store phylax addresses
 // as 40 hex digits instead of the full 64-digit hex representation.
 // When performing lookups over those collections, this function
 // can perform the conversion.

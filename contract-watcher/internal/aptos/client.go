@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"github.com/go-resty/resty/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
 	"go.uber.org/ratelimit"
 )
 

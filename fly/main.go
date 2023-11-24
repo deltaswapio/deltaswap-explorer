@@ -14,38 +14,37 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/go-redis/redis/v8"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/config"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/deduplicator"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/guardiansets"
-	flyAlert "github.com/wormhole-foundation/wormhole-explorer/fly/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/health"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/migration"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/notifier"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/processor"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/producer"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/queue"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/server"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/fly/config"
+	"github.com/deltaswapio/deltaswap-explorer/fly/deduplicator"
+	flyAlert "github.com/deltaswapio/deltaswap-explorer/fly/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/health"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/fly/migration"
+	"github.com/deltaswapio/deltaswap-explorer/fly/notifier"
+	"github.com/deltaswapio/deltaswap-explorer/fly/phylaxsets"
+	"github.com/deltaswapio/deltaswap-explorer/fly/processor"
+	"github.com/deltaswapio/deltaswap-explorer/fly/producer"
+	"github.com/deltaswapio/deltaswap-explorer/fly/queue"
+	"github.com/deltaswapio/deltaswap-explorer/fly/server"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
 	"google.golang.org/protobuf/proto"
 
-	"github.com/certusone/wormhole/node/pkg/common"
-	"github.com/certusone/wormhole/node/pkg/p2p"
-	gossipv1 "github.com/certusone/wormhole/node/pkg/proto/gossip/v1"
-	"github.com/certusone/wormhole/node/pkg/supervisor"
+	"github.com/deltaswapio/deltaswap/node/pkg/common"
+	"github.com/deltaswapio/deltaswap/node/pkg/p2p"
+	gossipv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/gossip/v1"
+	"github.com/deltaswapio/deltaswap/node/pkg/supervisor"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/dgraph-io/ristretto"
 	"github.com/eko/gocache/v3/cache"
 	"github.com/eko/gocache/v3/store"
 	eth_common "github.com/ethereum/go-ethereum/common"
 	crypto2 "github.com/ethereum/go-ethereum/crypto"
 	"github.com/libp2p/go-libp2p-core/crypto"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 
 	"github.com/joho/godotenv"
@@ -267,7 +266,7 @@ func main() {
 	logLevel = "warn"
 	common.SetRestrictiveUmask()
 
-	logger := logger.New("wormhole-fly", logger.WithLevel(logLevel))
+	logger := logger.New("deltaswap-fly", logger.WithLevel(logLevel))
 
 	isLocal := flag.Bool("local", false, "a bool")
 	flag.Parse()
@@ -339,8 +338,8 @@ func main() {
 	// Heartbeat updates
 	heartbeatC := make(chan *gossipv1.Heartbeat, cfg.HeartbeatsChannelSize)
 
-	// Guardian set state managed by processor
-	gst := common.NewGuardianSetState(heartbeatC)
+	// Phylax set state managed by processor
+	gst := common.NewPhylaxSetState(heartbeatC)
 
 	// Governor cfg
 	govConfigC := make(chan *gossipv1.SignedChainGovernorConfig, cfg.GovernorConfigChannelSize)
@@ -348,17 +347,17 @@ func main() {
 	// Governor status
 	govStatusC := make(chan *gossipv1.SignedChainGovernorStatus, cfg.GovernorStatusChannelSize)
 
-	// Bootstrap guardian set, otherwise heartbeats would be skipped
+	// Bootstrap phylax set, otherwise heartbeats would be skipped
 	// TODO: fetch this and probably figure out how to update it live
-	guardianSetHistory := guardiansets.GetByEnv(p2pNetworkConfig.Enviroment, alertClient)
-	gsLastet := guardianSetHistory.GetLatest()
+	phylaxSetHistory := phylaxsets.GetByEnv(p2pNetworkConfig.Enviroment, alertClient)
+	gsLastet := phylaxSetHistory.GetLatest()
 	gst.Set(&gsLastet)
 
 	// Ignore observation requests
 	// Note: without this, the whole program hangs on observation requests
 	discardMessages(rootCtx, obsvReqC)
 	maxHealthTimeSeconds := config.GetMaxHealthTimeSeconds()
-	guardianCheck := health.NewGuardianCheck(maxHealthTimeSeconds)
+	phylaxCheck := health.NewPhylaxCheck(maxHealthTimeSeconds)
 
 	// Log observations
 	go func() {
@@ -368,7 +367,7 @@ func main() {
 				return
 			case m := <-obsvC:
 				o := m.Msg
-				guardianCheck.Ping(rootCtx)
+				phylaxCheck.Ping(rootCtx)
 				metrics.IncObservationTotal()
 				ok := verifyObservation(logger, o, gst.Get())
 				if !ok {
@@ -415,7 +414,7 @@ func main() {
 	// When recive a message, the message filter by deduplicator
 	// if VAA is from pyhnet should be saved directly to repository
 	// if VAA is from non pyhnet should be publish with nonPythVaaPublish
-	vaaGossipConsumer := processor.NewVAAGossipConsumer(&guardianSetHistory, deduplicator, nonPythVaaPublish, repository.UpsertVaa, metrics, logger)
+	vaaGossipConsumer := processor.NewVAAGossipConsumer(&phylaxSetHistory, deduplicator, nonPythVaaPublish, repository.UpsertVaa, metrics, logger)
 	// Creates a instance to consume VAA messages (non pyth) from a queue and store in a storage
 	vaaQueueConsumer := processor.NewVAAQueueConsumer(vaaQueueConsume, repository, notifierFunc, metrics, logger)
 	// Creates a wrapper that splits the incoming VAAs into 2 channels (pyth to non pyth) in order
@@ -426,7 +425,7 @@ func main() {
 
 	// start fly http server.
 	pprofEnabled := config.GetPprofEnabled()
-	server := server.NewServer(cfg.ApiPort, guardianCheck, logger, repository, sqsConsumer, *isLocal, pprofEnabled, alertClient)
+	server := server.NewServer(cfg.ApiPort, phylaxCheck, logger, repository, sqsConsumer, *isLocal, pprofEnabled, alertClient)
 	server.Start()
 
 	go func() {
@@ -435,7 +434,7 @@ func main() {
 			case <-rootCtx.Done():
 				return
 			case sVaa := <-signedInC:
-				guardianCheck.Ping(rootCtx)
+				phylaxCheck.Ping(rootCtx)
 				metrics.IncVaaTotal()
 				v, err := vaa.Unmarshal(sVaa.Vaa)
 				if err != nil {
@@ -458,13 +457,13 @@ func main() {
 	}()
 
 	// Log heartbeats
-	go func(guardianCheck *health.GuardianCheck) {
+	go func(phylaxCheck *health.PhylaxCheck) {
 		for {
 			select {
 			case <-rootCtx.Done():
 				return
 			case hb := <-heartbeatC:
-				guardianCheck.Ping(rootCtx)
+				phylaxCheck.Ping(rootCtx)
 				metrics.IncHeartbeatFromGossipNetwork(hb.NodeName)
 				err := repository.UpsertHeartbeat(hb)
 				if err != nil {
@@ -474,7 +473,7 @@ func main() {
 				}
 			}
 		}
-	}(guardianCheck)
+	}(phylaxCheck)
 
 	// Log govConfigs
 	go func() {
@@ -483,7 +482,7 @@ func main() {
 			case <-rootCtx.Done():
 				return
 			case govConfig := <-govConfigC:
-				guardianCheck.Ping(rootCtx)
+				phylaxCheck.Ping(rootCtx)
 				nodeName, err := getGovernorConfigNodeName(govConfig)
 				if err != nil {
 					logger.Error("Error getting gov config node name", zap.Error(err))
@@ -508,7 +507,7 @@ func main() {
 			case <-rootCtx.Done():
 				return
 			case govStatus := <-govStatusC:
-				guardianCheck.Ping(rootCtx)
+				phylaxCheck.Ping(rootCtx)
 				nodeName, err := getGovernorStatusNodeName(govStatus)
 				if err != nil {
 					logger.Error("Error getting gov status node name", zap.Error(err))
@@ -592,7 +591,7 @@ func getObservationChainID(logger *zap.Logger, obs *gossipv1.SignedObservation) 
 	return vaa.ChainID(chainID), nil
 }
 
-func verifyObservation(logger *zap.Logger, obs *gossipv1.SignedObservation, gs *common.GuardianSet) bool {
+func verifyObservation(logger *zap.Logger, obs *gossipv1.SignedObservation, gs *common.PhylaxSet) bool {
 	pk, err := crypto2.Ecrecover(obs.GetHash(), obs.GetSignature())
 	if err != nil {
 		return false
@@ -609,14 +608,14 @@ func verifyObservation(logger *zap.Logger, obs *gossipv1.SignedObservation, gs *
 		return false
 	}
 
-	_, isFromGuardian := gs.KeyIndex(theirAddr)
-	if !isFromGuardian {
-		logger.Error("error validating observation, signer not in guardian set",
+	_, isFromPhylax := gs.KeyIndex(theirAddr)
+	if !isFromPhylax {
+		logger.Error("error validating observation, signer not in phylax set",
 			zap.String("id", obs.MessageId),
 			zap.String("obs_addr", theirAddr.Hex()),
 		)
 	}
-	return isFromGuardian
+	return isFromPhylax
 }
 
 func discardMessages[T any](ctx context.Context, obsvReqC chan T) {

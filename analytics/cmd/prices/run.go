@@ -5,9 +5,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/coingecko"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/coingecko"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
 	"go.uber.org/zap"
 )
 
@@ -17,9 +17,9 @@ import (
 func RunPrices(output string) {
 
 	// build logger
-	logger := logger.New("wormhole-explorer-analytics")
+	logger := logger.New("deltaswap-explorer-analytics")
 
-	logger.Info("starting wormhole-explorer-analytics ...")
+	logger.Info("starting deltaswap-explorer-analytics ...")
 
 	cg := coingecko.NewCoinGeckoAPI("")
 
@@ -50,6 +50,6 @@ func RunPrices(output string) {
 
 	}
 
-	logger.Info("finished wormhole-explorer-analytics")
+	logger.Info("finished deltaswap-explorer-analytics")
 
 }

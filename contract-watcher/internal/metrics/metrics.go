@@ -1,7 +1,7 @@
 package metrics
 
 import (
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 const serviceName = "wormscan-contract-watcher"

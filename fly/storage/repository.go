@@ -8,15 +8,15 @@ import (
 	"strings"
 	"time"
 
-	gossipv1 "github.com/certusone/wormhole/node/pkg/proto/gossip/v1"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	flyAlert "github.com/deltaswapio/deltaswap-explorer/fly/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/track"
+	"github.com/deltaswapio/deltaswap-explorer/fly/producer"
+	gossipv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/gossip/v1"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	eth_common "github.com/ethereum/go-ethereum/common"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	flyAlert "github.com/wormhole-foundation/wormhole-explorer/fly/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/track"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/producer"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -69,15 +69,15 @@ func (s *Repository) UpsertVaa(ctx context.Context, v *vaa.VAA, serializedVaa []
 	id := v.MessageID()
 	now := time.Now()
 	vaaDoc := &VaaUpdate{
-		ID:               v.MessageID(),
-		Timestamp:        &v.Timestamp,
-		Version:          v.Version,
-		EmitterChain:     v.EmitterChain,
-		EmitterAddr:      v.EmitterAddress.String(),
-		Sequence:         strconv.FormatUint(v.Sequence, 10),
-		GuardianSetIndex: v.GuardianSetIndex,
-		Vaa:              serializedVaa,
-		UpdatedAt:        &now,
+		ID:             v.MessageID(),
+		Timestamp:      &v.Timestamp,
+		Version:        v.Version,
+		EmitterChain:   v.EmitterChain,
+		EmitterAddr:    v.EmitterAddress.String(),
+		Sequence:       strconv.FormatUint(v.Sequence, 10),
+		PhylaxSetIndex: v.PhylaxSetIndex,
+		Vaa:            serializedVaa,
+		UpdatedAt:      &now,
 	}
 
 	update := bson.M{
@@ -125,15 +125,15 @@ func (s *Repository) UpsertVaa(ctx context.Context, v *vaa.VAA, serializedVaa []
 			Source:  "fly",
 			Type:    domain.SignedVaaType,
 			Payload: producer.SignedVaa{
-				ID:               v.MessageID(),
-				EmitterChain:     uint16(v.EmitterChain),
-				EmitterAddr:      v.EmitterAddress.String(),
-				Sequence:         v.Sequence,
-				GuardianSetIndex: v.GuardianSetIndex,
-				Timestamp:        v.Timestamp,
-				Vaa:              serializedVaa,
-				TxHash:           vaaDoc.TxHash,
-				Version:          int(v.Version),
+				ID:             v.MessageID(),
+				EmitterChain:   uint16(v.EmitterChain),
+				EmitterAddr:    v.EmitterAddress.String(),
+				Sequence:       v.Sequence,
+				PhylaxSetIndex: v.PhylaxSetIndex,
+				Timestamp:      v.Timestamp,
+				Vaa:            serializedVaa,
+				TxHash:         vaaDoc.TxHash,
+				Version:        int(v.Version),
 			},
 		}
 
@@ -167,15 +167,15 @@ func (s *Repository) UpsertObservation(o *gossipv1.SignedObservation) error {
 
 	addr := eth_common.BytesToAddress(o.GetAddr())
 	obs := ObservationUpdate{
-		ChainID:      vaa.ChainID(chainID),
-		Emitter:      emitter,
-		Sequence:     strconv.FormatUint(sequence, 10),
-		MessageID:    o.GetMessageId(),
-		Hash:         o.GetHash(),
-		TxHash:       o.GetTxHash(),
-		GuardianAddr: addr.String(),
-		Signature:    o.GetSignature(),
-		UpdatedAt:    &now,
+		ChainID:    vaa.ChainID(chainID),
+		Emitter:    emitter,
+		Sequence:   strconv.FormatUint(sequence, 10),
+		MessageID:  o.GetMessageId(),
+		Hash:       o.GetHash(),
+		TxHash:     o.GetTxHash(),
+		PhylaxAddr: addr.String(),
+		Signature:  o.GetSignature(),
+		UpdatedAt:  &now,
 	}
 
 	update := bson.M{
@@ -262,7 +262,7 @@ func (s *Repository) UpsertTxHash(ctx context.Context, vaaTxHash VaaIdTxHashUpda
 }
 
 func (s *Repository) UpsertHeartbeat(hb *gossipv1.Heartbeat) error {
-	id := hb.GuardianAddr
+	id := hb.PhylaxAddr
 	now := time.Now()
 	update := bson.D{{Key: "$set", Value: hb}, {Key: "$set", Value: bson.D{{Key: "updatedAt", Value: now}}}, {Key: "$setOnInsert", Value: bson.D{{Key: "indexedAt", Value: now}}}}
 	opts := options.Update().SetUpsert(true)
@@ -272,8 +272,8 @@ func (s *Repository) UpsertHeartbeat(hb *gossipv1.Heartbeat) error {
 		// send alert when exists an error saving heartbeat.
 		alertContext := alert.AlertContext{
 			Details: map[string]string{
-				"guardianAddr": hb.GuardianAddr,
-				"nodeName":     hb.NodeName,
+				"phylaxAddr": hb.PhylaxAddr,
+				"nodeName":   hb.NodeName,
 			},
 			Error: err,
 		}
@@ -283,7 +283,7 @@ func (s *Repository) UpsertHeartbeat(hb *gossipv1.Heartbeat) error {
 }
 
 func (s *Repository) UpsertGovernorConfig(govC *gossipv1.SignedChainGovernorConfig) error {
-	id := hex.EncodeToString(govC.GuardianAddr)
+	id := hex.EncodeToString(govC.PhylaxAddr)
 	now := time.Now()
 	var gCfg gossipv1.ChainGovernorConfig
 	err := proto.Unmarshal(govC.Config, &gCfg)
@@ -314,7 +314,7 @@ func (s *Repository) UpsertGovernorConfig(govC *gossipv1.SignedChainGovernorConf
 }
 
 func (s *Repository) UpsertGovernorStatus(govS *gossipv1.SignedChainGovernorStatus) error {
-	id := hex.EncodeToString(govS.GuardianAddr)
+	id := hex.EncodeToString(govS.PhylaxAddr)
 	now := time.Now()
 	var gStatus gossipv1.ChainGovernorStatus
 	err := proto.Unmarshal(govS.Status, &gStatus)

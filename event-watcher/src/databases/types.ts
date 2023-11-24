@@ -1,4 +1,4 @@
-import { ChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import JsonDB from './JsonDB';
 import MongoDB from './MongoDB';
 

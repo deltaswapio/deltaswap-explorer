@@ -16,15 +16,15 @@ type NotificationEvent struct {
 }
 
 type SignedVaa struct {
-	ID               string    `json:"id"`
-	EmitterChain     uint16    `json:"emitterChain"`
-	EmitterAddr      string    `json:"emitterAddr"`
-	Sequence         uint64    `json:"sequence"`
-	GuardianSetIndex uint32    `json:"guardianSetIndex"`
-	Timestamp        time.Time `json:"timestamp"`
-	Vaa              []byte    `json:"vaa"`
-	TxHash           string    `json:"txHash"`
-	Version          int       `json:"version"`
+	ID             string    `json:"id"`
+	EmitterChain   uint16    `json:"emitterChain"`
+	EmitterAddr    string    `json:"emitterAddr"`
+	Sequence       uint64    `json:"sequence"`
+	PhylaxSetIndex uint32    `json:"phylaxSetIndex"`
+	Timestamp      time.Time `json:"timestamp"`
+	Vaa            []byte    `json:"vaa"`
+	TxHash         string    `json:"txHash"`
+	Version        int       `json:"version"`
 }
 
 // NewComposite returns a PushFunc that calls all the given producers.

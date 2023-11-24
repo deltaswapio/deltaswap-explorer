@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
 )
 
 // TestCheckTxShouldBeUpdated tests the checkTxShouldBeUpdated function.

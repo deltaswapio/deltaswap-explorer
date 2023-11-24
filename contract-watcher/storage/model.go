@@ -3,7 +3,7 @@ package storage
 import (
 	"time"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // DestinationTx representa a destination transaction.

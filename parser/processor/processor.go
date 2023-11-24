@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	parserAlert "github.com/wormhole-foundation/wormhole-explorer/parser/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/parser"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	parserAlert "github.com/deltaswapio/deltaswap-explorer/parser/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/parser/parser"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

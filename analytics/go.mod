@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/analytics
+module github.com/deltaswapio/deltaswap-explorer/analytics
 
 go 1.19
 
@@ -7,7 +7,8 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.17.4
 	github.com/aws/aws-sdk-go-v2/config v1.1.1
 	github.com/aws/aws-sdk-go-v2/credentials v1.1.1
-	github.com/go-redis/redis/v8 v8.11.5
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	github.com/gofiber/fiber/v2 v2.47.0
 	github.com/influxdata/influxdb-client-go/v2 v2.12.2
 	github.com/joho/godotenv v1.5.1
@@ -16,8 +17,6 @@ require (
 	github.com/sethvargo/go-envconfig v0.9.0
 	github.com/shopspring/decimal v1.3.1
 	github.com/spf13/cobra v1.7.0
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-00010101000000-000000000000
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.24.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
@@ -45,6 +44,7 @@ require (
 	github.com/deepmap/oapi-codegen v1.8.2 // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/ethereum/go-ethereum v1.10.21 // indirect
+	github.com/go-redis/redis/v8 v8.11.5 // indirect
 	github.com/gofiber/adaptor/v2 v2.1.31 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
@@ -86,4 +86,4 @@ require (
 	google.golang.org/protobuf v1.30.0 // indirect
 )
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

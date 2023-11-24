@@ -1,12 +1,12 @@
-import { ChainName, coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName, coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import BaseDB from './BaseDB';
 import { LastBlockByChain, WHTransaction, WHTransferRedeemed } from './types';
 import * as mongoDB from 'mongodb';
 import { env } from '../config';
 
-const WORMHOLE_TX_COLLECTION: string = 'wormholeTxs';
+const DELTASWAP_TX_COLLECTION: string = 'wormholeTxs';
 const GLOBAL_TX_COLLECTION: string = 'globalTransactions';
-const WORMHOLE_LAST_BLOCK_COLLECTION: string = 'lastBlocksByChain';
+const DELTASWAP_LAST_BLOCK_COLLECTION: string = 'lastBlocksByChain';
 
 export default class MongoDB extends BaseDB {
   private client: mongoDB.MongoClient | null = null;
@@ -20,9 +20,9 @@ export default class MongoDB extends BaseDB {
     this.logger.info('Connecting...');
     this.client = new mongoDB.MongoClient(env.MONGODB_URI as string);
     this.db = this.client.db(env.MONGODB_DATABASE ?? 'wormhole');
-    this.wormholeTxCollection = this.db.collection(WORMHOLE_TX_COLLECTION);
+    this.wormholeTxCollection = this.db.collection(DELTASWAP_TX_COLLECTION);
     this.globalTxCollection = this.db.collection(GLOBAL_TX_COLLECTION);
-    this.lastTxBlockByChainCollection = this.db.collection(WORMHOLE_LAST_BLOCK_COLLECTION);
+    this.lastTxBlockByChainCollection = this.db.collection(DELTASWAP_LAST_BLOCK_COLLECTION);
   }
 
   async connect(): Promise<void> {
@@ -63,7 +63,7 @@ export default class MongoDB extends BaseDB {
   async storeWhTxs(chainName: ChainName, whTxs: WHTransaction[]): Promise<void> {
     try {
       for (let i = 0; i < whTxs.length; i++) {
-        let message = `Insert Wormhole Transaction Event Log to ${WORMHOLE_TX_COLLECTION} collection`;
+        let message = `Insert Deltaswap Transaction Event Log to ${DELTASWAP_TX_COLLECTION} collection`;
         const currentWhTx = whTxs[i];
         const { id, ...rest } = currentWhTx;
 
@@ -81,7 +81,7 @@ export default class MongoDB extends BaseDB {
             { returnDocument: 'after' },
           );
 
-          message = `Update Wormhole Transaction Event Log to ${WORMHOLE_TX_COLLECTION} collection`;
+          message = `Update Deltaswap Transaction Event Log to ${DELTASWAP_TX_COLLECTION} collection`;
         } else {
           await this.wormholeTxCollection?.insertOne({
             _id: id as unknown as mongoDB.ObjectId,
@@ -104,14 +104,14 @@ export default class MongoDB extends BaseDB {
         }
       }
     } catch (e: unknown) {
-      this.logger.error(`Error Upsert Wormhole Transaction Event Log: ${e}`);
+      this.logger.error(`Error Upsert Deltaswap Transaction Event Log: ${e}`);
     }
   }
 
   async storeRedeemedTxs(chainName: ChainName, redeemedTxs: WHTransferRedeemed[]): Promise<void> {
     try {
       for (let i = 0; i < redeemedTxs.length; i++) {
-        let message = `Insert Wormhole Transfer Redeemed Event Log to ${GLOBAL_TX_COLLECTION} collection`;
+        let message = `Insert Deltaswap Transfer Redeemed Event Log to ${GLOBAL_TX_COLLECTION} collection`;
         const currentWhRedeemedTx = redeemedTxs[i];
         const { id, destinationTx, ...rest } = currentWhRedeemedTx;
         const { status } = destinationTx;
@@ -130,7 +130,7 @@ export default class MongoDB extends BaseDB {
 
         if (!whTxResponse?.value) {
           this.logger.info(
-            `Error Update Wormhole Transfer Redeemed Event Log: ${id} does not exist on ${WORMHOLE_TX_COLLECTION} collection`,
+            `Error Update Deltaswap Transfer Redeemed Event Log: ${id} does not exist on ${DELTASWAP_TX_COLLECTION} collection`,
           );
         }
 
@@ -139,7 +139,7 @@ export default class MongoDB extends BaseDB {
         });
 
         if (globalTxDocument) {
-          message = `Update Wormhole Transfer Redeemed Event Log to ${GLOBAL_TX_COLLECTION} collection`;
+          message = `Update Deltaswap Transfer Redeemed Event Log to ${GLOBAL_TX_COLLECTION} collection`;
           const { destinationTx: globalTxDocumentDestinationTx } = globalTxDocument;
 
           if (!globalTxDocumentDestinationTx) {
@@ -152,7 +152,7 @@ export default class MongoDB extends BaseDB {
               { returnDocument: 'after' },
             );
           } else {
-            message = `Already exists Wormhole Transfer Redeemed Event Log on ${GLOBAL_TX_COLLECTION} collection`;
+            message = `Already exists Deltaswap Transfer Redeemed Event Log on ${GLOBAL_TX_COLLECTION} collection`;
           }
         } else {
           await this.globalTxCollection?.insertOne({
@@ -175,7 +175,7 @@ export default class MongoDB extends BaseDB {
         }
       }
     } catch (e: unknown) {
-      this.logger.error(`Error Update Wormhole Transfer Redeemed Event Log: ${e}`);
+      this.logger.error(`Error Update Deltaswap Transfer Redeemed Event Log: ${e}`);
     }
   }
 

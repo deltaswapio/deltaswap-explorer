@@ -1,6 +1,6 @@
 package notional
 
-import "github.com/wormhole-foundation/wormhole-explorer/common/domain"
+import "github.com/deltaswapio/deltaswap-explorer/common/domain"
 
 // DummyNotionalCache is a dummy notional cache.
 type DummyNotionalCache struct {

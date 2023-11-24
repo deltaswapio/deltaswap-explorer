@@ -11,18 +11,18 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/config"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/healthcheck"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/http/infrastructure"
-	pipelineAlert "github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/sns"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/pipeline"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/topic"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/watcher"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/config"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/healthcheck"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/http/infrastructure"
+	pipelineAlert "github.com/deltaswapio/deltaswap-explorer/pipeline/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/internal/sns"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/pipeline"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/topic"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/watcher"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 )
@@ -48,9 +48,9 @@ func main() {
 		log.Fatal("Error creating config", err)
 	}
 
-	logger := logger.New("wormhole-explorer-pipeline", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-pipeline", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-pipeline ...")
+	logger.Info("Starting deltaswap-explorer-pipeline ...")
 
 	//setup DB connection
 	db, err := dbutil.Connect(rootCtx, logger, config.MongoURI, config.MongoDatabase, false)
@@ -98,7 +98,7 @@ func main() {
 	server := infrastructure.NewServer(logger, config.Port, config.PprofEnabled, healthChecks...)
 	server.Start()
 
-	logger.Info("Started wormhole-explorer-pipeline")
+	logger.Info("Started deltaswap-explorer-pipeline")
 
 	// Waiting for signal
 	sigterm := make(chan os.Signal, 1)
@@ -122,7 +122,7 @@ func main() {
 	logger.Info("Closing Http server ...")
 	server.Stop()
 
-	logger.Info("Finished wormhole-explorer-pipeline")
+	logger.Info("Finished deltaswap-explorer-pipeline")
 
 }
 

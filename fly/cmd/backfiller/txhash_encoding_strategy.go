@@ -5,14 +5,14 @@ import (
 	"encoding/hex"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/producer"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/producer"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -26,7 +26,7 @@ type TxHashEncondingConfig struct {
 
 func RunTxHashEncoding(cfg TxHashEncondingConfig) {
 	ctx := context.Background()
-	logger := logger.New("wormhole-fly", logger.WithLevel(cfg.LogLevel))
+	logger := logger.New("deltaswap-fly", logger.WithLevel(cfg.LogLevel))
 
 	db, err := dbutil.Connect(ctx, logger, cfg.MongoURI, cfg.MongoDatabase, false)
 	if err != nil {

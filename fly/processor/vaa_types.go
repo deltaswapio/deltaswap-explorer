@@ -3,7 +3,7 @@ package processor
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // VAAPushFunc is a function to push VAA message.

@@ -1,18 +1,18 @@
-package guardiansets
+package phylaxsets
 
 import (
 	"context"
 	_ "embed"
 	"testing"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 //go:embed validVaa.bin
 var validVaa []byte
 
-// TestValidSignatures exercises the method `GuardianSetHistory.Validate()`
+// TestValidSignatures exercises the method `PhylaxSetHistory.Validate()`
 func TestValidSignatures(t *testing.T) {
 
 	// unmarshal the binary encoding of the VAA into a high-level data structure
@@ -23,7 +23,7 @@ func TestValidSignatures(t *testing.T) {
 	}
 
 	// assert that the signatures must be valid
-	h := getMainnetGuardianSet(alert.NewDummyClient())
+	h := getMainnetPhylaxSet(alert.NewDummyClient())
 	err = h.Verify(context.TODO(), &vaa)
 	if err != nil {
 		t.Fatalf("Failed to verify VAA: %v", err)
@@ -31,7 +31,7 @@ func TestValidSignatures(t *testing.T) {
 
 }
 
-// TestInvalidSignatures exercises the method `GuardianSetHistory.Validate()`
+// TestInvalidSignatures exercises the method `PhylaxSetHistory.Validate()`
 func TestInvalidSignatures(t *testing.T) {
 
 	// create an invalid VAA, binary encoded
@@ -47,7 +47,7 @@ func TestInvalidSignatures(t *testing.T) {
 	}
 
 	// assert that the signatures must be invalid
-	h := getMainnetGuardianSet(alert.NewDummyClient())
+	h := getMainnetPhylaxSet(alert.NewDummyClient())
 	err = h.Verify(context.TODO(), &vaa)
 	if err == nil {
 		t.Fatal("Expected signatures to be invalid")

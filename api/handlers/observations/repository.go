@@ -5,10 +5,10 @@ import (
 	"context"
 	"fmt"
 
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/pkg/errors"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -84,11 +84,11 @@ func (r *Repository) FindOne(ctx context.Context, q *ObservationQuery) (*Observa
 // ObservationQuery respresent a query for the observation mongodb document.
 type ObservationQuery struct {
 	pagination.Pagination
-	chainId      vaa.ChainID
-	emitter      string
-	sequence     string
-	guardianAddr string
-	hash         []byte
+	chainId    vaa.ChainID
+	emitter    string
+	sequence   string
+	phylaxAddr string
+	hash       []byte
 	uint64
 }
 
@@ -116,9 +116,9 @@ func (q *ObservationQuery) SetSequence(seq string) *ObservationQuery {
 	return q
 }
 
-// SetGuardianAddr set the guardianAddr field of the ObservationQuery struct.
-func (q *ObservationQuery) SetGuardianAddr(guardianAddr string) *ObservationQuery {
-	q.guardianAddr = guardianAddr
+// SetPhylaxAddr set the phylaxAddr field of the ObservationQuery struct.
+func (q *ObservationQuery) SetPhylaxAddr(phylaxAddr string) *ObservationQuery {
+	q.phylaxAddr = phylaxAddr
 	return q
 }
 
@@ -148,8 +148,8 @@ func (q *ObservationQuery) toBSON() *bson.D {
 	if len(q.hash) > 0 {
 		r = append(r, bson.E{"hash", q.hash})
 	}
-	if q.guardianAddr != "" {
-		r = append(r, bson.E{"guardianAddr", q.guardianAddr})
+	if q.phylaxAddr != "" {
+		r = append(r, bson.E{"phylaxAddr", q.phylaxAddr})
 	}
 
 	return &r

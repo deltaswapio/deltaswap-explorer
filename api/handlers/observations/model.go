@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // ObservationDoc represent an observation document.
@@ -17,7 +17,7 @@ type ObservationDoc struct {
 	Sequence     string      `bson:"sequence" json:"sequence"`
 	Hash         []byte      `bson:"hash" json:"hash"`
 	TxHash       []byte      `bson:"txHash" json:"txHash"`
-	GuardianAddr string      `bson:"guardianAddr" json:"guardianAddr"`
+	PhylaxAddr   string      `bson:"phylaxAddr" json:"phylaxAddr"`
 	Signature    []byte      `bson:"signature" json:"signature"`
 	UpdatedAt    *time.Time  `bson:"updatedAt" json:"updatedAt"`
 	IndexedAt    *time.Time  `bson:"indexedAt" json:"indexedAt"`

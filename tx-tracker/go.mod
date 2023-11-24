@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/txtracker
+module github.com/deltaswapio/deltaswap-explorer/txtracker
 
 go 1.19
 
@@ -12,7 +12,7 @@ require (
 	github.com/mr-tron/base58 v1.2.0
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.16.0
-	github.com/wormhole-foundation/wormhole-explorer/api v0.0.0-20230316184234-db3a54270a77
+	github.com/deltaswapio/deltaswap-explorer/api v0.0.0-00010101000000-000000000000
 	go.mongodb.org/mongo-driver v1.11.2
 )
 
@@ -100,8 +100,8 @@ require (
 	github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible // indirect
 	github.com/tklauser/go-sysconf v0.3.5 // indirect
 	github.com/tklauser/numcpus v0.2.2 // indirect
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-20230301134427-b3ec0bcc9eda
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20230301134427-b3ec0bcc9eda
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.uber.org/zap v1.24.0
 	golang.org/x/crypto v0.7.0 // indirect
 	golang.org/x/sys v0.10.0 // indirect
@@ -109,4 +109,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

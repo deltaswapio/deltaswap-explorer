@@ -7,9 +7,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/sqs"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

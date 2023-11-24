@@ -3,9 +3,9 @@ package consumer
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/metric"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/queue"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/queue"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

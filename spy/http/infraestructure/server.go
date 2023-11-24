@@ -1,9 +1,9 @@
 package infraestructure
 
 import (
+	"github.com/deltaswapio/deltaswap-explorer/common/health"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
-	"github.com/wormhole-foundation/wormhole-explorer/common/health"
 	"go.uber.org/zap"
 )
 

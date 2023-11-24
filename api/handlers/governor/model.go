@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/mongo"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/mongo"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // GovConfigPage represent a governor configuration.
@@ -181,7 +181,7 @@ type GovernorLimit struct {
 }
 
 // AvailableNotionalByChain definition.
-// This is the structure that is used in guardian api grpc api version.
+// This is the structure that is used in phylax api grpc api version.
 type AvailableNotionalByChain struct {
 	ChainID            vaa.ChainID  `bson:"chainId" json:"chainId"`
 	AvailableNotional  mongo.Uint64 `bson:"availableNotional" json:"remainingAvailableNotional"`

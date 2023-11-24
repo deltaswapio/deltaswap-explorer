@@ -3,10 +3,10 @@ package pipeline
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/topic"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/watcher"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/topic"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/watcher"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -37,18 +37,18 @@ func (p *Publisher) Publish(ctx context.Context, e *watcher.Event) {
 
 	// create a Event.
 	event := topic.Event{
-		ID:               e.ID,
-		ChainID:          e.ChainID,
-		EmitterAddress:   e.EmitterAddress,
-		Sequence:         e.Sequence,
-		GuardianSetIndex: e.GuardianSetIndex,
-		Vaa:              e.Vaa,
-		IndexedAt:        e.IndexedAt,
-		Timestamp:        e.Timestamp,
-		UpdatedAt:        e.UpdatedAt,
-		TxHash:           e.TxHash,
-		Version:          e.Version,
-		Revision:         e.Revision,
+		ID:             e.ID,
+		ChainID:        e.ChainID,
+		EmitterAddress: e.EmitterAddress,
+		Sequence:       e.Sequence,
+		PhylaxSetIndex: e.PhylaxSetIndex,
+		Vaa:            e.Vaa,
+		IndexedAt:      e.IndexedAt,
+		Timestamp:      e.Timestamp,
+		UpdatedAt:      e.UpdatedAt,
+		TxHash:         e.TxHash,
+		Version:        e.Version,
+		Revision:       e.Revision,
 	}
 
 	// In some scenarios the fly component that inserts the VAA documents does not have the txhash field available,

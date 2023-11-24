@@ -2,10 +2,10 @@ package infrastructure
 
 import (
 	"github.com/ansrivas/fiberprometheus/v2"
+	health "github.com/deltaswapio/deltaswap-explorer/common/health"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/http/vaa"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
-	health "github.com/wormhole-foundation/wormhole-explorer/common/health"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/http/vaa"
 	"go.uber.org/zap"
 )
 

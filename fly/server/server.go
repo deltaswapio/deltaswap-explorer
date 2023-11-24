@@ -4,12 +4,12 @@ import (
 	"fmt"
 
 	"github.com/ansrivas/fiberprometheus/v2"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/health"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/health"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
 	"go.uber.org/zap"
 )
 
@@ -19,8 +19,8 @@ type Server struct {
 	logger *zap.Logger
 }
 
-func NewServer(port uint, guardianCheck *health.GuardianCheck, logger *zap.Logger, repository *storage.Repository, consumer *sqs.Consumer, isLocal, pprofEnabled bool, alertClient alert.AlertClient) *Server {
-	ctrl := NewController(guardianCheck, repository, consumer, isLocal, alertClient, logger)
+func NewServer(port uint, phylaxCheck *health.PhylaxCheck, logger *zap.Logger, repository *storage.Repository, consumer *sqs.Consumer, isLocal, pprofEnabled bool, alertClient alert.AlertClient) *Server {
+	ctrl := NewController(phylaxCheck, repository, consumer, isLocal, alertClient, logger)
 	app := fiber.New(fiber.Config{DisableStartupMessage: true})
 
 	// Configure middleware

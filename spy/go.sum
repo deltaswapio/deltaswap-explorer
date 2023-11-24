@@ -71,8 +71,8 @@ github.com/btcsuite/btcd/chaincfg/chainhash v1.0.1 h1:q0rUy8C/TYNBQS1+CGKw68tLOF
 github.com/cenkalti/backoff/v4 v4.1.3 h1:cFAlzYUlVYDysBEH2T5hyJZMh3+5+WCBvSnK6Q8UtC4=
 github.com/cenkalti/backoff/v4 v4.1.3/go.mod h1:scbssz8iZGpm3xbr14ovlUdkxfGXNInqkPWOWmG2CLw=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
-github.com/certusone/wormhole/node v0.0.0-20230315165931-62bef9ffb441 h1:GA0tsKbkA2jz4lQUGV0PyWTJ02GIsTvSwq7xjjv3GN0=
-github.com/certusone/wormhole/node v0.0.0-20230315165931-62bef9ffb441/go.mod h1:U/qHGQY1vAw//UlPYVQKSL9b3C2nL6YakCYorMEz3GY=
+github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af h1:GA0tsKbkA2jz4lQUGV0PyWTJ02GIsTvSwq7xjjv3GN0=
+github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af/go.mod h1:ZxIOuzMQQ1T5PmbmQSRpN9r8Wjj+7H/xQJ9jG9EScPM=
 github.com/cespare/xxhash/v2 v2.1.1/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
 github.com/cespare/xxhash/v2 v2.1.2 h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE=
 github.com/cespare/xxhash/v2 v2.1.2/go.mod h1:VGX0DQ3Q6kWi7AoAeZDth3/j3BFtOZR5XLFGgcrjCOs=
@@ -382,8 +382,8 @@ github.com/valyala/fasttemplate v1.0.1/go.mod h1:UQGH1tvbgY+Nz5t2n7tXsz52dQxojPU
 github.com/valyala/fasttemplate v1.2.1/go.mod h1:KHLXt3tVN2HBp8eijSv/kGJopbvo7S+qRAEEKiv+SiQ=
 github.com/valyala/tcplisten v1.0.0 h1:rBHj/Xf+E1tRGZyWIWwJDiRY0zc1Js+CV5DqwacVSA8=
 github.com/valyala/tcplisten v1.0.0/go.mod h1:T0xQ8SeCZGxckz9qRXTfG43PvQ/mcWh7FwZEA7Ioqkc=
-github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8 h1:rrOyHd+H9a6Op1iUyZNCaI5v9D1syq8jDAYyX/2Q4L8=
-github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8/go.mod h1:dE12DOucCq23gjGGGhtbyx41FBxuHxjpPvG+ArO+8t0=
+github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5 h1:rrOyHd+H9a6Op1iUyZNCaI5v9D1syq8jDAYyX/2Q4L8=
+github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5/go.mod h1:jmbK+tPMlEdZQfYU7LP0vwDf6ADVZH5XgEAbfKFOT1I=
 github.com/xdg-go/pbkdf2 v1.0.0 h1:Su7DPu48wXMwC3bs7MCNG+z4FhcyEuz5dlvchbq0B0c=
 github.com/xdg-go/pbkdf2 v1.0.0/go.mod h1:jrpuAogTd400dnrH08LKmI/xc1MbPOebTwRqcT5RDeI=
 github.com/xdg-go/scram v1.1.1 h1:VOMT+81stJgXW3CpHyqHN3AXDYIMsx56mEFrB37Mb/E=

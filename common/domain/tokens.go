@@ -3,7 +3,7 @@ package domain
 import (
 	"fmt"
 
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // Symbol identifies a publicly traded token (i.e. "ETH" for Ethereum, "ALGO" for Algorand, etc.)

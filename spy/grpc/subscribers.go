@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	gossipv1 "github.com/certusone/wormhole/node/pkg/proto/gossip/v1"
-	spyv1 "github.com/certusone/wormhole/node/pkg/proto/spy/v1"
+	gossipv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/gossip/v1"
+	spyv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/spy/v1"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/google/uuid"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 

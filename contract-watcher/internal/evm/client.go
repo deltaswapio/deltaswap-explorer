@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/utils"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"github.com/go-resty/resty/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/common/utils"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
 	"go.uber.org/ratelimit"
 )
 

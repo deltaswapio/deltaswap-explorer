@@ -13,17 +13,17 @@ import (
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"go.mongodb.org/mongo-driver/mongo"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/health"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/chains"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/consumer"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/http/infrastructure"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/http/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/queue"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/health"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/chains"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/consumer"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/http/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/http/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/queue"
 	"go.uber.org/zap"
 )
 
@@ -40,9 +40,9 @@ func main() {
 	metrics := newMetrics(cfg)
 
 	// build logger
-	logger := logger.New("wormhole-explorer-tx-tracker", logger.WithLevel(cfg.LogLevel))
+	logger := logger.New("deltaswap-explorer-tx-tracker", logger.WithLevel(cfg.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-tx-tracker ...")
+	logger.Info("Starting deltaswap-explorer-tx-tracker ...")
 
 	// initialize rate limiters
 	chains.Initialize(&cfg.RpcProviderSettings)
@@ -73,7 +73,7 @@ func main() {
 	consumer := consumer.New(vaaConsumeFunc, &cfg.RpcProviderSettings, rootCtx, logger, repository, metrics, cfg.P2pNetwork)
 	consumer.Start(rootCtx)
 
-	logger.Info("Started wormhole-explorer-tx-tracker")
+	logger.Info("Started deltaswap-explorer-tx-tracker")
 
 	// Waiting for signal
 	sigterm := make(chan os.Signal, 1)
@@ -95,7 +95,7 @@ func main() {
 	logger.Info("Closing MongoDB connection...")
 	db.DisconnectWithTimeout(10 * time.Second)
 
-	logger.Info("Terminated wormhole-explorer-tx-tracker")
+	logger.Info("Terminated deltaswap-explorer-tx-tracker")
 }
 
 func newVAAConsumeFunc(

@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/internal/coingecko"
 	"github.com/go-redis/redis"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/cache/notional"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/internal/coingecko"
 	"go.uber.org/zap"
 )
 

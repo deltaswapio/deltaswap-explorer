@@ -1,4 +1,4 @@
-import { ChainId, ChainName, coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainId, ChainName, coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { MAX_UINT_64, padUint16, padUint64 } from '../common';
 import JsonDB from './JsonDB';
 import MongoDB from './MongoDB';

@@ -1,8 +1,8 @@
 package transactions
 
 import (
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/shopspring/decimal"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 type Tx struct {

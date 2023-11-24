@@ -7,15 +7,15 @@ import (
 	"fmt"
 	"strconv"
 
-	gossipv1 "github.com/certusone/wormhole/node/pkg/proto/gossip/v1"
-	publicrpcv1 "github.com/certusone/wormhole/node/pkg/proto/publicrpc/v1"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/guardian"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/heartbeats"
-	vaaservice "github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/heartbeats"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/phylax"
+	vaaservice "github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	gossipv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/gossip/v1"
+	publicrpcv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/publicrpc/v1"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -24,7 +24,7 @@ import (
 // Handler rpc handler.
 type Handler struct {
 	publicrpcv1.UnimplementedPublicRPCServiceServer
-	gs     guardian.GuardianSet
+	gs     phylax.PhylaxSet
 	vaaSrv *vaaservice.Service
 	hbSrv  *heartbeats.Service
 	govSrv *governor.Service
@@ -33,7 +33,7 @@ type Handler struct {
 
 // NewHandler create a new rpc Handler.
 func NewHandler(vaaSrv *vaaservice.Service, hbSrv *heartbeats.Service, govSrv *governor.Service, logger *zap.Logger, p2pNetwork string) *Handler {
-	return &Handler{gs: guardian.GetByEnv(p2pNetwork), vaaSrv: vaaSrv, hbSrv: hbSrv, govSrv: govSrv, logger: logger}
+	return &Handler{gs: phylax.GetByEnv(p2pNetwork), vaaSrv: vaaSrv, hbSrv: hbSrv, govSrv: govSrv, logger: logger}
 }
 
 // GetSignedVAA get signedVAA by chainID, address, sequence.
@@ -94,17 +94,17 @@ func (h *Handler) GetSignedBatchVAA(ctx context.Context, _ *publicrpcv1.GetSigne
 
 // GetLastHeartbeats get last heartbeats.
 func (h *Handler) GetLastHeartbeats(ctx context.Context, request *publicrpcv1.GetLastHeartbeatsRequest) (*publicrpcv1.GetLastHeartbeatsResponse, error) {
-	// check guardianSet exists.
+	// check phylaxSet exists.
 	if len(h.gs.GstByIndex) == 0 {
-		return nil, status.Error(codes.Unavailable, "guardian set not fetched from chain yet")
+		return nil, status.Error(codes.Unavailable, "phylax set not fetched from chain yet")
 	}
 
-	// get lasted guardianSet.
-	guardianSet := h.gs.GetLatest()
-	guardianAddresses := guardianSet.KeysAsHexStrings()
+	// get lasted phylaxSet.
+	phylaxSet := h.gs.GetLatest()
+	phylaxAddresses := phylaxSet.KeysAsHexStrings()
 
 	// get last heartbeats by ids.
-	heartbeats, err := h.hbSrv.GetHeartbeatsByIds(ctx, guardianAddresses)
+	heartbeats, err := h.hbSrv.GetHeartbeatsByIds(ctx, phylaxAddresses)
 	if err != nil {
 		return nil, status.Error(codes.Internal, "internal server error")
 	}
@@ -131,37 +131,37 @@ func (h *Handler) GetLastHeartbeats(ctx context.Context, request *publicrpcv1.Ge
 			Timestamp:     hb.Timestamp,
 			Networks:      networkResponses,
 			Version:       hb.Version,
-			GuardianAddr:  hb.GuardianAddr,
+			PhylaxAddr:    hb.PhylaxAddr,
 			BootTimestamp: hb.BootTimestamp,
 			Features:      hb.Features,
 		}
 
 		response.Entries = append(response.Entries, &publicrpcv1.GetLastHeartbeatsResponse_Entry{
-			VerifiedGuardianAddr: hb.ID,
-			P2PNodeAddr:          "",
-			RawHeartbeat:         &rawHeartbeat,
+			VerifiedPhylaxAddr: hb.ID,
+			P2PNodeAddr:        "",
+			RawHeartbeat:       &rawHeartbeat,
 		})
 	}
 	return response, nil
 }
 
-// GetCurrentGuardianSet get current guardian set.
-func (h *Handler) GetCurrentGuardianSet(ctx context.Context, request *publicrpcv1.GetCurrentGuardianSetRequest) (*publicrpcv1.GetCurrentGuardianSetResponse, error) {
-	// check guardianSet exists.
+// GetCurrentPhylaxSet get current phylax set.
+func (h *Handler) GetCurrentPhylaxSet(ctx context.Context, request *publicrpcv1.GetCurrentPhylaxSetRequest) (*publicrpcv1.GetCurrentPhylaxSetResponse, error) {
+	// check phylaxSet exists.
 	if len(h.gs.GstByIndex) == 0 {
-		return nil, status.Error(codes.Unavailable, "guardian set not fetched from chain yet")
+		return nil, status.Error(codes.Unavailable, "phylax set not fetched from chain yet")
 	}
-	// get lasted guardianSet.
+	// get lasted phylaxSet.
 	guardinSet := h.gs.GetLatest()
 
-	// get guardian addresses.
+	// get phylax addresses.
 	addresses := make([]string, len(guardinSet.Keys))
 	for i, v := range guardinSet.Keys {
 		addresses[i] = v.Hex()
 	}
 
-	return &publicrpcv1.GetCurrentGuardianSetResponse{
-		GuardianSet: &publicrpcv1.GuardianSet{
+	return &publicrpcv1.GetCurrentPhylaxSetResponse{
+		PhylaxSet: &publicrpcv1.PhylaxSet{
 			Index:     guardinSet.Index,
 			Addresses: addresses,
 		},

@@ -1,4 +1,4 @@
-import { CHAIN_ID_SUI, coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { CHAIN_ID_SUI, coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import {
   Checkpoint,
   JsonRpcClient,
@@ -12,7 +12,7 @@ import { makeBlockKey, makeVaaKey, makeWHTransaction } from '../databases/utils'
 import { WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/types';
 import { makeSerializedVAA } from './utils';
 
-const SUI_EVENT_HANDLE = `0x5306f64e312b581766351c07af79c72fcb1cd25147157fdc2f8ad76de9a3fb6a::publish_message::WormholeMessage`;
+const SUI_EVENT_HANDLE = `0x5306f64e312b581766351c07af79c72fcb1cd25147157fdc2f8ad76de9a3fb6a::publish_message::DeltaswapMessage`;
 
 type PublishMessageEvent = {
   consistency_level: number;

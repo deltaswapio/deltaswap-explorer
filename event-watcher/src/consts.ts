@@ -1,4 +1,4 @@
-import { ChainName, CONTRACTS } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName, CONTRACTS } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { AxiosRequestConfig } from 'axios';
 import { env } from './config';
 
@@ -115,12 +115,10 @@ export const AXIOS_CONFIG_JSON: AxiosRequestConfig = {
 };
 
 export const GUARDIAN_RPC_HOSTS = [
-  'https://wormhole-v2-mainnet-api.certus.one',
-  'https://wormhole.inotel.ro',
-  'https://wormhole-v2-mainnet-api.mcf.rocks',
-  'https://wormhole-v2-mainnet-api.chainlayer.network',
-  'https://wormhole-v2-mainnet-api.staking.fund',
-];
+  'https://p-1.deltaswap.io',
+  'https://p-2.deltaswap.io',
+  'https://p-3.deltaswap.io',
+  ];
 
 export const DEFAULT_RPS = 30;
 

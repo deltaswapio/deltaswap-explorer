@@ -3,26 +3,26 @@ package processor
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/fly/deduplicator"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/guardiansets"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/deduplicator"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/phylaxsets"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
 type vaaGossipConsumer struct {
-	guardianSetHistory *guardiansets.GuardianSetHistory
-	nonPythProcess     VAAPushFunc
-	pythProcess        VAAPushFunc
-	logger             *zap.Logger
-	deduplicator       *deduplicator.Deduplicator
-	metrics            metrics.Metrics
+	phylaxSetHistory *phylaxsets.PhylaxSetHistory
+	nonPythProcess   VAAPushFunc
+	pythProcess      VAAPushFunc
+	logger           *zap.Logger
+	deduplicator     *deduplicator.Deduplicator
+	metrics          metrics.Metrics
 }
 
 // NewVAAGossipConsumer creates a new processor instances.
 func NewVAAGossipConsumer(
-	guardianSetHistory *guardiansets.GuardianSetHistory,
+	phylaxSetHistory *phylaxsets.PhylaxSetHistory,
 	deduplicator *deduplicator.Deduplicator,
 	nonPythPublish VAAPushFunc,
 	pythPublish VAAPushFunc,
@@ -31,19 +31,19 @@ func NewVAAGossipConsumer(
 ) *vaaGossipConsumer {
 
 	return &vaaGossipConsumer{
-		guardianSetHistory: guardianSetHistory,
-		deduplicator:       deduplicator,
-		nonPythProcess:     nonPythPublish,
-		pythProcess:        pythPublish,
-		metrics:            metrics,
-		logger:             logger,
+		phylaxSetHistory: phylaxSetHistory,
+		deduplicator:     deduplicator,
+		nonPythProcess:   nonPythPublish,
+		pythProcess:      pythPublish,
+		metrics:          metrics,
+		logger:           logger,
 	}
 }
 
 // Push handles incoming VAAs depending on whether it is a pyth or non pyth.
 func (p *vaaGossipConsumer) Push(ctx context.Context, v *vaa.VAA, serializedVaa []byte) error {
 
-	if err := p.guardianSetHistory.Verify(ctx, v); err != nil {
+	if err := p.phylaxSetHistory.Verify(ctx, v); err != nil {
 		p.logger.Error("Received invalid vaa", zap.String("id", v.MessageID()))
 		return err
 	}

@@ -7,7 +7,7 @@ import {
   GetTransactionsByAccountIdRequestParams,
   GetTransactionsByAccountIdResponse,
   Transaction,
-  WormholePublishEventLog,
+  DeltaswapPublishEventLog,
 } from '../types/near';
 
 // The following is obtained by going to: https://explorer.near.org/accounts/contract.wormhole_crypto.near
@@ -53,6 +53,6 @@ export const getTransactionsByAccountId = async (
     .reverse(); // return chronological order
 };
 
-export const isWormholePublishEventLog = (log: EventLog): log is WormholePublishEventLog => {
+export const isDeltaswapPublishEventLog = (log: EventLog): log is DeltaswapPublishEventLog => {
   return log.standard === 'wormhole' && log.event === 'publish';
 };

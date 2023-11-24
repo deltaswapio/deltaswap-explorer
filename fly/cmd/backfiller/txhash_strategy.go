@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 func workerTxHash(ctx context.Context, repo *storage.Repository, line string) error {

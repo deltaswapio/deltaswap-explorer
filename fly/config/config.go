@@ -6,10 +6,9 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	"github.com/joho/godotenv"
-	"github.com/sethvargo/go-envconfig"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
 )
 
 const defaultMaxHealthTimeSeconds = 60
@@ -18,17 +17,17 @@ const defaultMaxHealthTimeSeconds = 60
 const (
 	// mainnet p2p config.
 	MainNetP2ppNetworkID      = "/wormhole/mainnet/2"
-	MainNetP2pBootstrap       = "/dns4/wormhole-mainnet-v2-bootstrap.certus.one/udp/8999/quic/p2p/12D3KooWQp644DK27fd3d4Km3jr7gHiuJJ5ZGmy8hH4py7fP4FP7"
+	MainNetP2pBootstrap       = "/dns4/deltaswap-mainnet-v2-bootstrap.certus.one/udp/8999/quic/p2p/12D3KooWQp644DK27fd3d4Km3jr7gHiuJJ5ZGmy8hH4py7fP4FP7"
 	MainNetP2pPort       uint = 8999
 
 	// testnet p2p config.
 	TestNetP2ppNetworkID      = "/wormhole/testnet/2/1"
-	TestNetP2pBootstrap       = "/dns4/wormhole-testnet-v2-bootstrap.certus.one/udp/8999/quic/p2p/12D3KooWAkB9ynDur1Jtoa97LBUp8RXdhzS5uHgAfdTquJbrbN7i,/dns4/t-guardian-01.nodes.stable.io/udp/8999/quic/p2p/12D3KooWCW3LGUtkCVkHZmVSZHzL3C4WRKWfqAiJPz1NR7dT9Bxh,/dns4/t-guardian-02.nodes.stable.io/udp/8999/quic/p2p/12D3KooWJXA6goBCiWM8ucjzc4jVUBSqL9Rri6UpjHbkMPErz5zK"
+	TestNetP2pBootstrap       = "/dns4/deltaswap-testnet-v2-bootstrap.certus.one/udp/8999/quic/p2p/12D3KooWAkB9ynDur1Jtoa97LBUp8RXdhzS5uHgAfdTquJbrbN7i,/dns4/t-phylax-01.nodes.stable.io/udp/8999/quic/p2p/12D3KooWCW3LGUtkCVkHZmVSZHzL3C4WRKWfqAiJPz1NR7dT9Bxh,/dns4/t-phylax-02.nodes.stable.io/udp/8999/quic/p2p/12D3KooWJXA6goBCiWM8ucjzc4jVUBSqL9Rri6UpjHbkMPErz5zK"
 	TestNetP2pPort       uint = 8999
 
 	// devnet p2p config.
 	DevNetP2ppNetworkID      = "/wormhole/dev"
-	DevNetP2pBootstrap       = "/dns4/guardian-0.guardian/udp/8999/quic/p2p/12D3KooWL3XJ9EMCyZvmmGXL2LMiVBtrVa2BuESsJiXkSj7333Jw"
+	DevNetP2pBootstrap       = "/dns4/phylax-0.phylax/udp/8999/quic/p2p/12D3KooWL3XJ9EMCyZvmmGXL2LMiVBtrVa2BuESsJiXkSj7333Jw"
 	DevNetP2pPort       uint = 8999
 )
 

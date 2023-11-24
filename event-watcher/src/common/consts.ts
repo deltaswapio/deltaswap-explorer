@@ -2,7 +2,7 @@ import {
   ChainId,
   ChainName,
   coalesceChainName,
-} from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+} from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 
 export const INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN: {
   [key in ChainName]?: string;

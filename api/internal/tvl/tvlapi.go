@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	"github.com/tidwall/gjson"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
 )
 
 var (

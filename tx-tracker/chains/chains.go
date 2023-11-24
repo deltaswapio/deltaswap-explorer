@@ -7,8 +7,8 @@ import (
 	"math"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 var (
@@ -23,7 +23,7 @@ var (
 	baseUrlsByChain map[sdk.ChainID]string
 )
 
-// WARNING: The following chain IDs are not supported by the wormhole-sdk:
+// WARNING: The following chain IDs are not supported by the deltaswap-sdk:
 const ChainIDOsmosis sdk.ChainID = 20
 const ChainIDEvmos sdk.ChainID = 4001
 const ChainIDKujira sdk.ChainID = 4002

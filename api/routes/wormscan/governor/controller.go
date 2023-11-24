@@ -4,11 +4,10 @@ package governor
 import (
 	"fmt"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
-	_ "github.com/wormhole-foundation/wormhole-explorer/api/response" // needed by swaggo docs
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	_ "github.com/deltaswapio/deltaswap-explorer/api/response" // needed by swaggo docs
 	"go.uber.org/zap"
 )
 
@@ -24,8 +23,8 @@ func NewController(serv *governor.Service, logger *zap.Logger) *Controller {
 }
 
 // FindGovernorConfigurations godoc
-// @Description Returns governor configuration for all guardians.
-// @Tags wormholescan
+// @Description Returns governor configuration for all phylaxs.
+// @Tags deltaswapscan
 // @ID governor-config
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -48,24 +47,24 @@ func (c *Controller) FindGovernorConfigurations(ctx *fiber.Ctx) error {
 	return ctx.JSON(governorConfigs)
 }
 
-// FindGovernorConfigurationByGuardianAddress godoc
-// @Description Returns governor configuration for a given guardian.
-// @Tags wormholescan
-// @ID governor-config-by-guardian-address
+// FindGovernorConfigurationByPhylaxAddress godoc
+// @Description Returns governor configuration for a given phylax.
+// @Tags deltaswapscan
+// @ID governor-config-by-phylax-address
 // @Success 200 {object} response.Response[governor.GovConfig]
 // @Failure 400
 // @Failure 500
-// @Router /api/v1/governor/config/:guardian_address [get]
-func (c *Controller) FindGovernorConfigurationByGuardianAddress(ctx *fiber.Ctx) error {
+// @Router /api/v1/governor/config/:phylax_address [get]
+func (c *Controller) FindGovernorConfigurationByPhylaxAddress(ctx *fiber.Ctx) error {
 
 	// extract query params
-	guardianAddress, err := middleware.ExtractGuardianAddress(ctx, c.logger)
+	phylaxAddress, err := middleware.ExtractPhylaxAddress(ctx, c.logger)
 	if err != nil {
 		return err
 	}
 
 	// query the database
-	govConfigs, err := c.srv.FindGovernorConfigByGuardianAddress(ctx.Context(), guardianAddress)
+	govConfigs, err := c.srv.FindGovernorConfigByPhylaxAddress(ctx.Context(), phylaxAddress)
 	if err != nil {
 		return err
 	} else if len(govConfigs) == 0 {
@@ -81,8 +80,8 @@ func (c *Controller) FindGovernorConfigurationByGuardianAddress(ctx *fiber.Ctx) 
 }
 
 // FindGovernorStatus godoc
-// @Description Returns the governor status for all guardians.
-// @Tags wormholescan
+// @Description Returns the governor status for all phylaxs.
+// @Tags deltaswapscan
 // @ID governor-status
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -105,29 +104,29 @@ func (c *Controller) FindGovernorStatus(ctx *fiber.Ctx) error {
 	return ctx.JSON(governorStatus)
 }
 
-// FindGovernorStatusByGuardianAddress godoc
-// @Description Returns the governor status for a given guardian.
-// @Tags wormholescan
-// @ID governor-status-by-guardian-address
+// FindGovernorStatusByPhylaxAddress godoc
+// @Description Returns the governor status for a given phylax.
+// @Tags deltaswapscan
+// @ID governor-status-by-phylax-address
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
 // @Success 200 {object} response.Response[governor.GovStatus]
 // @Failure 400
 // @Failure 500
-// @Router /api/v1/governor/status/:guardian_address [get]
-func (c *Controller) FindGovernorStatusByGuardianAddress(ctx *fiber.Ctx) error {
+// @Router /api/v1/governor/status/:phylax_address [get]
+func (c *Controller) FindGovernorStatusByPhylaxAddress(ctx *fiber.Ctx) error {
 
 	p, err := middleware.ExtractPagination(ctx)
 	if err != nil {
 		return err
 	}
 
-	guardianAddress, err := middleware.ExtractGuardianAddress(ctx, c.logger)
+	phylaxAddress, err := middleware.ExtractPhylaxAddress(ctx, c.logger)
 	if err != nil {
 		return err
 	}
 
-	govStatus, err := c.srv.FindGovernorStatusByGuardianAddress(ctx.Context(), guardianAddress, p)
+	govStatus, err := c.srv.FindGovernorStatusByPhylaxAddress(ctx.Context(), phylaxAddress, p)
 	if err != nil {
 		return err
 	}
@@ -137,7 +136,7 @@ func (c *Controller) FindGovernorStatusByGuardianAddress(ctx *fiber.Ctx) error {
 
 // GetGovernorLimit godoc
 // @Description Returns the governor limit for all blockchains.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-notional-limit
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -162,7 +161,7 @@ func (c *Controller) GetGovernorLimit(ctx *fiber.Ctx) error {
 
 // FindNotionalLimit godoc
 // @Description Returns the detailed notional limit for all blockchains.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-notional-limit-detail
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -187,7 +186,7 @@ func (c *Controller) FindNotionalLimit(ctx *fiber.Ctx) error {
 
 // GetNotionalLimitByChainID godoc
 // @Description Returns the detailed notional limit available for a given blockchain.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-notional-limit-detail-by-chain
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -217,7 +216,7 @@ func (c *Controller) GetNotionalLimitByChainID(ctx *fiber.Ctx) error {
 
 // GetAvailableNotional godoc
 // @Description Returns the amount of notional value available for each blockchain.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-notional-available
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -243,7 +242,7 @@ func (c *Controller) GetAvailableNotional(ctx *fiber.Ctx) error {
 
 // GetAvailableNotionalByChainID godoc
 // @Description Returns the amount of notional value available for a given blockchain.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-notional-available-by-chain
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -273,7 +272,7 @@ func (c *Controller) GetAvailableNotionalByChainID(ctx *fiber.Ctx) error {
 
 // GetMaxNotionalAvailableByChainID godoc
 // @Description Returns the maximum amount of notional value available for a given blockchain.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-max-notional-available-by-chain
 // @Success 200 {object} response.Response[governor.MaxNotionalAvailableRecord]
 // @Failure 400
@@ -296,7 +295,7 @@ func (c *Controller) GetMaxNotionalAvailableByChainID(ctx *fiber.Ctx) error {
 
 // GetEnqueuedVaas godoc
 // @Description Returns enqueued VAAs for each blockchain.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID governor-enqueued-vaas
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -322,8 +321,8 @@ func (c *Controller) GetEnqueuedVaas(ctx *fiber.Ctx) error {
 
 // GetEnqueuedVaasByChainID godoc
 // @Description Returns all enqueued VAAs for a given blockchain.
-// @Tags wormholescan
-// @ID guardians-enqueued-vaas-by-chain
+// @Tags deltaswapscan
+// @ID phylaxs-enqueued-vaas-by-chain
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
 // @Param sortOrder query string false "Sort results in ascending or descending order." Enums(ASC, DESC)

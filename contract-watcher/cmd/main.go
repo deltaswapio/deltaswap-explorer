@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/cmd/backfiller"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/cmd/service"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/config"
 	"github.com/spf13/cobra"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/cmd/backfiller"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/cmd/service"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/config"
 )
 
 func main() {

@@ -4,14 +4,14 @@ aws --profile localstack --endpoint-url=http://localhost:4566 sns create-topic -
 
 ## Config SQS FIFO with dead letter queue localstack
 
-aws --profile localstack --endpoint-url=http://localhost:4566 sqs create-queue --queue-name=wormhole-vaa-analytic-dlq-queue.fifo --attributes "FifoQueue=true"
+aws --profile localstack --endpoint-url=http://localhost:4566 sqs create-queue --queue-name=deltaswap-vaa-analytic-dlq-queue.fifo --attributes "FifoQueue=true"
 
-aws --profile localstack --endpoint-url=http://localhost:4566 sqs create-queue --queue-name=wormhole-vaa-analytic-queue.fifo --attributes FifoQueue=true,MessageRetentionPeriod=3600,ReceiveMessageWaitTimeSeconds=5,VisibilityTimeout=20,RedrivePolicy="\"{\\\"deadLetterTargetArn\\\":\\\"arn:aws:sqs:us-east-1:000000000000:wormhole-vaa-analytic-dlq-queue.fifo\\\",\\\"maxReceiveCount\\\":\\\"2\\\"}\""
+aws --profile localstack --endpoint-url=http://localhost:4566 sqs create-queue --queue-name=deltaswap-vaa-analytic-queue.fifo --attributes FifoQueue=true,MessageRetentionPeriod=3600,ReceiveMessageWaitTimeSeconds=5,VisibilityTimeout=20,RedrivePolicy="\"{\\\"deadLetterTargetArn\\\":\\\"arn:aws:sqs:us-east-1:000000000000:deltaswap-vaa-analytic-dlq-queue.fifo\\\",\\\"maxReceiveCount\\\":\\\"2\\\"}\""
 
 ## Subscribe SQS FIFO to vaas-pipeline.fifo topic
 
-aws --profile localstack --endpoint-url=http://localhost:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:vaas-pipeline.fifo --protocol sqs --notification-endpoint http://localhost:4566/000000000000/wormhole-vaa-analytic-queue.fifo
+aws --profile localstack --endpoint-url=http://localhost:4566 sns subscribe --topic-arn arn:aws:sns:us-east-1:000000000000:vaas-pipeline.fifo --protocol sqs --notification-endpoint http://localhost:4566/000000000000/deltaswap-vaa-analytic-queue.fifo
 
 ## Check message in the dead letter queue localstack
 
-aws --profile localstack --endpoint-url=http://localhost:4566 sqs receive-message --queue-url=http://localhost:4566/000000000000/wormhole-vaa-analytic-dlq-queue.fifo
+aws --profile localstack --endpoint-url=http://localhost:4566 sqs receive-message --queue-url=http://localhost:4566/000000000000/deltaswap-vaa-analytic-dlq-queue.fifo

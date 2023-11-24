@@ -4,45 +4,45 @@ import (
 	"context"
 	"errors"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	flyAlert "github.com/deltaswapio/deltaswap-explorer/fly/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/health"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	flyAlert "github.com/wormhole-foundation/wormhole-explorer/fly/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/health"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
 	"go.uber.org/zap"
 )
 
 // Controller definition.
 type Controller struct {
-	guardianCheck *health.GuardianCheck
-	repository    *storage.Repository
-	consumer      *sqs.Consumer
-	isLocal       bool
-	logger        *zap.Logger
-	alertClient   alert.AlertClient
+	phylaxCheck *health.PhylaxCheck
+	repository  *storage.Repository
+	consumer    *sqs.Consumer
+	isLocal     bool
+	logger      *zap.Logger
+	alertClient alert.AlertClient
 }
 
 // NewController creates a Controller instance.
-func NewController(gCheck *health.GuardianCheck, repo *storage.Repository, consumer *sqs.Consumer, isLocal bool, alertClient alert.AlertClient, logger *zap.Logger) *Controller {
-	return &Controller{guardianCheck: gCheck, repository: repo, consumer: consumer, isLocal: isLocal, alertClient: alertClient, logger: logger}
+func NewController(gCheck *health.PhylaxCheck, repo *storage.Repository, consumer *sqs.Consumer, isLocal bool, alertClient alert.AlertClient, logger *zap.Logger) *Controller {
+	return &Controller{phylaxCheck: gCheck, repository: repo, consumer: consumer, isLocal: isLocal, alertClient: alertClient, logger: logger}
 }
 
 // HealthCheck handler for the endpoint /health.
 func (c *Controller) HealthCheck(ctx *fiber.Ctx) error {
-	// check guardian gossip network is ready.
-	guardianErr := c.checkGuardianStatus(ctx.Context())
-	if guardianErr != nil {
-		c.logger.Error("Health check failed", zap.Error(guardianErr))
+	// check phylax gossip network is ready.
+	phylaxErr := c.checkPhylaxStatus(ctx.Context())
+	if phylaxErr != nil {
+		c.logger.Error("Health check failed", zap.Error(phylaxErr))
 		// send alert when exists an error saving ptth vaa.
 		alertContext := alert.AlertContext{
-			Error: guardianErr,
+			Error: phylaxErr,
 		}
-		c.alertClient.CreateAndSend(ctx.Context(), flyAlert.ErrorGuardianNoActivity, alertContext)
+		c.alertClient.CreateAndSend(ctx.Context(), flyAlert.ErrorPhylaxNoActivity, alertContext)
 		return ctx.Status(fiber.StatusInternalServerError).JSON(struct {
 			Status string `json:"status"`
 			Error  string `json:"error"`
-		}{Status: "NO", Error: guardianErr.Error()})
+		}{Status: "NO", Error: phylaxErr.Error()})
 	}
 	return ctx.JSON(struct {
 		Status string `json:"status"`
@@ -116,10 +116,10 @@ func (c *Controller) checkQueueStatus(ctx context.Context) error {
 	return nil
 }
 
-func (c *Controller) checkGuardianStatus(ctx context.Context) error {
-	isAlive := c.guardianCheck.IsAlive()
+func (c *Controller) checkPhylaxStatus(ctx context.Context) error {
+	isAlive := c.phylaxCheck.IsAlive()
 	if !isAlive {
-		return errors.New("guardian healthcheck not arrive in time")
+		return errors.New("phylax healthcheck not arrive in time")
 	}
 	return nil
 }

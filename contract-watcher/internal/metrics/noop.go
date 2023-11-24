@@ -1,6 +1,6 @@
 package metrics
 
-import sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+import sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 
 // NoopMetrics is a no-op implementation of the Metrics interface.
 type NoopMetrics struct {

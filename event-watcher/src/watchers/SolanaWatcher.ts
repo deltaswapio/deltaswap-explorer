@@ -1,4 +1,4 @@
-import { getPostedMessage } from '@certusone/wormhole-sdk/lib/cjs/solana/wormhole';
+import { getPostedMessage } from '@deltaswapio/deltaswap-sdk/lib/cjs/solana/wormhole';
 import {
   Commitment,
   ConfirmedSignatureInfo,
@@ -16,7 +16,7 @@ import { isLegacyMessage, normalizeCompileInstruction } from '../utils/solana';
 import BaseWatcher from './BaseWatcher';
 import { makeSerializedVAA } from './utils';
 
-const WORMHOLE_PROGRAM_ID = NETWORK_CONTRACTS.solana.core;
+const DELTASWAP_PROGRAM_ID = NETWORK_CONTRACTS.solana.core;
 const COMMITMENT: Commitment = 'finalized';
 const GET_SIGNATURES_LIMIT = 1000;
 
@@ -25,7 +25,7 @@ export class SolanaWatcher extends BaseWatcher {
   // this is set as a class field so we can modify it in tests
   getSignaturesLimit = GET_SIGNATURES_LIMIT;
   // The Solana watcher uses the `getSignaturesForAddress` RPC endpoint to fetch all transactions
-  // containing Wormhole messages. This API takes in signatures and paginates based on number of
+  // containing Deltaswap messages. This API takes in signatures and paginates based on number of
   // transactions returned. Since we don't know the number of transactions in advance, we use
   // a block range of 100K slots. Technically, batch size can be arbitrarily large since pagination
   // of the WH transactions within that range is handled internally below.
@@ -89,7 +89,7 @@ export class SolanaWatcher extends BaseWatcher {
     let currSignature: string | undefined = fromSignature;
     while (numSignatures === this.getSignaturesLimit) {
       const signatures: ConfirmedSignatureInfo[] = await connection.getSignaturesForAddress(
-        new PublicKey(WORMHOLE_PROGRAM_ID),
+        new PublicKey(DELTASWAP_PROGRAM_ID),
         {
           before: currSignature,
           until: toSignature,
@@ -99,7 +99,7 @@ export class SolanaWatcher extends BaseWatcher {
 
       this.logger.debug(`processing ${signatures.length} transactions`);
 
-      // In order to determine if a transaction has a Wormhole message, we normalize and iterate
+      // In order to determine if a transaction has a Deltaswap message, we normalize and iterate
       // through all instructions in the transaction. Only PostMessage instructions are relevant
       // when looking for messages. PostMessageUnreliable instructions are ignored because there
       // are no data availability guarantees (ie the associated message accounts may have been
@@ -132,7 +132,7 @@ export class SolanaWatcher extends BaseWatcher {
         const accountKeys = isLegacyMessage(message)
           ? message.accountKeys
           : message.staticAccountKeys;
-        const programIdIndex = accountKeys.findIndex((i) => i.toBase58() === WORMHOLE_PROGRAM_ID);
+        const programIdIndex = accountKeys.findIndex((i) => i.toBase58() === DELTASWAP_PROGRAM_ID);
         const instructions = message.compiledInstructions;
         const innerInstructions =
           res.meta?.innerInstructions?.flatMap((i) =>
@@ -224,7 +224,7 @@ export class SolanaWatcher extends BaseWatcher {
     let currSignature: string | undefined = fromSignature;
     while (numSignatures === this.getSignaturesLimit) {
       const signatures: ConfirmedSignatureInfo[] = await connection.getSignaturesForAddress(
-        new PublicKey(WORMHOLE_PROGRAM_ID),
+        new PublicKey(DELTASWAP_PROGRAM_ID),
         {
           before: currSignature,
           until: toSignature,
@@ -234,7 +234,7 @@ export class SolanaWatcher extends BaseWatcher {
 
       this.logger.debug(`processing ${signatures.length} transactions`);
 
-      // In order to determine if a transaction has a Wormhole message, we normalize and iterate
+      // In order to determine if a transaction has a Deltaswap message, we normalize and iterate
       // through all instructions in the transaction. Only PostMessage instructions are relevant
       // when looking for messages. PostMessageUnreliable instructions are ignored because there
       // are no data availability guarantees (ie the associated message accounts may have been
@@ -267,7 +267,7 @@ export class SolanaWatcher extends BaseWatcher {
         const accountKeys = isLegacyMessage(message)
           ? message.accountKeys
           : message.staticAccountKeys;
-        const programIdIndex = accountKeys.findIndex((i) => i.toBase58() === WORMHOLE_PROGRAM_ID);
+        const programIdIndex = accountKeys.findIndex((i) => i.toBase58() === DELTASWAP_PROGRAM_ID);
         const instructions = message.compiledInstructions;
         const innerInstructions =
           res.meta?.innerInstructions?.flatMap((i) =>

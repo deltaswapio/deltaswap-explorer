@@ -5,24 +5,24 @@ import (
 	"time"
 )
 
-// GuardianCheck definition.
-type GuardianCheck struct {
+// PhylaxCheck definition.
+type PhylaxCheck struct {
 	maxHealthTimeDuration time.Duration
 	lastPing              time.Time
 }
 
-// NewGuardianCheck instanciate a new GuardianCheck
-func NewGuardianCheck(maxHealthTimeSeconds int64) *GuardianCheck {
-	return &GuardianCheck{maxHealthTimeDuration: time.Duration(maxHealthTimeSeconds * int64(time.Second)), lastPing: time.Now()}
+// NewPhylaxCheck instanciate a new PhylaxCheck
+func NewPhylaxCheck(maxHealthTimeSeconds int64) *PhylaxCheck {
+	return &PhylaxCheck{maxHealthTimeDuration: time.Duration(maxHealthTimeSeconds * int64(time.Second)), lastPing: time.Now()}
 }
 
 // Change last ping.
-func (g *GuardianCheck) Ping(ctx context.Context) {
+func (g *PhylaxCheck) Ping(ctx context.Context) {
 	g.lastPing = time.Now()
 }
 
-// IsAlive check if the guardians are alive.
-func (g *GuardianCheck) IsAlive() bool {
+// IsAlive check if the phylaxs are alive.
+func (g *PhylaxCheck) IsAlive() bool {
 	healthTime := time.Now().Add(-1 * g.maxHealthTimeDuration)
 	return !g.lastPing.Before(healthTime)
 }

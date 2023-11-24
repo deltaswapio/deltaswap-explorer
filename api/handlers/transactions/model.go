@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 type Scorecards struct {

@@ -6,11 +6,11 @@ package response
 import (
 	"fmt"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/config"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/config"
 )
 
-// API error codes. These error code are the same used in guardian API.
+// API error codes. These error code are the same used in phylax API.
 // https://github.com/grpc/grpc-go/blob/master/codes/codes.go
 const (
 	OK = iota
@@ -44,10 +44,10 @@ func SetEnableStackTrace(cfg config.AppConfig) {
 }
 
 // APIError api error response.
-// This structure is defined to be aligned with the way the guardian API handles the error response.
+// This structure is defined to be aligned with the way the phylax API handles the error response.
 type APIError struct {
 	StatusCode int           `json:"-"`
-	Code       int           `json:"code"` // support to guardian-api code.
+	Code       int           `json:"code"` // support to phylax-api code.
 	Message    string        `json:"message"`
 	Details    []ErrorDetail `json:"details"`
 }

@@ -1,6 +1,6 @@
 package metrics
 
-import sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+import sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 
 // DummyMetrics is a dummy implementation of Metric interface.
 type DummyMetrics struct {
@@ -44,23 +44,23 @@ func (d *DummyMetrics) IncVaaSendNotification(chain sdk.ChainID) {}
 // IncObservationTotal increases the number of observation received from Gossip network.
 func (d *DummyMetrics) IncObservationTotal() {}
 
-// IncHeartbeatFromGossipNetwork increases the number of heartbeat received by guardian from Gossip network.
-func (d *DummyMetrics) IncHeartbeatFromGossipNetwork(guardianName string) {}
+// IncHeartbeatFromGossipNetwork increases the number of heartbeat received by phylax from Gossip network.
+func (d *DummyMetrics) IncHeartbeatFromGossipNetwork(phylaxName string) {}
 
 // IncHeartbeatInserted increases the number of heartbeat inserted in database.
-func (d *DummyMetrics) IncHeartbeatInserted(guardianName string) {}
+func (d *DummyMetrics) IncHeartbeatInserted(phylaxName string) {}
 
-// IncGovernorConfigFromGossipNetwork increases the number of guardian config received by guardian from Gossip network.
-func (d *DummyMetrics) IncGovernorConfigFromGossipNetwork(guardianName string) {}
+// IncGovernorConfigFromGossipNetwork increases the number of phylax config received by phylax from Gossip network.
+func (d *DummyMetrics) IncGovernorConfigFromGossipNetwork(phylaxName string) {}
 
-// IncGovernorConfigInserted increases the number of guardian config inserted in database.
-func (d *DummyMetrics) IncGovernorConfigInserted(guardianName string) {}
+// IncGovernorConfigInserted increases the number of phylax config inserted in database.
+func (d *DummyMetrics) IncGovernorConfigInserted(phylaxName string) {}
 
-// IncGovernorStatusFromGossipNetwork increases the number of guardian status received by guardian from Gossip network.
-func (d *DummyMetrics) IncGovernorStatusFromGossipNetwork(guardianName string) {}
+// IncGovernorStatusFromGossipNetwork increases the number of phylax status received by phylax from Gossip network.
+func (d *DummyMetrics) IncGovernorStatusFromGossipNetwork(phylaxName string) {}
 
-// IncGovernorStatusInserted increases the number of guardian status inserted in database.
-func (d *DummyMetrics) IncGovernorStatusInserted(guardianName string) {}
+// IncGovernorStatusInserted increases the number of phylax status inserted in database.
+func (d *DummyMetrics) IncGovernorStatusInserted(phylaxName string) {}
 
 // IncMaxSequenceCacheError increases the number of errors when updating max sequence cache.
 func (d *DummyMetrics) IncMaxSequenceCacheError(chain sdk.ChainID) {}

@@ -8,16 +8,16 @@ import (
 	"sync"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/common"
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/tvl"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"github.com/influxdata/influxdb-client-go/v2/api"
 	"github.com/mitchellh/mapstructure"
 	"github.com/pkg/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/common"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/tvl"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
@@ -343,7 +343,7 @@ func (r *Repository) FindChainActivity(ctx context.Context, q *ChainActivityQuer
 		response = append(response, row)
 	}
 
-	// https://github.com/wormhole-foundation/wormhole-explorer/issues/433
+	// https://github.com/deltaswapio/deltaswap-explorer/issues/433
 	// filter out results with wrong chain ids
 	// this should be fixed in the InfluxDB
 	var responseWithoutWrongChainId []ChainActivityResult
@@ -641,7 +641,7 @@ func (r *Repository) GetTransactionCount(ctx context.Context, q *TransactionCoun
 	}
 
 	// [QA] The transaction history graph shows the current data twice when filtered by 1W
-	// https://github.com/wormhole-foundation/wormhole-explorer/issues/406
+	// https://github.com/deltaswapio/deltaswap-explorer/issues/406
 	for i := range response {
 		if i > 0 {
 			if q.TimeSpan == "1w" || q.TimeSpan == "1mo" {

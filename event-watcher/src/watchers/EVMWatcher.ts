@@ -1,5 +1,5 @@
-import { Implementation__factory } from '@certusone/wormhole-sdk/lib/cjs/ethers-contracts/factories/Implementation__factory';
-import { EVMChainName, coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { Implementation__factory } from '@deltaswapio/deltaswap-sdk/lib/cjs/ethers-contracts/factories/Implementation__factory';
+import { EVMChainName, coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { Log } from '@ethersproject/abstract-provider';
 
 import { BigNumber } from 'ethers';
@@ -16,11 +16,11 @@ import { makeSerializedVAA } from './utils';
 
 export const wormholeInterface = Implementation__factory.createInterface();
 // This is the hash for topic[0] of the core contract event LogMessagePublished
-// https://github.com/wormhole-foundation/wormhole/blob/main/ethereum/contracts/Implementation.sol#L12
+// https://github.com/deltaswapio/deltaswap/blob/main/ethereum/contracts/Implementation.sol#L12
 export const LOG_MESSAGE_PUBLISHED_TOPIC =
   '0x6eb224fb001ed210e379b335e35efe88672a8ce935d981a6896b27ffdf52a3b2';
 // This is the hash for topic[0] of the token bridge contract event TransferRedeemed
-// https://github.com/wormhole-foundation/wormhole/blob/99d01324b80d2e86d0e5b8ea832f9cf9d4119fcd/ethereum/contracts/bridge/Bridge.sol#L29
+// https://github.com/deltaswapio/deltaswap/blob/99d01324b80d2e86d0e5b8ea832f9cf9d4119fcd/ethereum/contracts/bridge/Bridge.sol#L29
 export const TRANSFER_REDEEMED_TOPIC =
   '0xcaf280c8cfeba144da67230d9b009c8f868a75bac9a528fa0474be1ba317c169';
 

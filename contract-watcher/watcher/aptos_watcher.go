@@ -9,12 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/avast/retry-go"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/aptos"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/aptos"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -192,7 +191,7 @@ func (w *AptosWatcher) processTransaction(ctx context.Context, tx aptos.Transact
 		return
 	}
 
-	log.Debug("found Wormhole transaction")
+	log.Debug("found Deltaswap transaction")
 
 	if len(tx.Payload.Arguments) != 1 {
 		log.Error("invalid number of arguments",

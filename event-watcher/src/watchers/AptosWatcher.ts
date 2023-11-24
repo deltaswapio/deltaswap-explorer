@@ -1,4 +1,4 @@
-import { coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils';
+import { coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils';
 import { INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN } from '../common';
 import { AptosClient } from 'aptos';
 import { z } from 'zod';
@@ -10,12 +10,12 @@ import { WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/typ
 import { makeSerializedVAA } from './utils';
 
 const APTOS_CORE_BRIDGE_ADDRESS = NETWORK_CONTRACTS.aptos.core;
-const APTOS_EVENT_HANDLE = `${APTOS_CORE_BRIDGE_ADDRESS}::state::WormholeMessageHandle`;
+const APTOS_EVENT_HANDLE = `${APTOS_CORE_BRIDGE_ADDRESS}::state::DeltaswapMessageHandle`;
 const APTOS_FIELD_NAME = 'event';
 
 /**
  * NOTE: The Aptos watcher differs from other watchers in that it uses the event sequence number to
- * fetch Wormhole messages and therefore also stores sequence numbers instead of block numbers.
+ * fetch Deltaswap messages and therefore also stores sequence numbers instead of block numbers.
  */
 export class AptosWatcher extends BaseWatcher {
   client: AptosClient;

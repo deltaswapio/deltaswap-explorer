@@ -1,16 +1,16 @@
-import { ChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN, sleep } from '../common';
 import { z } from 'zod';
 import { DEFAULT_RPS, NETWORK_RPS_BY_CHAIN, TIMEOUT } from '../consts';
 import { DBOptionTypes, WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/types';
-import { getLogger, WormholeLogger } from '../utils/logger';
+import { getLogger, DeltaswapLogger } from '../utils/logger';
 import { SNSOptionTypes } from '../services/SNS/types';
 import { WatcherImplementation } from './types';
 import axios from 'axios';
 import rateLimit, { type RateLimitedAxiosInstance } from 'axios-rate-limit';
 
 abstract class BaseWatcher implements WatcherImplementation {
-  public logger: WormholeLogger;
+  public logger: DeltaswapLogger;
   maximumBatchSize: number = 100;
   sns?: SNSOptionTypes;
   db?: DBOptionTypes;

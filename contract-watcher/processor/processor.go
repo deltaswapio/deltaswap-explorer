@@ -3,7 +3,7 @@ package processor
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/watcher"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/watcher"
 	"go.uber.org/zap"
 )
 

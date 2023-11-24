@@ -4,7 +4,7 @@ import (
 	"context"
 	"strings"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/utils"
+	"github.com/deltaswapio/deltaswap-explorer/common/utils"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )

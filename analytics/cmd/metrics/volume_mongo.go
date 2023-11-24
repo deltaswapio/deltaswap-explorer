@@ -6,12 +6,12 @@ import (
 	"os"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/token"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/prices"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/common/repository"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/token"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/prices"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/common/repository"
 	"go.uber.org/zap"
 )
 
@@ -22,9 +22,9 @@ func RunVaaVolumeFromMongo(mongoUri, mongoDb, outputFile, pricesFile, vaaPayload
 	rootCtx := context.Background()
 
 	// build logger
-	logger := logger.New("wormhole-explorer-analytics")
+	logger := logger.New("deltaswap-explorer-analytics")
 
-	logger.Info("starting wormhole-explorer-analytics ...")
+	logger.Info("starting deltaswap-explorer-analytics ...")
 
 	//setup DB connection
 	db, err := dbutil.Connect(rootCtx, logger, mongoUri, mongoDb, false)
@@ -119,6 +119,6 @@ func RunVaaVolumeFromMongo(mongoUri, mongoDb, outputFile, pricesFile, vaaPayload
 
 	logger.Info("missing tokens", zap.Int("count", len(converter.MissingTokens)))
 
-	logger.Info("finished wormhole-explorer-analytics")
+	logger.Info("finished deltaswap-explorer-analytics")
 
 }

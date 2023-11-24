@@ -1,11 +1,10 @@
 package address
 
 import (
-	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/address"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware" // required by swaggo
-	_ "github.com/wormhole-foundation/wormhole-explorer/api/response" // required by swaggo
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/address"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware" // required by swaggo
+	_ "github.com/deltaswapio/deltaswap-explorer/api/response" // required by swaggo
 	"go.uber.org/zap"
 )
 
@@ -26,7 +25,7 @@ func NewController(srv *address.Service, logger *zap.Logger) *Controller {
 
 // FindById godoc
 // @Description Lookup an address
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-address-by-id
 // @Param address path string true "address"
 // @Param page query integer false "Page number. Starts at 0."

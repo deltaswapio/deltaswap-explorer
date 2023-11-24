@@ -12,7 +12,7 @@ import { SNSOptionTypes } from './services/SNS/types';
 import WebServer from './services/WebServer';
 import { WatcherOptionTypes } from './watchers/types';
 import { logInfo } from './utils/logger';
-import { ChainName } from '@certusone/wormhole-sdk';
+import { ChainName } from '@deltaswapio/deltaswap-sdk';
 import { NETWORK } from './consts';
 
 const version = '1.2.0';

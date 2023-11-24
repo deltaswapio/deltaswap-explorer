@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/stretchr/testify/assert"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap/zaptest"
 )
 

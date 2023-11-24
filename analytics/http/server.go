@@ -2,11 +2,11 @@ package http
 
 import (
 	"github.com/ansrivas/fiberprometheus/v2"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/http/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/http/vaa"
+	health "github.com/deltaswapio/deltaswap-explorer/common/health"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/http/infrastructure"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/http/vaa"
-	health "github.com/wormhole-foundation/wormhole-explorer/common/health"
 	"go.uber.org/zap"
 )
 

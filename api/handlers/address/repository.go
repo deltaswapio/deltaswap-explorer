@@ -4,8 +4,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/common"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/common"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"

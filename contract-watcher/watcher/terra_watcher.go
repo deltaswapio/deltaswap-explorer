@@ -9,11 +9,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/terra"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/terra"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -165,7 +165,7 @@ func (w *TerraWatcher) processBlock(ctx context.Context, block int64) {
 		for _, tx := range transactions.Txs {
 
 			// unmarshall terra tx to wormhole token bridge tx.
-			var wormholeTx terra.WormholeTerraTx
+			var wormholeTx terra.DeltaswapTerraTx
 			txBytes, err := json.Marshal(tx.Tx)
 			if err != nil {
 				continue
@@ -182,7 +182,7 @@ func (w *TerraWatcher) processBlock(ctx context.Context, block int64) {
 			}
 
 			// unmarshall terra tx logs to wormhole token bridge logs.
-			var wormholeTxLogs []terra.WormholeTerraTxLog
+			var wormholeTxLogs []terra.DeltaswapTerraTxLog
 			txLogsBytes, err := json.Marshal(tx.Logs)
 			if err != nil {
 				w.logger.Debug("error marshall tx logs", zap.Error(err), zap.String("txHash", tx.Txhash),
@@ -191,7 +191,7 @@ func (w *TerraWatcher) processBlock(ctx context.Context, block int64) {
 			}
 			err = json.Unmarshal(txLogsBytes, &wormholeTxLogs)
 			if err != nil {
-				w.logger.Debug("error unmarshall to []terra.WormholeTerraLog", zap.Error(err),
+				w.logger.Debug("error unmarshall to []terra.DeltaswapTerraLog", zap.Error(err),
 					zap.String("txHash", tx.Txhash), zap.Int64("block", block))
 				continue
 			}
@@ -244,7 +244,7 @@ func (w *TerraWatcher) processBlock(ctx context.Context, block int64) {
 	}
 }
 
-func (w *TerraWatcher) checkTransactionContractAddress(tx terra.WormholeTerraTx) bool {
+func (w *TerraWatcher) checkTransactionContractAddress(tx terra.DeltaswapTerraTx) bool {
 	for _, msg := range tx.Value.Msg {
 		if msg.Value.Contract == w.contractAddress {
 			return true
@@ -255,7 +255,7 @@ func (w *TerraWatcher) checkTransactionContractAddress(tx terra.WormholeTerraTx)
 
 // checkTransactionMethod checks the method of the transaction.
 // iterate over the logs, events and attributes to find the method.
-func (w *TerraWatcher) checkTransactionMethod(tx []terra.WormholeTerraTxLog) (bool, string) {
+func (w *TerraWatcher) checkTransactionMethod(tx []terra.DeltaswapTerraTxLog) (bool, string) {
 	for _, log := range tx {
 		for _, event := range log.Events {
 			for _, attribute := range event.Attributes {
@@ -269,7 +269,7 @@ func (w *TerraWatcher) checkTransactionMethod(tx []terra.WormholeTerraTxLog) (bo
 }
 
 // getTransactionData
-func (w *TerraWatcher) getTransactionData(tx terra.WormholeTerraTx) (string, string, *vaa.VAA, error) {
+func (w *TerraWatcher) getTransactionData(tx terra.DeltaswapTerraTx) (string, string, *vaa.VAA, error) {
 	for _, msg := range tx.Value.Msg {
 		if msg.Value.Contract == w.contractAddress {
 			// unmarshal vaa

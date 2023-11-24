@@ -5,8 +5,8 @@ import (
 	"errors"
 	"time"
 
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	wormscanCache "github.com/wormhole-foundation/wormhole-explorer/common/client/cache"
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	wormscanCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache"
 	"go.uber.org/zap"
 )
 

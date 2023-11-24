@@ -1,13 +1,13 @@
-import { ChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import {
   INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN,
   INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN_TESTNET,
 } from '../common/consts';
 import { NETWORK } from '../consts';
-import { getLogger, WormholeLogger } from '../utils/logger';
+import { getLogger, DeltaswapLogger } from '../utils/logger';
 import { DBImplementation, LastBlockByChain, WHTransaction, WHTransferRedeemed } from './types';
 abstract class BaseDB implements DBImplementation {
-  public logger: WormholeLogger;
+  public logger: DeltaswapLogger;
   public lastBlocksByChain: LastBlockByChain[] = [];
 
   constructor(private readonly dbTypeName: string = '') {

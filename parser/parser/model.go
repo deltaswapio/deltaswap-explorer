@@ -3,8 +3,8 @@ package parser
 import (
 	"time"
 
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // ParsedVaaUpdate represent a parsed vaa update.

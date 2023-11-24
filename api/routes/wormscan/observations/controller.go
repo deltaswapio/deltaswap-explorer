@@ -4,9 +4,8 @@ package observations
 import (
 	"strconv"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/observations"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/observations"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
 	"go.uber.org/zap"
 )
 
@@ -26,7 +25,7 @@ func NewController(srv *observations.Service, logger *zap.Logger) *Controller {
 
 // FindAll godoc
 // @Description Returns all observations, sorted in descending timestamp order.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-observations
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -52,7 +51,7 @@ func (c *Controller) FindAll(ctx *fiber.Ctx) error {
 
 // FindAllByChain godoc
 // @Description Returns all observations for a given blockchain, sorted in descending timestamp order.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-observations-by-chain
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -83,7 +82,7 @@ func (c *Controller) FindAllByChain(ctx *fiber.Ctx) error {
 
 // FindAllByEmitter godoc
 // @Description Returns all observations for a specific emitter address, sorted in descending timestamp order.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-observations-by-emitter
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -114,7 +113,7 @@ func (c *Controller) FindAllByEmitter(ctx *fiber.Ctx) error {
 
 // FindAllByVAA godoc
 // @Description Find observations identified by emitter chain, emitter address and sequence.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-observations-by-sequence
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."
@@ -145,7 +144,7 @@ func (c *Controller) FindAllByVAA(ctx *fiber.Ctx) error {
 
 // FindOne godoc
 // @Description Find a specific observation.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-observations-by-id
 // @Param page query integer false "Page number."
 // @Param pageSize query integer false "Number of elements per page."

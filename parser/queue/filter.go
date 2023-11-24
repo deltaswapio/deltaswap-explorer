@@ -1,6 +1,6 @@
 package queue
 
-import "github.com/wormhole-foundation/wormhole/sdk/vaa"
+import "github.com/deltaswapio/deltaswap/sdk/vaa"
 
 // PythFilter filter vaa event from pyth chain.
 func PythFilter(vaaEvent *VaaEvent) bool {

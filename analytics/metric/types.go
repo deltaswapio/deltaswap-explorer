@@ -3,7 +3,7 @@ package metric
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // MetricPushFunc is a function to push metrics

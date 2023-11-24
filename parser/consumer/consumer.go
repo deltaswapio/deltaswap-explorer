@@ -3,9 +3,9 @@ package consumer
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/processor"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/queue"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/parser/processor"
+	"github.com/deltaswapio/deltaswap-explorer/parser/queue"
 	"go.uber.org/zap"
 )
 

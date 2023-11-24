@@ -4,15 +4,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/config"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/http/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/processor"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/parser/config"
+	"github.com/deltaswapio/deltaswap-explorer/parser/http/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/parser/parser"
+	"github.com/deltaswapio/deltaswap-explorer/parser/processor"
 	"go.uber.org/zap"
 )
 
@@ -20,9 +20,9 @@ func Run(config *config.BackfillerConfiguration) {
 
 	rootCtx := context.Background()
 
-	logger := logger.New("wormhole-explorer-parser", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-parser", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-parser  as backfiller ...")
+	logger.Info("Starting deltaswap-explorer-parser  as backfiller ...")
 
 	startTime, err := time.Parse(time.RFC3339, config.StartTime)
 	if err != nil {
@@ -60,7 +60,7 @@ func Run(config *config.BackfillerConfiguration) {
 	//create a processor
 	processor := processor.New(parserVAAAPIClient, parserRepository, alert.NewDummyClient(), metrics.NewDummyMetrics(), logger)
 
-	logger.Info("Started wormhole-explorer-parser as backfiller")
+	logger.Info("Started deltaswap-explorer-parser as backfiller")
 
 	//start backfilling
 	page := int64(0)
@@ -92,5 +92,5 @@ func Run(config *config.BackfillerConfiguration) {
 	logger.Info("closing MongoDB connection...")
 	db.DisconnectWithTimeout(10 * time.Second)
 
-	logger.Info("Finish wormhole-explorer-parser as backfiller")
+	logger.Info("Finish deltaswap-explorer-parser as backfiller")
 }

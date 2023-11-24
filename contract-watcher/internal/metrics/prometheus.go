@@ -3,9 +3,9 @@ package metrics
 import (
 	"strconv"
 
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 type PrometheusMetrics struct {

@@ -1,4 +1,4 @@
-import { CosmWasmChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { CosmWasmChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { AXIOS_CONFIG_JSON, NETWORK_CONTRACTS, NETWORK_RPCS_BY_CHAIN } from '../consts';
 import { makeBlockKey, makeVaaKey, makeWHTransaction } from '../databases/utils';
 import BaseWatcher from './BaseWatcher';

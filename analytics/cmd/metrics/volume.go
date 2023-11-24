@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/token"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/prices"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/influxdata/influxdb-client-go/v2/api/write"
 	"github.com/shopspring/decimal"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/token"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/metric"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/prices"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 type VaaConverter struct {

@@ -1,8 +1,8 @@
-import { ChainName } from '@certusone/wormhole-sdk';
+import { ChainName } from '@deltaswapio/deltaswap-sdk';
 import BaseDB from '../databases/BaseDB';
 import { WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/types';
 import BaseSNS from '../services/SNS/BaseSNS';
-import { WormholeLogger } from '../utils/logger';
+import { DeltaswapLogger } from '../utils/logger';
 import { AlgorandWatcher } from './AlgorandWatcher';
 import { AptosWatcher } from './AptosWatcher';
 import { BSCWatcher } from './BSCWatcher';
@@ -27,7 +27,7 @@ export type WatcherOptionTypes =
   | SuiWatcher;
 export interface WatcherImplementation {
   chain: ChainName;
-  logger: WormholeLogger;
+  logger: DeltaswapLogger;
   maximumBatchSize: number;
   sns?: BaseSNS | null;
   db?: BaseDB;

@@ -1,9 +1,9 @@
 package metrics
 
 import (
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 // PrometheusMetrics is a Prometheus implementation of Metric interface.

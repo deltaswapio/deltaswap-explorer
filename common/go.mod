@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/common
+module github.com/deltaswapio/deltaswap-explorer/common
 
 go 1.19
 
@@ -17,7 +17,7 @@ require (
 	github.com/shopspring/decimal v1.3.1
 	github.com/stretchr/testify v1.8.0
 	github.com/test-go/testify v1.1.4
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.24.0
 )

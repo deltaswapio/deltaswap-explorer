@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/sqs"
 	"go.uber.org/zap"
 )
 

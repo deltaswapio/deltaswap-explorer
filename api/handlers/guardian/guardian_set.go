@@ -1,60 +1,60 @@
-package guardian
+package phylax
 
 import (
 	"time"
 
-	"github.com/certusone/wormhole/node/pkg/common"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/config"
+	"github.com/deltaswapio/deltaswap/node/pkg/common"
 	eth_common "github.com/ethereum/go-ethereum/common"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/config"
 )
 
-// GuardianSet definition.
-type GuardianSet struct {
-	GstByIndex            []common.GuardianSet
+// PhylaxSet definition.
+type PhylaxSet struct {
+	GstByIndex            []common.PhylaxSet
 	ExpirationTimeByIndex []time.Time
 }
 
-// Get get guardianset config by enviroment.
-func GetByEnv(enviroment string) GuardianSet {
+// Get get phylaxset config by enviroment.
+func GetByEnv(enviroment string) PhylaxSet {
 	switch enviroment {
 	case config.P2pTestNet:
-		return getTestnetGuardianSet()
+		return getTestnetPhylaxSet()
 	default:
-		return getMainnetGuardianSet()
+		return getMainnetPhylaxSet()
 	}
 }
 
-// IsValid check if a guardianSet is valid.
-func (gs GuardianSet) IsValid(gsIx uint32, t time.Time) bool {
+// IsValid check if a phylaxSet is valid.
+func (gs PhylaxSet) IsValid(gsIx uint32, t time.Time) bool {
 	if gsIx < 0 || int(gsIx) > len(gs.GstByIndex) {
 		return false
 	}
 	return gs.ExpirationTimeByIndex[gsIx].After(t)
 }
 
-// GetLatest get the lastest guardianset.
-func (gs GuardianSet) GetLatest() common.GuardianSet {
+// GetLatest get the lastest phylaxset.
+func (gs PhylaxSet) GetLatest() common.PhylaxSet {
 	return gs.GstByIndex[len(gs.GstByIndex)-1]
 }
 
-func getTestnetGuardianSet() GuardianSet {
+func getTestnetPhylaxSet() PhylaxSet {
 	const tenYears = time.Hour * 24 * 365 * 10
 	gs0TestValidUntil := time.Now().Add(tenYears)
-	gstest0 := common.GuardianSet{
+	gstest0 := common.PhylaxSet{
 		Index: 0,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x13947Bd48b18E53fdAeEe77F3473391aC727C638"), //
 		},
 	}
-	return GuardianSet{
-		GstByIndex:            []common.GuardianSet{gstest0},
+	return PhylaxSet{
+		GstByIndex:            []common.PhylaxSet{gstest0},
 		ExpirationTimeByIndex: []time.Time{gs0TestValidUntil},
 	}
 }
 
-func getMainnetGuardianSet() GuardianSet {
+func getMainnetPhylaxSet() PhylaxSet {
 	gs0ValidUntil := time.Unix(1628599904, 0) // Tue Aug 10 2021 12:51:44 GMT+0000
-	gs0 := common.GuardianSet{
+	gs0 := common.PhylaxSet{
 		Index: 0,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -62,7 +62,7 @@ func getMainnetGuardianSet() GuardianSet {
 	}
 
 	gs1ValidUntil := time.Unix(1650566103, 0) // Thu Apr 21 2022 18:35:03 GMT+0000
-	gs1 := common.GuardianSet{
+	gs1 := common.PhylaxSet{
 		Index: 1,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -89,7 +89,7 @@ func getMainnetGuardianSet() GuardianSet {
 
 	const tenYears = time.Hour * 24 * 365 * 10
 	gs2ValidUntil := time.Now().Add(tenYears) // still valid so we add 10 years
-	gs2 := common.GuardianSet{
+	gs2 := common.PhylaxSet{
 		Index: 2,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -117,7 +117,7 @@ func getMainnetGuardianSet() GuardianSet {
 	}
 
 	gs3ValidUntil := time.Now().Add(tenYears) // still valid so we add 10 years
-	gs3 := common.GuardianSet{
+	gs3 := common.PhylaxSet{
 		Index: 3,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -143,8 +143,8 @@ func getMainnetGuardianSet() GuardianSet {
 		},
 	}
 
-	return GuardianSet{
-		GstByIndex:            []common.GuardianSet{gs0, gs1, gs2, gs3},
+	return PhylaxSet{
+		GstByIndex:            []common.PhylaxSet{gs0, gs1, gs2, gs3},
 		ExpirationTimeByIndex: []time.Time{gs0ValidUntil, gs1ValidUntil, gs2ValidUntil, gs3ValidUntil},
 	}
 }

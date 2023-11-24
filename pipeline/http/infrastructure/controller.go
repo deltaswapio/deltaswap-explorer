@@ -3,8 +3,8 @@ package infrastructure
 import (
 	"fmt"
 
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/healthcheck"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/healthcheck"
 	"go.uber.org/zap"
 )
 

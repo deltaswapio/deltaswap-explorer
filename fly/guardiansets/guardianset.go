@@ -1,4 +1,4 @@
-package guardiansets
+package phylaxsets
 
 import (
 	"context"
@@ -6,84 +6,84 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/certusone/wormhole/node/pkg/common"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	flyAlert "github.com/deltaswapio/deltaswap-explorer/fly/internal/alert"
+	"github.com/deltaswapio/deltaswap/node/pkg/common"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	eth_common "github.com/ethereum/go-ethereum/common"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	flyAlert "github.com/wormhole-foundation/wormhole-explorer/fly/internal/alert"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
-// GuardianSetHistory contains information about all guardian sets for the current network (past and present).
-type GuardianSetHistory struct {
-	guardianSetsByIndex    []common.GuardianSet
+// PhylaxSetHistory contains information about all phylax sets for the current network (past and present).
+type PhylaxSetHistory struct {
+	phylaxSetsByIndex      []common.PhylaxSet
 	expirationTimesByIndex []time.Time
 	alertClient            alert.AlertClient
 }
 
-// Verify takes a VAA as input and validates its guardian signatures.
-func (h *GuardianSetHistory) Verify(ctx context.Context, vaa *sdk.VAA) error {
+// Verify takes a VAA as input and validates its phylax signatures.
+func (h *PhylaxSetHistory) Verify(ctx context.Context, vaa *sdk.VAA) error {
 
-	idx := vaa.GuardianSetIndex
+	idx := vaa.PhylaxSetIndex
 
 	// Make sure the index exists
-	if idx >= uint32(len(h.guardianSetsByIndex)) {
+	if idx >= uint32(len(h.phylaxSetsByIndex)) {
 		alertContext := alert.AlertContext{
 			Details: map[string]string{
-				"vaaID":               vaa.MessageID(),
-				"vaaGuardianSetIndex": fmt.Sprint(vaa.GuardianSetIndex),
-				"guardianSetIndex":    fmt.Sprint(len(h.guardianSetsByIndex)),
+				"vaaID":             vaa.MessageID(),
+				"vaaPhylaxSetIndex": fmt.Sprint(vaa.PhylaxSetIndex),
+				"phylaxSetIndex":    fmt.Sprint(len(h.phylaxSetsByIndex)),
 			},
 		}
-		_ = h.alertClient.CreateAndSend(ctx, flyAlert.GuardianSetUnknown, alertContext)
-		return fmt.Errorf("guardian Set Index is out of bounds: got %d, max is %d",
-			vaa.GuardianSetIndex,
-			len(h.guardianSetsByIndex),
+		_ = h.alertClient.CreateAndSend(ctx, flyAlert.PhylaxSetUnknown, alertContext)
+		return fmt.Errorf("phylax Set Index is out of bounds: got %d, max is %d",
+			vaa.PhylaxSetIndex,
+			len(h.phylaxSetsByIndex),
 		)
 	}
 
-	// Verify guardian signatures
-	if vaa.VerifySignatures(h.guardianSetsByIndex[idx].Keys) {
+	// Verify phylax signatures
+	if vaa.VerifySignatures(h.phylaxSetsByIndex[idx].Keys) {
 		return nil
 	} else {
 		return errors.New("VAA contains invalid signatures")
 	}
 }
 
-// GetLatest returns the lastest guardian set.
-func (h GuardianSetHistory) GetLatest() common.GuardianSet {
-	return h.guardianSetsByIndex[len(h.guardianSetsByIndex)-1]
+// GetLatest returns the lastest phylax set.
+func (h PhylaxSetHistory) GetLatest() common.PhylaxSet {
+	return h.phylaxSetsByIndex[len(h.phylaxSetsByIndex)-1]
 }
 
-// Get get guardianset config by enviroment.
-func GetByEnv(enviroment string, alertClient alert.AlertClient) GuardianSetHistory {
+// Get get phylaxset config by enviroment.
+func GetByEnv(enviroment string, alertClient alert.AlertClient) PhylaxSetHistory {
 	switch enviroment {
 	case domain.P2pTestNet:
-		return getTestnetGuardianSet(alertClient)
+		return getTestnetPhylaxSet(alertClient)
 	default:
-		return getMainnetGuardianSet(alertClient)
+		return getMainnetPhylaxSet(alertClient)
 	}
 }
 
-func getTestnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
+func getTestnetPhylaxSet(alertClient alert.AlertClient) PhylaxSetHistory {
 	const tenYears = time.Hour * 24 * 365 * 10
 	gs0TestValidUntil := time.Now().Add(tenYears)
-	gstest0 := common.GuardianSet{
+	gstest0 := common.PhylaxSet{
 		Index: 0,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x13947Bd48b18E53fdAeEe77F3473391aC727C638"), //
 		},
 	}
-	return GuardianSetHistory{
-		guardianSetsByIndex:    []common.GuardianSet{gstest0},
+	return PhylaxSetHistory{
+		phylaxSetsByIndex:      []common.PhylaxSet{gstest0},
 		expirationTimesByIndex: []time.Time{gs0TestValidUntil},
 		alertClient:            alertClient,
 	}
 }
 
-func getMainnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
+func getMainnetPhylaxSet(alertClient alert.AlertClient) PhylaxSetHistory {
 	gs0ValidUntil := time.Unix(1628599904, 0) // Tue Aug 10 2021 12:51:44 GMT+0000
-	gs0 := common.GuardianSet{
+	gs0 := common.PhylaxSet{
 		Index: 0,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -91,7 +91,7 @@ func getMainnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
 	}
 
 	gs1ValidUntil := time.Unix(1650566103, 0) // Thu Apr 21 2022 18:35:03 GMT+0000
-	gs1 := common.GuardianSet{
+	gs1 := common.PhylaxSet{
 		Index: 1,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -118,7 +118,7 @@ func getMainnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
 
 	const tenYears = time.Hour * 24 * 365 * 10
 	gs2ValidUntil := time.Now().Add(tenYears) // still valid so we add 10 years
-	gs2 := common.GuardianSet{
+	gs2 := common.PhylaxSet{
 		Index: 2,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -146,7 +146,7 @@ func getMainnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
 	}
 
 	gs3ValidUntil := time.Now().Add(tenYears) // still valid so we add 10 years
-	gs3 := common.GuardianSet{
+	gs3 := common.PhylaxSet{
 		Index: 3,
 		Keys: []eth_common.Address{
 			eth_common.HexToAddress("0x58CC3AE5C097b213cE3c81979e1B9f9570746AA5"), // Certus One
@@ -172,8 +172,8 @@ func getMainnetGuardianSet(alertClient alert.AlertClient) GuardianSetHistory {
 		},
 	}
 
-	return GuardianSetHistory{
-		guardianSetsByIndex:    []common.GuardianSet{gs0, gs1, gs2, gs3},
+	return PhylaxSetHistory{
+		phylaxSetsByIndex:      []common.PhylaxSet{gs0, gs1, gs2, gs3},
 		expirationTimesByIndex: []time.Time{gs0ValidUntil, gs1ValidUntil, gs2ValidUntil, gs3ValidUntil},
 		alertClient:            alertClient,
 	}

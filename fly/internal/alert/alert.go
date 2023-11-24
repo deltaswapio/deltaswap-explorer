@@ -3,7 +3,7 @@ package alert
 import (
 	"fmt"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
 )
 
 // alert key constants definition.
@@ -14,10 +14,10 @@ const (
 	ErrorSaveHeartbeat      = "ERROR_SAVE_HEARTBEAT"
 	ErrorSaveGovernorStatus = "ERROR_SAVE_GOVERNOR_STATUS"
 	ErrorSaveGovernorConfig = "ERROR_SAVE_GOVERNOR_CONFIG"
-	ErrorGuardianNoActivity = "ERROR_GUARDIAN_NO_ACTIVITY"
+	ErrorPhylaxNoActivity   = "ERROR_GUARDIAN_NO_ACTIVITY"
 
 	// warning alerts
-	GuardianSetUnknown       = "GUARDIAN_SET_UNKNOWN"
+	PhylaxSetUnknown         = "GUARDIAN_SET_UNKNOWN"
 	ObservationWithoutTxHash = "OBSERVATION_WITHOUT_TX_HASH"
 )
 
@@ -82,21 +82,21 @@ func LoadAlerts(cfg alert.AlertConfig) map[string]alert.Alert {
 		Entity:      "fly",
 		Priority:    alert.CRITICAL,
 	}
-	alerts[GuardianSetUnknown] = alert.Alert{
-		Alias:       GuardianSetUnknown,
-		Message:     fmt.Sprintf("[%s] %s", cfg.Environment, "Guardian set unknown"),
-		Description: "The guardian set from the vaa is unknown.",
+	alerts[PhylaxSetUnknown] = alert.Alert{
+		Alias:       PhylaxSetUnknown,
+		Message:     fmt.Sprintf("[%s] %s", cfg.Environment, "Phylax set unknown"),
+		Description: "The phylax set from the vaa is unknown.",
 		Actions:     []string{},
-		Tags:        []string{cfg.Environment, "fly", "guardianSet", "vaa"},
+		Tags:        []string{cfg.Environment, "fly", "phylaxSet", "vaa"},
 		Entity:      "fly",
 		Priority:    alert.INFORMATIONAL,
 	}
-	alerts[ErrorGuardianNoActivity] = alert.Alert{
-		Alias:       ErrorGuardianNoActivity,
-		Message:     fmt.Sprintf("[%s] %s", cfg.Environment, "Guardian no activity from gossip network"),
+	alerts[ErrorPhylaxNoActivity] = alert.Alert{
+		Alias:       ErrorPhylaxNoActivity,
+		Message:     fmt.Sprintf("[%s] %s", cfg.Environment, "Phylax no activity from gossip network"),
 		Description: "The fly doesn't recive activity from gossip network.",
 		Actions:     []string{},
-		Tags:        []string{cfg.Environment, "fly", "guardian", "p2p"},
+		Tags:        []string{cfg.Environment, "fly", "phylax", "p2p"},
 		Entity:      "fly",
 		Priority:    alert.INFORMATIONAL,
 	}

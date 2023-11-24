@@ -3,8 +3,8 @@ import { env } from '../config';
 import { toArray } from './array';
 
 const { combine, errors } = format;
-let logger: WormholeLogger | undefined = undefined;
-export type WormholeLogger = Logger & { labels: string[] };
+let logger: DeltaswapLogger | undefined = undefined;
+export type DeltaswapLogger = Logger & { labels: string[] };
 
 /**
  * Get a logger that is scoped to the given labels. If a parent logger is
@@ -29,8 +29,8 @@ export type WormholeLogger = Logger & { labels: string[] };
  */
 export const getLogger = (
   labels: string | string[] = [],
-  parent?: WormholeLogger,
-): WormholeLogger => {
+  parent?: DeltaswapLogger,
+): DeltaswapLogger => {
   // base logger is parent if unspecified
   if (!parent) parent = logger = logger ?? createBaseLogger();
 
@@ -39,14 +39,14 @@ export const getLogger = (
   if (labels.length === 0) return parent;
 
   // create scoped logger
-  const child: WormholeLogger = parent.child({
+  const child: DeltaswapLogger = parent.child({
     labels: [...parent.labels, ...labels],
-  }) as WormholeLogger;
+  }) as DeltaswapLogger;
   child.labels = labels;
   return child;
 };
 
-const createBaseLogger = (): WormholeLogger => {
+const createBaseLogger = (): DeltaswapLogger => {
   const { LOG_LEVEL, LOG_DIR } = env;
   const LOG_PATH = LOG_DIR ? `${LOG_DIR}/watcher.${new Date().toISOString()}.log` : null;
 
@@ -57,7 +57,7 @@ const createBaseLogger = (): WormholeLogger => {
   });
 
   const appendLoggerName = format((info) => {
-    info.logger = 'wormhole-explorer-event-watcher';
+    info.logger = 'deltaswap-explorer-event-watcher';
     return info;
   });
 
@@ -84,7 +84,7 @@ const createBaseLogger = (): WormholeLogger => {
     exitOnError: false,
   };
 
-  const logger = createLogger(loggerConfig) as WormholeLogger;
+  const logger = createLogger(loggerConfig) as DeltaswapLogger;
   logger.labels = [];
   return logger;
 };
@@ -93,7 +93,7 @@ export const logInfo = ({ labels, message }: { labels: string[]; message: string
   const obj = {
     labels,
     level: 'info',
-    logger: 'wormhole-explorer-event-watcher',
+    logger: 'deltaswap-explorer-event-watcher',
     message,
     ts: new Date().toISOString(),
   };

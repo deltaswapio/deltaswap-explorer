@@ -8,7 +8,7 @@ type HeartbeatDoc struct {
 	BootTimestamp int64              `bson:"boottimestamp" json:"bootTimestamp"`
 	Counter       int64              `bson:"counter" json:"counter"`
 	Features      []string           `bson:"features" json:"features"`
-	GuardianAddr  string             `bson:"guardianaddr" json:"guardianAddr"`
+	PhylaxAddr    string             `bson:"phylaxaddr" json:"phylaxAddr"`
 	IndexedAt     *time.Time         `bson:"indexedAt" json:"indexedAt"`
 	NodeName      string             `bson:"nodename" json:"nodeName"`
 	Timestamp     int64              `bson:"timestamp" json:"timestamp"`

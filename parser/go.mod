@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/parser
+module github.com/deltaswapio/deltaswap-explorer/parser
 
 go 1.19
 
@@ -8,7 +8,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/sethvargo/go-envconfig v0.6.0 // Configuration environment
 	github.com/stretchr/testify v1.8.1 // indirect; Testing
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.24.0
 )
@@ -21,7 +21,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.2
 	github.com/prometheus/client_golang v1.16.0
 	github.com/spf13/cobra v1.7.0
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
 )
 
 require (
@@ -93,4 +93,4 @@ require (
 // https://github.com/cosmos/cosmos-sdk/issues/10925 for more details.
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

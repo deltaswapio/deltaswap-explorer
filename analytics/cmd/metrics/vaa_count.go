@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/metric"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/parser"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/parser"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 func RunVaaCount(inputFile, outputFile string) {

@@ -1,4 +1,4 @@
-import { coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { decode } from 'bs58';
 import { Provider, TypedError } from 'near-api-js/lib/providers';
 import { BlockResult, ExecutionStatus } from 'near-api-js/lib/providers/provider';
@@ -8,7 +8,7 @@ import { NETWORK_CONTRACTS, NETWORK_RPCS_BY_CHAIN } from '../consts';
 import { WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/types';
 import { makeBlockKey, makeVaaKey, makeWHTransaction } from '../databases/utils';
 import { EventLog } from '../types/near';
-import { getNearProvider, isWormholePublishEventLog } from '../utils/near';
+import { getNearProvider, isDeltaswapPublishEventLog } from '../utils/near';
 import BaseWatcher from './BaseWatcher';
 import { makeSerializedVAA } from './utils';
 
@@ -37,7 +37,7 @@ export class NearWatcher extends BaseWatcher {
       block = await provider.block({ blockId: toBlock });
       blocks.push(block);
       while (true) {
-        // traverse backwards via block hashes: https://github.com/wormhole-foundation/wormhole-monitor/issues/35
+        // traverse backwards via block hashes: https://github.com/deltaswapio/deltaswap-monitor/issues/35
         block = await provider.block({ blockId: block.header.prev_hash });
         if (block.header.height < fromBlock) break;
         blocks.push(block);
@@ -66,7 +66,7 @@ export class NearWatcher extends BaseWatcher {
       block = await provider.block({ blockId: toBlock });
       blocks.push(block);
       while (true) {
-        // traverse backwards via block hashes: https://github.com/wormhole-foundation/wormhole-monitor/issues/35
+        // traverse backwards via block hashes: https://github.com/deltaswapio/deltaswap-monitor/issues/35
         block = await provider.block({ blockId: block.header.prev_hash });
         if (block.header.height < fromBlock) break;
         blocks.push(block);
@@ -143,7 +143,7 @@ export const getMessagesFromBlockResults = async (
         .flatMap(({ outcome }) => outcome.logs)
         .filter((log) => log.startsWith('EVENT_JSON:')) // https://nomicon.io/Standards/EventsFormat
         .map((log) => JSON.parse(log.slice(11)) as EventLog)
-        .filter(isWormholePublishEventLog);
+        .filter(isDeltaswapPublishEventLog);
       for (const log of logs) {
         const vaaKey = makeVaaKey(tx.hash, 'near', log.emitter, log.seq.toString());
         vaasByBlock[blockKey] = [...vaasByBlock[blockKey], vaaKey];
@@ -191,7 +191,7 @@ export const getWhTxsResults = async (
         .flatMap(({ outcome }) => outcome.logs)
         .filter((log) => log.startsWith('EVENT_JSON:')) // https://nomicon.io/Standards/EventsFormat
         .map((log) => JSON.parse(log.slice(11)) as EventLog)
-        .filter(isWormholePublishEventLog);
+        .filter(isDeltaswapPublishEventLog);
 
       for (const log of logs) {
         const { nonce, emitter, seq, data } = log;

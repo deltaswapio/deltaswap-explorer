@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/certusone/wormhole/node/pkg/common"
-	spyv1 "github.com/certusone/wormhole/node/pkg/proto/spy/v1"
-	"github.com/certusone/wormhole/node/pkg/supervisor"
+	"github.com/deltaswapio/deltaswap/node/pkg/common"
+	spyv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/spy/v1"
+	"github.com/deltaswapio/deltaswap/node/pkg/supervisor"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 )

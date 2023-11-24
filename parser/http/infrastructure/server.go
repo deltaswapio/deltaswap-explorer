@@ -2,10 +2,10 @@ package infrastructure
 
 import (
 	"github.com/ansrivas/fiberprometheus/v2"
+	"github.com/deltaswapio/deltaswap-explorer/parser/http/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/sqs"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/pprof"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/http/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/sqs"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 )

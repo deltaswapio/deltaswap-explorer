@@ -3,10 +3,10 @@ package vaa
 import (
 	"strconv"
 
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/consumer"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/consumer"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 

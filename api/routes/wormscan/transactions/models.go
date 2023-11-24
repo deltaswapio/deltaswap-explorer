@@ -3,8 +3,8 @@ package transactions
 import (
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/transactions"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/transactions"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // TransactionDetail is a brief description of a transaction (e.g. ID, txHash, payload, etc.)

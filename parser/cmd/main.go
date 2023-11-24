@@ -3,10 +3,10 @@ package main
 import (
 	"strings"
 
+	"github.com/deltaswapio/deltaswap-explorer/parser/cmd/backfiller"
+	"github.com/deltaswapio/deltaswap-explorer/parser/cmd/service"
+	"github.com/deltaswapio/deltaswap-explorer/parser/config"
 	"github.com/spf13/cobra"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/cmd/backfiller"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/cmd/service"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/config"
 )
 
 func main() {

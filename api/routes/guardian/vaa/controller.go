@@ -4,10 +4,10 @@ package vaa
 import (
 	"strconv"
 
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
 	"go.uber.org/zap"
 )
 
@@ -24,8 +24,8 @@ func NewController(serv *vaa.Service, logger *zap.Logger) *Controller {
 
 // FindSignedVAAByID godoc
 // @Description get a VAA []byte from a chainID, emitter address and sequence.
-// @Tags Guardian
-// @ID guardians-find-signed-vaa
+// @Tags Phylax
+// @ID phylaxs-find-signed-vaa
 // @Param chain_id path integer true "id of the blockchain"
 // @Param emitter path string true "address of the emitter"
 // @Param seq path integer true "sequence of the VAA"
@@ -67,8 +67,8 @@ func (c *Controller) FindSignedVAAByID(ctx *fiber.Ctx) error {
 
 // FindSignedBatchVAAByID godoc
 // @Description get a batch of VAA []byte from a chainID, emitter address and sequence.
-// @Tags Guardian
-// @ID guardians-find-signed-batch-vaa
+// @Tags Phylax
+// @ID phylaxs-find-signed-batch-vaa
 // @Param chain_id path integer true "id of the blockchain"
 // @Param emitter path string true "address of the emitter"
 // @Param seq path integer true "sequence of the VAA"

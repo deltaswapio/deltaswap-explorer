@@ -7,10 +7,10 @@ import (
 	"time"
 
 	"github.com/avast/retry-go"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
 	"github.com/gagliardetto/solana-go/rpc/jsonrpc"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
 	"go.uber.org/ratelimit"
 )
 

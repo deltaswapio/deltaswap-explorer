@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/pipeline
+module github.com/deltaswapio/deltaswap-explorer/pipeline
 
 go 1.19
 
@@ -20,8 +20,8 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/prometheus/client_golang v1.16.0
 	github.com/test-go/testify v1.1.4
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-00010101000000-000000000000
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 )
 
 require (
@@ -91,4 +91,4 @@ require (
 // https://github.com/cosmos/cosmos-sdk/issues/10925 for more details.
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

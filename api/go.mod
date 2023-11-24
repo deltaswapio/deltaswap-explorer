@@ -1,10 +1,10 @@
-module github.com/wormhole-foundation/wormhole-explorer/api
+module github.com/deltaswapio/deltaswap-explorer/api
 
 go 1.19
 
 require (
 	github.com/ansrivas/fiberprometheus/v2 v2.4.1
-	github.com/certusone/wormhole/node v0.0.0-20230315165931-62bef9ffb441
+	github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af
 	github.com/ethereum/go-ethereum v1.10.21
 	github.com/gagliardetto/solana-go v1.7.1
 	github.com/gofiber/adaptor/v2 v2.1.29
@@ -18,8 +18,8 @@ require (
 	github.com/spf13/viper v1.14.0
 	github.com/stretchr/testify v1.8.1
 	github.com/swaggo/swag v1.16.1
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-00010101000000-000000000000
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.24.0
 	google.golang.org/grpc v1.50.1
@@ -159,4 +159,4 @@ require (
 // https://github.com/cosmos/cosmos-sdk/issues/10925 for more details.
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

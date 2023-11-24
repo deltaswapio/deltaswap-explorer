@@ -1,4 +1,4 @@
-import { ChainId, ChainName } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainId, ChainName } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 export declare const INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN: {
     [key in ChainName]?: string;
 };

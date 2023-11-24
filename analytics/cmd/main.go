@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/prices"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/service"
 	"github.com/spf13/cobra"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/prices"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/service"
 )
 
 func main() {

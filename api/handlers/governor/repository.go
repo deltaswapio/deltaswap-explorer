@@ -7,18 +7,18 @@ import (
 	"sort"
 	"time"
 
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/pkg/errors"
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.uber.org/zap"
 )
 
-const minGuardianNum = 13
+const minPhylaxNum = 13
 
 // Repository definition.
 type Repository struct {
@@ -142,7 +142,7 @@ func (r *Repository) FindGovernorStatus(
 	q *GovernorQuery,
 ) ([]*GovStatus, error) {
 
-	// Sort guardians by ascending ID to guarantee deterministic output.
+	// Sort phylaxs by ascending ID to guarantee deterministic output.
 	sort := bson.D{{Key: "_id", Value: 1}}
 
 	projection := bson.D{
@@ -294,7 +294,7 @@ func (r *Repository) FindNotionalLimit(
 		{Key: "$project", Value: bson.D{
 			{Key: "chainId", Value: "$_id"},
 			{Key: "notionalLimit", Value: bson.M{
-				"$arrayElemAt": []interface{}{"$notionalLimits", minGuardianNum - 1},
+				"$arrayElemAt": []interface{}{"$notionalLimits", minPhylaxNum - 1},
 			}},
 		}},
 	}
@@ -490,7 +490,7 @@ func (r *Repository) GetAvailableNotional(
 		{Key: "$project", Value: bson.D{
 			{Key: "chainId", Value: "$_id"},
 			{Key: "availableNotional", Value: bson.M{
-				"$arrayElemAt": []interface{}{"$availableNotionals", minGuardianNum - 1},
+				"$arrayElemAt": []interface{}{"$availableNotionals", minPhylaxNum - 1},
 			}},
 		}},
 	}
@@ -764,11 +764,11 @@ func (r *Repository) GetMaxNotionalAvailableByChainID(
 		return nil, errs.ErrNotFound
 	}
 
-	if len(rows) < minGuardianNum {
+	if len(rows) < minPhylaxNum {
 		return nil, errs.ErrNotFound
 	}
 
-	maxNotionalLimit := rows[minGuardianNum-1]
+	maxNotionalLimit := rows[minPhylaxNum-1]
 	return maxNotionalLimit, nil
 }
 
@@ -1178,13 +1178,13 @@ func (r *Repository) GetGovernorLimit(
 	projectStage9 := bson.D{
 		{Key: "$project", Value: bson.D{
 			{Key: "notionalLimit", Value: bson.M{
-				"$arrayElemAt": []interface{}{"$notionalLimits", minGuardianNum - 1},
+				"$arrayElemAt": []interface{}{"$notionalLimits", minPhylaxNum - 1},
 			}},
 			{Key: "maxTransactionSize", Value: bson.M{
-				"$arrayElemAt": []interface{}{"$maxTransactionSizes", minGuardianNum - 1},
+				"$arrayElemAt": []interface{}{"$maxTransactionSizes", minPhylaxNum - 1},
 			}},
 			{Key: "availableNotional", Value: bson.M{
-				"$arrayElemAt": []interface{}{"$availableNotionals", minGuardianNum - 1},
+				"$arrayElemAt": []interface{}{"$availableNotionals", minPhylaxNum - 1},
 			}},
 		}},
 	}
@@ -1262,7 +1262,7 @@ func (r *Repository) GetGovernorLimit(
 // GetAvailNotionByChain get the limits by chainID.
 //
 // In this version returns the minimum value of the availableNotional per chainID
-// by analyzing the data of all guardian nodes.
+// by analyzing the data of all phylax nodes.
 func (r *Repository) GetAvailNotionByChain(
 	ctx context.Context,
 ) ([]*AvailableNotionalByChain, error) {

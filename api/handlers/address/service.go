@@ -3,8 +3,8 @@ package address
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
 	"go.uber.org/zap"
 )
 

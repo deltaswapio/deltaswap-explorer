@@ -8,12 +8,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/transactions"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/pkg/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/transactions"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -65,7 +64,7 @@ func ExtractToChain(c *fiber.Ctx, l *zap.Logger) (*sdk.ChainID, error) {
 // When the parameter `chainIdHint` is not nil, this function will attempt to parse the
 // native address format of the specified chain.
 //
-// The fallback behavior is to parse the address according to the Wormhole hex format.
+// The fallback behavior is to parse the address according to the Deltaswap hex format.
 func ExtractEmitterAddr(c *fiber.Ctx, l *zap.Logger, chainIdHint *sdk.ChainID) (*types.Address, error) {
 
 	emitterStr := c.Params("emitter")
@@ -110,27 +109,27 @@ func ExtractSequence(c *fiber.Ctx, l *zap.Logger) (uint64, error) {
 	return seq, nil
 }
 
-// ExtractGuardianAddress get guardian address from route path.
-func ExtractGuardianAddress(c *fiber.Ctx, l *zap.Logger) (*types.Address, error) {
+// ExtractPhylaxAddress get phylax address from route path.
+func ExtractPhylaxAddress(c *fiber.Ctx, l *zap.Logger) (*types.Address, error) {
 
 	// read the address from query params
-	tmp := c.Params("guardian_address")
+	tmp := c.Params("phylax_address")
 	if tmp == "" {
 		return nil, response.NewInvalidParamError(c, "MALFORMED GUARDIAN ADDR", nil)
 	}
 
 	// Attempt to parse the address
-	guardianAddress, err := types.StringToAddress(tmp, false /*acceptSolanaFormat*/)
+	phylaxAddress, err := types.StringToAddress(tmp, false /*acceptSolanaFormat*/)
 	if err != nil {
 		requestID := fmt.Sprintf("%v", c.Locals("requestid"))
-		l.Error("failed to decode guardian address",
+		l.Error("failed to decode phylax address",
 			zap.Error(err),
 			zap.String("requestID", requestID),
 		)
 		return nil, response.NewInvalidParamError(c, "MALFORMED GUARDIAN ADDR", errors.WithStack(err))
 	}
 
-	return guardianAddress, nil
+	return phylaxAddress, nil
 }
 
 // ExtractVAAParams get VAA chain, address from route path.

@@ -7,14 +7,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/certusone/wormhole/node/pkg/supervisor"
-	"github.com/go-redis/redis/v8"
-	"github.com/wormhole-foundation/wormhole-explorer/common/health"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/spy/config"
-	"github.com/wormhole-foundation/wormhole-explorer/spy/grpc"
-	"github.com/wormhole-foundation/wormhole-explorer/spy/http/infraestructure"
-	"github.com/wormhole-foundation/wormhole-explorer/spy/source"
+	"github.com/deltaswapio/deltaswap-explorer/common/health"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/spy/config"
+	"github.com/deltaswapio/deltaswap-explorer/spy/grpc"
+	"github.com/deltaswapio/deltaswap-explorer/spy/http/infraestructure"
+	"github.com/deltaswapio/deltaswap-explorer/spy/source"
+	"github.com/deltaswapio/deltaswap/node/pkg/supervisor"
 	"go.uber.org/zap"
 )
 
@@ -51,9 +50,9 @@ func main() {
 		log.Fatal("Error creating config", err)
 	}
 
-	logger := logger.New("wormhole-explorer-spy", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-spy", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-spy ...")
+	logger.Info("Starting deltaswap-explorer-spy ...")
 
 	svs := grpc.NewSignedVaaSubscribers(logger)
 	avs := grpc.NewAllVaaSubscribers(logger)
@@ -101,7 +100,7 @@ func main() {
 	server := infraestructure.NewServer(logger, config.Port, config.PprofEnabled, healthChecks...)
 	server.Start()
 
-	logger.Info("Started wormhole-explorer-spy")
+	logger.Info("Started deltaswap-explorer-spy")
 
 	// Waiting for signal
 	sigterm := make(chan os.Signal, 1)
@@ -129,5 +128,5 @@ func main() {
 
 	logger.Info("Closing Http server ...")
 	server.Stop()
-	logger.Info("Finished wormhole-explorer-spy")
+	logger.Info("Finished deltaswap-explorer-spy")
 }

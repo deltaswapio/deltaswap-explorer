@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	pipelineAlert "github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/pipeline/topic"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	pipelineAlert "github.com/deltaswapio/deltaswap-explorer/pipeline/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/pipeline/topic"
 	"go.uber.org/zap"
 )
 

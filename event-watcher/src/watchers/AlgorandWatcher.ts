@@ -4,7 +4,7 @@ import { ALGORAND_INFO } from '../consts';
 import { makeBlockKey, makeVaaKey, makeWHTransaction } from '../databases/utils';
 import { WHTransaction, VaasByBlock, WHTransferRedeemed } from '../databases/types';
 import { makeSerializedVAA } from './utils';
-import { coalesceChainId } from '@certusone/wormhole-sdk';
+import { coalesceChainId } from '@deltaswapio/deltaswap-sdk';
 
 type Message = {
   txHash: string | null;

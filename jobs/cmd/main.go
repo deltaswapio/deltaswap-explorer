@@ -5,15 +5,15 @@ import (
 	"log"
 	"os"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/common/prices"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/config"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/internal/coingecko"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/jobs"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/jobs/notional"
+	"github.com/deltaswapio/deltaswap-explorer/jobs/jobs/report"
 	"github.com/go-redis/redis"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/common/prices"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/config"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/internal/coingecko"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/jobs"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/jobs/notional"
-	"github.com/wormhole-foundation/wormhole-explorer/jobs/jobs/report"
 	"go.uber.org/zap"
 )
 
@@ -29,7 +29,7 @@ func main() {
 		log.Fatal("error creating config", errConf)
 	}
 
-	logger := logger.New("wormhole-explorer-jobs", logger.WithLevel(cfg.LogLevel))
+	logger := logger.New("deltaswap-explorer-jobs", logger.WithLevel(cfg.LogLevel))
 	logger.Info("started job execution", zap.String("job_id", cfg.JobID))
 
 	var err error

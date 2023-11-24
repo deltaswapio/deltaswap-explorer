@@ -6,10 +6,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/chains"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/chains"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
+	"github.com/deltaswapio/deltaswap-explorer/fly/config"
 	"github.com/test-go/testify/assert"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/config"
 )
 
 func TestNewLastSequenceNotifier(t *testing.T) {

@@ -21,9 +21,9 @@ const (
 
 // TxHash represents a transaction hash passed by query params.
 type TxHash struct {
-	hash       string
-	isWormhole bool
-	isSolana   bool
+	hash        string
+	isDeltaswap bool
+	isSolana    bool
 }
 
 // ParseTxHash parses a transaction hash from a string.
@@ -51,10 +51,10 @@ func ParseTxHash(value string) (*TxHash, error) {
 		return parseSuiTxHash(value)
 	}
 
-	// Wormhole txHashes are 32 bytes long, encoded as hex.
+	// Deltaswap txHashes are 32 bytes long, encoded as hex.
 	// Optionally, they can be prefixed with "0x" or "0X".
 	if len(value) >= wormholeMinTxHashLen && len(value) <= wormholeMaxTxHashLen {
-		return parseWormholeTxHash(value)
+		return parseDeltaswapTxHash(value)
 	}
 
 	return nil, fmt.Errorf("invalid txHash length: %d", len(value))
@@ -95,8 +95,8 @@ func parseAlgorandTxHash(value string) (*TxHash, error) {
 
 	// Populate the result struct and return
 	result := TxHash{
-		hash:       base32.StdEncoding.WithPadding(base32.NoPadding).EncodeToString(bytes),
-		isWormhole: true,
+		hash:        base32.StdEncoding.WithPadding(base32.NoPadding).EncodeToString(bytes),
+		isDeltaswap: true,
 	}
 	return &result, nil
 }
@@ -116,13 +116,13 @@ func parseSuiTxHash(value string) (*TxHash, error) {
 
 	// Populate the result struct and return
 	result := TxHash{
-		hash:       base58.Encode(bytes),
-		isWormhole: true,
+		hash:        base58.Encode(bytes),
+		isDeltaswap: true,
 	}
 	return &result, nil
 }
 
-func parseWormholeTxHash(value string) (*TxHash, error) {
+func parseDeltaswapTxHash(value string) (*TxHash, error) {
 
 	// Trim any preceding "0x" to the address
 	value = strings.TrimPrefix(value, "0x")
@@ -141,8 +141,8 @@ func parseWormholeTxHash(value string) (*TxHash, error) {
 
 	// Populate the result struct and return
 	result := TxHash{
-		hash:       hex.EncodeToString(bytes),
-		isWormhole: true,
+		hash:        hex.EncodeToString(bytes),
+		isDeltaswap: true,
 	}
 	return &result, nil
 }
@@ -151,8 +151,8 @@ func (h *TxHash) IsSolanaTxHash() bool {
 	return h.isSolana
 }
 
-func (h *TxHash) IsWormholeTxHash() bool {
-	return h.isWormhole
+func (h *TxHash) IsDeltaswapTxHash() bool {
+	return h.isDeltaswap
 }
 
 func (h *TxHash) String() string {

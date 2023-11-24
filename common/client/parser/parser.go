@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

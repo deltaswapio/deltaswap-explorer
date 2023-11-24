@@ -8,7 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"go.uber.org/ratelimit"
 )
 

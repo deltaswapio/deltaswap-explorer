@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/jobs
+module github.com/deltaswapio/deltaswap-explorer/jobs
 
 go 1.19
 
@@ -7,8 +7,8 @@ require (
 	github.com/joho/godotenv v1.5.1
 	github.com/sethvargo/go-envconfig v0.9.0
 	github.com/shopspring/decimal v1.3.1
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-20230713181709-0425a89e7533
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20230713181709-0425a89e7533
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.24.0
 )
@@ -43,4 +43,4 @@ require (
 	golang.org/x/text v0.8.0 // indirect
 )
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

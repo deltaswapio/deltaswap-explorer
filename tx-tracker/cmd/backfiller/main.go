@@ -11,11 +11,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/chains"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/consumer"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/chains"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/consumer"
 	"go.uber.org/zap"
 )
 

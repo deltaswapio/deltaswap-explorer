@@ -1,6 +1,6 @@
 package config
 
-import "github.com/wormhole-foundation/wormhole/sdk/vaa"
+import "github.com/deltaswapio/deltaswap/sdk/vaa"
 
 const (
 	//Method names for wormhole token bridge contract.

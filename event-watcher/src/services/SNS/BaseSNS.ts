@@ -1,9 +1,9 @@
-import { getLogger, WormholeLogger } from '../../utils/logger';
+import { getLogger, DeltaswapLogger } from '../../utils/logger';
 import { SNSImplementation, SNSInput, SNSPublishMessageOutput, WhEventType } from './types';
 import { WHTransaction, WHTransferRedeemed } from '../../databases/types';
 
 abstract class BaseSNS implements SNSImplementation {
-  public logger: WormholeLogger;
+  public logger: DeltaswapLogger;
   public metadata = {
     source: 'event-watcher',
     type: 'published-log-message',

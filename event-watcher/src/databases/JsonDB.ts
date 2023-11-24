@@ -1,13 +1,13 @@
-import { ChainName, coalesceChainId } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { ChainName, coalesceChainId } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { readFileSync, writeFileSync } from 'fs';
 import { env } from '../config';
 import BaseDB from './BaseDB';
 import { WHTransaction, WHTransferRedeemed } from './types';
 
 const ENCODING = 'utf8';
-const WORMHOLE_TX_FILE: string = env.JSON_WH_TXS_FILE;
+const DELTASWAP_TX_FILE: string = env.JSON_WH_TXS_FILE;
 const GLOBAL_TX_FILE: string = env.JSON_GLOBAL_TXS_FILE;
-const WORMHOLE_LAST_BLOCKS_FILE: string = env.JSON_LAST_BLOCKS_FILE;
+const DELTASWAP_LAST_BLOCKS_FILE: string = env.JSON_LAST_BLOCKS_FILE;
 
 export default class JsonDB extends BaseDB {
   wormholeTxFile: WHTransaction[] = [];
@@ -23,11 +23,11 @@ export default class JsonDB extends BaseDB {
 
   async connect(): Promise<void> {
     try {
-      const whTxsFileRawData = readFileSync(WORMHOLE_TX_FILE, ENCODING);
+      const whTxsFileRawData = readFileSync(DELTASWAP_TX_FILE, ENCODING);
       this.wormholeTxFile = whTxsFileRawData ? JSON.parse(whTxsFileRawData) : [];
-      this.logger.info(`${WORMHOLE_TX_FILE} file ready`);
+      this.logger.info(`${DELTASWAP_TX_FILE} file ready`);
     } catch (e) {
-      this.logger.warn(`${WORMHOLE_TX_FILE} file does not exists, creating new file`);
+      this.logger.warn(`${DELTASWAP_TX_FILE} file does not exists, creating new file`);
       this.wormholeTxFile = [];
     }
 
@@ -52,11 +52,11 @@ export default class JsonDB extends BaseDB {
 
   async getLastBlocksProcessed(): Promise<void> {
     try {
-      const lastBlocksByChain = readFileSync(WORMHOLE_LAST_BLOCKS_FILE, ENCODING);
+      const lastBlocksByChain = readFileSync(DELTASWAP_LAST_BLOCKS_FILE, ENCODING);
       this.lastBlocksByChain = lastBlocksByChain ? JSON.parse(lastBlocksByChain) : [];
-      this.logger.info(`${WORMHOLE_LAST_BLOCKS_FILE} file ready`);
+      this.logger.info(`${DELTASWAP_LAST_BLOCKS_FILE} file ready`);
     } catch (e) {
-      this.logger.warn(`${WORMHOLE_LAST_BLOCKS_FILE} file does not exists, creating new file`);
+      this.logger.warn(`${DELTASWAP_LAST_BLOCKS_FILE} file does not exists, creating new file`);
       this.lastBlocksByChain = [];
     }
   }
@@ -64,7 +64,7 @@ export default class JsonDB extends BaseDB {
   async storeWhTxs(chainName: ChainName, whTxs: WHTransaction[]): Promise<void> {
     try {
       for (let i = 0; i < whTxs.length; i++) {
-        let message = 'Insert Wormhole Transaction Event Log to JSON file';
+        let message = 'Insert Deltaswap Transaction Event Log to JSON file';
         const currentWhTx = whTxs[i];
         const { id } = currentWhTx;
 
@@ -80,12 +80,12 @@ export default class JsonDB extends BaseDB {
           whTx.eventLog.updatedAt = new Date();
           whTx.eventLog.revision ? (whTx.eventLog.revision += 1) : (whTx.eventLog.revision = 1);
 
-          message = 'Update Wormhole Transaction Event Log to JSON file';
+          message = 'Update Deltaswap Transaction Event Log to JSON file';
         } else {
           this.wormholeTxFile.push(currentWhTx);
         }
 
-        writeFileSync(WORMHOLE_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
+        writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
 
         if (currentWhTx) {
           const { id, eventLog } = currentWhTx;
@@ -102,7 +102,7 @@ export default class JsonDB extends BaseDB {
         }
       }
     } catch (e: unknown) {
-      this.logger.error(`Error Upsert Wormhole Transaction Event Log: ${e}`);
+      this.logger.error(`Error Upsert Deltaswap Transaction Event Log: ${e}`);
     }
   }
 
@@ -111,7 +111,7 @@ export default class JsonDB extends BaseDB {
 
     try {
       for (let i = 0; i < redeemedTxs.length; i++) {
-        let message = 'Insert Wormhole Transfer Redeemed Event Log to JSON file';
+        let message = 'Insert Deltaswap Transfer Redeemed Event Log to JSON file';
         const currentRedeemedTx = redeemedTxs[i];
         const { id, destinationTx } = currentRedeemedTx;
         const { method, status } = destinationTx;
@@ -125,7 +125,7 @@ export default class JsonDB extends BaseDB {
           whTx.eventLog.updatedAt = new Date();
           whTx.eventLog.revision ? (whTx.eventLog.revision += 1) : (whTx.eventLog.revision = 1);
 
-          writeFileSync(WORMHOLE_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
+          writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
         }
 
         const whRedeemedTxIndex = this.redeemedTxFile?.findIndex(
@@ -140,7 +140,7 @@ export default class JsonDB extends BaseDB {
           whRedeemedTx.destinationTx.updatedAt = new Date();
           whRedeemedTx.revision ? (whRedeemedTx.revision += 1) : (whRedeemedTx.revision = 1);
 
-          message = 'Update Wormhole Transfer Redeemed Event Log to JSON file';
+          message = 'Update Deltaswap Transfer Redeemed Event Log to JSON file';
         } else {
           this.redeemedTxFile.push(currentRedeemedTx);
         }
@@ -160,7 +160,7 @@ export default class JsonDB extends BaseDB {
         }
       }
     } catch (e: unknown) {
-      this.logger.error(`Error Upsert Wormhole Transfer Redeemed Event Log: ${e}`);
+      this.logger.error(`Error Upsert Deltaswap Transfer Redeemed Event Log: ${e}`);
     }
   }
 
@@ -198,7 +198,7 @@ export default class JsonDB extends BaseDB {
 
     try {
       writeFileSync(
-        WORMHOLE_LAST_BLOCKS_FILE,
+        DELTASWAP_LAST_BLOCKS_FILE,
         JSON.stringify(this.lastBlocksByChain, null, 2),
         ENCODING,
       );

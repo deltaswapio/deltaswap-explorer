@@ -1,4 +1,4 @@
-import { CHAIN_ID_SOLANA } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { CHAIN_ID_SOLANA } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { expect, test } from '@jest/globals';
 import { INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN } from '../../common';
 import { getDB } from '../utils';

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 // chanID constants.
@@ -21,16 +21,16 @@ type VaaDoc struct {
 	EmitterAddr       string      `bson:"emitterAddr" json:"emitterAddr"`
 	EmitterNativeAddr string      `json:"emitterNativeAddr,omitempty"`
 	Sequence          string      `bson:"sequence" json:"-"`
-	GuardianSetIndex  uint32      `bson:"guardianSetIndex" json:"guardianSetIndex"`
+	PhylaxSetIndex    uint32      `bson:"phylaxSetIndex" json:"phylaxSetIndex"`
 	Vaa               []byte      `bson:"vaas" json:"vaa"`
 	Timestamp         *time.Time  `bson:"timestamp" json:"timestamp"`
 	UpdatedAt         *time.Time  `bson:"updatedAt" json:"updatedAt"`
 	IndexedAt         *time.Time  `bson:"indexedAt" json:"indexedAt"`
-	// TxHash is an extension field - it is not present in the guardian API.
+	// TxHash is an extension field - it is not present in the phylax API.
 	TxHash *string `bson:"txHash" json:"txHash,omitempty"`
-	// AppId is an extension field - it is not present in the guardian API.
+	// AppId is an extension field - it is not present in the phylax API.
 	AppId string `bson:"appId" json:"appId,omitempty"`
-	// Payload is an extension field - it is not present in the guardian API.
+	// Payload is an extension field - it is not present in the phylax API.
 	Payload map[string]interface{} `bson:"payload" json:"payload,omitempty"`
 
 	// NativeTxHash is an internal field.

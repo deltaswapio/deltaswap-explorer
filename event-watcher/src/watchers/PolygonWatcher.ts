@@ -21,7 +21,7 @@ export class PolygonWatcher extends EVMWatcher {
   //           method: 'eth_call',
   //           params: [
   //             { to: POLYGON_ROOT_CHAIN_ADDRESS, data: callData },
-  //             'latest', // does the guardian use latest?
+  //             'latest', // does the phylax use latest?
   //           ],
   //         },
   //       ],

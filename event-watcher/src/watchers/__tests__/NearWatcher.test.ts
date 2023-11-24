@@ -1,4 +1,4 @@
-import { CONTRACTS } from '@certusone/wormhole-sdk/lib/cjs/utils/consts';
+import { CONTRACTS } from '@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts';
 import { describe, expect, jest, test } from '@jest/globals';
 import { INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN } from '../../common/consts';
 import { NETWORK_RPCS_BY_CHAIN } from '../../consts';

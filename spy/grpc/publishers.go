@@ -1,7 +1,7 @@
 package grpc
 
 import (
-	"github.com/wormhole-foundation/wormhole-explorer/spy/source"
+	"github.com/deltaswapio/deltaswap-explorer/spy/source"
 	"go.uber.org/zap"
 )
 

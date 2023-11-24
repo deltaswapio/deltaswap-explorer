@@ -9,10 +9,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/token"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/prices"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/token"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/prices"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
 	"go.uber.org/zap"
 )
 
@@ -26,9 +26,9 @@ func RunVaaVolumeFromFile(inputFile, outputFile, pricesFile, vaaPayloadParserURL
 
 	ctx := context.Background()
 	// build logger
-	logger := logger.New("wormhole-explorer-analytics")
+	logger := logger.New("deltaswap-explorer-analytics")
 
-	logger.Info("starting wormhole-explorer-analytics ...")
+	logger.Info("starting deltaswap-explorer-analytics ...")
 
 	// create a parserVAAAPIClient
 	parserVAAAPIClient, err := parser.NewParserVAAAPIClient(10, vaaPayloadParserURL, logger)
@@ -108,7 +108,7 @@ func RunVaaVolumeFromFile(inputFile, outputFile, pricesFile, vaaPayloadParserURL
 
 	logger.Info("missing tokens", zap.Int("count", len(converter.MissingTokens)))
 
-	logger.Info("finished wormhole-explorer-analytics")
+	logger.Info("finished deltaswap-explorer-analytics")
 
 }
 

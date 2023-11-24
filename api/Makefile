@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 
 # These will be provided to the target
-GIT := github.com/wormhole-foundation/wormhole-explorer/api/internal/
+GIT := github.com/deltaswapio/deltaswap-explorer/api/internal/
 VERSION := 1.0.0
 BUILD := `git rev-parse --short HEAD`
 AUTHOR := `whoami`

@@ -1,9 +1,9 @@
 package metrics
 
 import (
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 // PrometheusMetrics is a Prometheus implementation of Metric interface.
@@ -62,33 +62,33 @@ func NewPrometheusMetrics(environment string) *PrometheusMetrics {
 
 	heartbeatReceivedCount := promauto.NewCounterVec(
 		prometheus.CounterOpts{
-			Name: "heartbeat_count_by_guardian",
-			Help: "Total number of heartbeat by guardian",
+			Name: "heartbeat_count_by_phylax",
+			Help: "Total number of heartbeat by phylax",
 			ConstLabels: map[string]string{
 				"environment": environment,
 				"service":     serviceName,
 			},
-		}, []string{"guardian_node", "type"})
+		}, []string{"phylax_node", "type"})
 
 	governorConfigReceivedCount := promauto.NewCounterVec(
 		prometheus.CounterOpts{
-			Name: "governor_config_count_by_guardian",
-			Help: "Total number of governor config by guardian",
+			Name: "governor_config_count_by_phylax",
+			Help: "Total number of governor config by phylax",
 			ConstLabels: map[string]string{
 				"environment": environment,
 				"service":     serviceName,
 			},
-		}, []string{"guardian_node", "type"})
+		}, []string{"phylax_node", "type"})
 
 	governorStatusReceivedCount := promauto.NewCounterVec(
 		prometheus.CounterOpts{
-			Name: "governor_status_count_by_guardian",
-			Help: "Total number of governor status by guardian",
+			Name: "governor_status_count_by_phylax",
+			Help: "Total number of governor status by phylax",
 			ConstLabels: map[string]string{
 				"environment": environment,
 				"service":     serviceName,
 			},
-		}, []string{"guardian_node", "type"})
+		}, []string{"phylax_node", "type"})
 	maxSequenceCacheCount := promauto.NewCounterVec(
 		prometheus.CounterOpts{
 			Name: "max_sequence_cache_count_by_chain",
@@ -165,34 +165,34 @@ func (m *PrometheusMetrics) IncObservationTotal() {
 	m.observationTotal.Inc()
 }
 
-// IncHeartbeatFromGossipNetwork increases the number of heartbeat received by guardian from Gossip network.
-func (m *PrometheusMetrics) IncHeartbeatFromGossipNetwork(guardianName string) {
-	m.heartbeatReceivedCount.WithLabelValues(guardianName, "gossip").Inc()
+// IncHeartbeatFromGossipNetwork increases the number of heartbeat received by phylax from Gossip network.
+func (m *PrometheusMetrics) IncHeartbeatFromGossipNetwork(phylaxName string) {
+	m.heartbeatReceivedCount.WithLabelValues(phylaxName, "gossip").Inc()
 }
 
 // IncHeartbeatInserted increases the number of heartbeat inserted in database.
-func (m *PrometheusMetrics) IncHeartbeatInserted(guardianName string) {
-	m.heartbeatReceivedCount.WithLabelValues(guardianName, "inserted").Inc()
+func (m *PrometheusMetrics) IncHeartbeatInserted(phylaxName string) {
+	m.heartbeatReceivedCount.WithLabelValues(phylaxName, "inserted").Inc()
 }
 
-// IncGovernorConfigFromGossipNetwork increases the number of guardian config received by guardian from Gossip network.
-func (m *PrometheusMetrics) IncGovernorConfigFromGossipNetwork(guardianName string) {
-	m.governorConfigReceivedCount.WithLabelValues(guardianName, "gossip").Inc()
+// IncGovernorConfigFromGossipNetwork increases the number of phylax config received by phylax from Gossip network.
+func (m *PrometheusMetrics) IncGovernorConfigFromGossipNetwork(phylaxName string) {
+	m.governorConfigReceivedCount.WithLabelValues(phylaxName, "gossip").Inc()
 }
 
-// IncGovernorConfigInserted increases the number of guardian config inserted in database.
-func (m *PrometheusMetrics) IncGovernorConfigInserted(guardianName string) {
-	m.governorConfigReceivedCount.WithLabelValues(guardianName, "inserted").Inc()
+// IncGovernorConfigInserted increases the number of phylax config inserted in database.
+func (m *PrometheusMetrics) IncGovernorConfigInserted(phylaxName string) {
+	m.governorConfigReceivedCount.WithLabelValues(phylaxName, "inserted").Inc()
 }
 
-// IncGovernorStatusFromGossipNetwork increases the number of guardian status received by guardian from Gossip network.
-func (m *PrometheusMetrics) IncGovernorStatusFromGossipNetwork(guardianName string) {
-	m.governorStatusReceivedCount.WithLabelValues(guardianName, "gossip").Inc()
+// IncGovernorStatusFromGossipNetwork increases the number of phylax status received by phylax from Gossip network.
+func (m *PrometheusMetrics) IncGovernorStatusFromGossipNetwork(phylaxName string) {
+	m.governorStatusReceivedCount.WithLabelValues(phylaxName, "gossip").Inc()
 }
 
-// IncGovernorStatusInserted increases the number of guardian status inserted in database.
-func (m *PrometheusMetrics) IncGovernorStatusInserted(guardianName string) {
-	m.governorStatusReceivedCount.WithLabelValues(guardianName, "inserted").Inc()
+// IncGovernorStatusInserted increases the number of phylax status inserted in database.
+func (m *PrometheusMetrics) IncGovernorStatusInserted(phylaxName string) {
+	m.governorStatusReceivedCount.WithLabelValues(phylaxName, "inserted").Inc()
 }
 
 // IncMaxSequenceCacheError increases the number of errors when updating max sequence cache.

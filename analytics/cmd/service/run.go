@@ -13,22 +13,21 @@ import (
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
 
-	"github.com/go-redis/redis/v8"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/cmd/token"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/config"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/consumer"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/http"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/http/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/metric"
+	"github.com/deltaswapio/deltaswap-explorer/analytics/queue"
+	wormscanNotionalCache "github.com/deltaswapio/deltaswap-explorer/common/client/cache/notional"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	sqs_client "github.com/deltaswapio/deltaswap-explorer/common/client/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	health "github.com/deltaswapio/deltaswap-explorer/common/health"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/cmd/token"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/config"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/consumer"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/http"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/http/vaa"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/metric"
-	"github.com/wormhole-foundation/wormhole-explorer/analytics/queue"
-	wormscanNotionalCache "github.com/wormhole-foundation/wormhole-explorer/common/client/cache/notional"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	sqs_client "github.com/wormhole-foundation/wormhole-explorer/common/client/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	health "github.com/wormhole-foundation/wormhole-explorer/common/health"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/zap"
 )
@@ -55,7 +54,7 @@ func Run() {
 	}
 
 	// build logger
-	logger := logger.New("wormhole-explorer-analytics", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-analytics", logger.WithLevel(config.LogLevel))
 	logger.Info("starting analytics service...")
 
 	// setup DB connection

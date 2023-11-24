@@ -8,15 +8,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/avast/retry-go"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/solana"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	solana_types "github.com/gagliardetto/solana-go"
 	"github.com/gagliardetto/solana-go/rpc"
 	"github.com/near/borsh-go"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/solana"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -80,7 +79,7 @@ type SolanaParams struct {
 
 type postVAAData struct {
 	Version          uint8
-	GuardianSetIndex uint32
+	PhylaxSetIndex   uint32
 	Timestamp        uint32
 	Nonce            uint32
 	EmitterChain     uint16
@@ -255,7 +254,7 @@ func (w *SolanaWatcher) processTransaction(ctx context.Context, txRpc *rpc.Trans
 		return
 	}
 
-	w.logger.Debug("found Wormhole transaction",
+	w.logger.Debug("found Deltaswap transaction",
 		zap.Stringer("txSignature", txSignature),
 		zap.Uint64("block", block))
 

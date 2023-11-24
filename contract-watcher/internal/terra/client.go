@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"go.uber.org/ratelimit"
 )
 
@@ -100,7 +100,7 @@ type Tx struct {
 	Timestamp *time.Time `json:"timestamp"`
 }
 
-type WormholeTerraTx struct {
+type DeltaswapTerraTx struct {
 	Type  string `json:"type"`
 	Value struct {
 		Fee struct {
@@ -135,7 +135,7 @@ type WormholeTerraTx struct {
 	} `json:"value"`
 }
 
-type WormholeTerraTxLog struct {
+type DeltaswapTerraTxLog struct {
 	Log struct {
 		Tax string `json:"tax"`
 	} `json:"log"`

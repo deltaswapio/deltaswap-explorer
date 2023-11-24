@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	spyv1 "github.com/certusone/wormhole/node/pkg/proto/spy/v1"
+	spyv1 "github.com/deltaswapio/deltaswap/node/pkg/proto/spy/v1"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/stretchr/testify/assert"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 	"go.uber.org/zap/zaptest"
 )
 
@@ -17,7 +17,7 @@ func createVAA(chainID vaa.ChainID, emitterAddr vaa.Address) *vaa.VAA {
 
 	vaa := &vaa.VAA{
 		Version:          vaa.SupportedVAAVersion,
-		GuardianSetIndex: uint32(1),
+		PhylaxSetIndex:   uint32(1),
 		Signatures:       nil,
 		Timestamp:        time.Unix(0, 0),
 		Nonce:            uint32(1),

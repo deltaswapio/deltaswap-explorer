@@ -4,15 +4,15 @@ import (
 	"context"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/builder"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/config"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/watcher"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/builder"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/config"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/watcher"
 	"go.uber.org/zap"
 )
 
@@ -20,9 +20,9 @@ func Run(config *config.BackfillerConfiguration) {
 
 	rootCtx := context.Background()
 
-	logger := logger.New("wormhole-explorer-contract-watcher", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-contract-watcher", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-contract-watcher as backfiller ...")
+	logger.Info("Starting deltaswap-explorer-contract-watcher as backfiller ...")
 
 	//setup DB connection
 	db, err := dbutil.Connect(rootCtx, logger, config.MongoURI, config.MongoDatabase, false)
@@ -62,7 +62,7 @@ func Run(config *config.BackfillerConfiguration) {
 	logger.Info("closing MongoDB connection...")
 	db.DisconnectWithTimeout(10 * time.Second)
 
-	logger.Info("Finish wormhole-explorer-contract-watcher as backfiller")
+	logger.Info("Finish deltaswap-explorer-contract-watcher as backfiller")
 
 }
 

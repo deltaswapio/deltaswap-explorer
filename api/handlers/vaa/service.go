@@ -6,13 +6,13 @@ import (
 	"fmt"
 	"strconv"
 
-	errs "github.com/wormhole-foundation/wormhole-explorer/api/internal/errors"
-	"github.com/wormhole-foundation/wormhole-explorer/api/internal/pagination"
-	"github.com/wormhole-foundation/wormhole-explorer/api/response"
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/cache"
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	errs "github.com/deltaswapio/deltaswap-explorer/api/internal/errors"
+	"github.com/deltaswapio/deltaswap-explorer/api/internal/pagination"
+	"github.com/deltaswapio/deltaswap-explorer/api/response"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/cache"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

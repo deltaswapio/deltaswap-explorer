@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isNFTBridgeEmitter = exports.NFT_BRIDGE_EMITTERS = exports.isTokenBridgeEmitter = exports.TOKEN_BRIDGE_EMITTERS = exports.INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN = void 0;
-const consts_1 = require("@certusone/wormhole-sdk/lib/cjs/utils/consts");
+const consts_1 = require("@deltaswapio/deltaswap-sdk/lib/cjs/utils/consts");
 exports.INITIAL_DEPLOYMENT_BLOCK_BY_CHAIN = {
     ethereum: '12959638',
     terra: '4810000',

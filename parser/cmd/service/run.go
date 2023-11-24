@@ -11,21 +11,21 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awsconfig "github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/credentials"
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	vaaPayloadParser "github.com/wormhole-foundation/wormhole-explorer/common/client/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/config"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/consumer"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/http/infrastructure"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/http/vaa"
-	parserAlert "github.com/wormhole-foundation/wormhole-explorer/parser/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/internal/sqs"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/migration"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/parser"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/processor"
-	"github.com/wormhole-foundation/wormhole-explorer/parser/queue"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	vaaPayloadParser "github.com/deltaswapio/deltaswap-explorer/common/client/parser"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/parser/config"
+	"github.com/deltaswapio/deltaswap-explorer/parser/consumer"
+	"github.com/deltaswapio/deltaswap-explorer/parser/http/infrastructure"
+	"github.com/deltaswapio/deltaswap-explorer/parser/http/vaa"
+	parserAlert "github.com/deltaswapio/deltaswap-explorer/parser/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/parser/internal/sqs"
+	"github.com/deltaswapio/deltaswap-explorer/parser/migration"
+	"github.com/deltaswapio/deltaswap-explorer/parser/parser"
+	"github.com/deltaswapio/deltaswap-explorer/parser/processor"
+	"github.com/deltaswapio/deltaswap-explorer/parser/queue"
 	"go.uber.org/zap"
 )
 
@@ -50,9 +50,9 @@ func Run() {
 		log.Fatal("Error creating config", err)
 	}
 
-	logger := logger.New("wormhole-explorer-parser", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-parser", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-parser ...")
+	logger.Info("Starting deltaswap-explorer-parser ...")
 
 	// setup DB connection
 	db, err := dbutil.Connect(rootCtx, logger, config.MongoURI, config.MongoDatabase, false)
@@ -98,7 +98,7 @@ func Run() {
 	server := infrastructure.NewServer(logger, config.Port, config.PprofEnabled, config.IsQueueConsumer(), sqsConsumer, db.Database, vaaController)
 	server.Start()
 
-	logger.Info("Started wormhole-explorer-parser")
+	logger.Info("Started deltaswap-explorer-parser")
 
 	// Waiting for signal
 	sigterm := make(chan os.Signal, 1)
@@ -119,7 +119,7 @@ func Run() {
 	logger.Info("Closing Http server ...")
 	server.Stop()
 
-	logger.Info("Finished wormhole-explorer-parser")
+	logger.Info("Finished deltaswap-explorer-parser")
 }
 
 // Creates a new AWS config depending on whether the execution is local (localstack) or not (AWS)

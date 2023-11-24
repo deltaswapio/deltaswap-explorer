@@ -4,11 +4,11 @@ import (
 	"context"
 	"errors"
 
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/chains"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/config"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/txtracker/queue"
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/chains"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/config"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/txtracker/queue"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

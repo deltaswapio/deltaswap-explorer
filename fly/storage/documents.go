@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 type IndexingTimestamps struct {
@@ -13,43 +13,43 @@ type IndexingTimestamps struct {
 }
 
 type VaaUpdate struct {
-	ID               string      `bson:"_id"`
-	Version          uint8       `bson:"version"`
-	EmitterChain     vaa.ChainID `bson:"emitterChain"`
-	EmitterAddr      string      `bson:"emitterAddr"`
-	Sequence         string      `bson:"sequence"`
-	GuardianSetIndex uint32      `bson:"guardianSetIndex"`
-	Vaa              []byte      `bson:"vaas"`
-	TxHash           string      `bson:"txHash,omitempty"`
-	OriginTxHash     *string     `bson:"_originTxHash,omitempty"` //this is temporary field for fix enconding txHash
-	Timestamp        *time.Time  `bson:"timestamp"`
-	UpdatedAt        *time.Time  `bson:"updatedAt"`
+	ID             string      `bson:"_id"`
+	Version        uint8       `bson:"version"`
+	EmitterChain   vaa.ChainID `bson:"emitterChain"`
+	EmitterAddr    string      `bson:"emitterAddr"`
+	Sequence       string      `bson:"sequence"`
+	PhylaxSetIndex uint32      `bson:"phylaxSetIndex"`
+	Vaa            []byte      `bson:"vaas"`
+	TxHash         string      `bson:"txHash,omitempty"`
+	OriginTxHash   *string     `bson:"_originTxHash,omitempty"` //this is temporary field for fix enconding txHash
+	Timestamp      *time.Time  `bson:"timestamp"`
+	UpdatedAt      *time.Time  `bson:"updatedAt"`
 }
 
 // ToMap returns a map representation of the VaaUpdate.
 func (v *VaaUpdate) ToMap() map[string]string {
 	return map[string]string{
-		"id":               v.ID,
-		"version":          fmt.Sprint(v.Version),
-		"emitterChain":     v.EmitterChain.String(),
-		"emitterAddr":      v.EmitterAddr,
-		"sequence":         v.Sequence,
-		"guardianSetIndex": fmt.Sprint(v.GuardianSetIndex),
-		"txHash":           v.TxHash,
-		"timestamp":        v.Timestamp.String(),
+		"id":             v.ID,
+		"version":        fmt.Sprint(v.Version),
+		"emitterChain":   v.EmitterChain.String(),
+		"emitterAddr":    v.EmitterAddr,
+		"sequence":       v.Sequence,
+		"phylaxSetIndex": fmt.Sprint(v.PhylaxSetIndex),
+		"txHash":         v.TxHash,
+		"timestamp":      v.Timestamp.String(),
 	}
 }
 
 type ObservationUpdate struct {
-	MessageID    string      `bson:"messageId"`
-	ChainID      vaa.ChainID `bson:"emitterChain"`
-	Emitter      string      `bson:"emitterAddr"`
-	Sequence     string      `bson:"sequence"`
-	Hash         []byte      `bson:"hash"`
-	TxHash       []byte      `bson:"txHash"`
-	GuardianAddr string      `bson:"guardianAddr"`
-	Signature    []byte      `bson:"signature"`
-	UpdatedAt    *time.Time  `bson:"updatedAt"`
+	MessageID  string      `bson:"messageId"`
+	ChainID    vaa.ChainID `bson:"emitterChain"`
+	Emitter    string      `bson:"emitterAddr"`
+	Sequence   string      `bson:"sequence"`
+	Hash       []byte      `bson:"hash"`
+	TxHash     []byte      `bson:"txHash"`
+	PhylaxAddr string      `bson:"phylaxAddr"`
+	Signature  []byte      `bson:"signature"`
+	UpdatedAt  *time.Time  `bson:"updatedAt"`
 }
 
 func (v *ObservationUpdate) ToMap() map[string]string {
@@ -60,7 +60,7 @@ func (v *ObservationUpdate) ToMap() map[string]string {
 		"emitterAddr":  v.Emitter,
 		"sequence":     v.Sequence,
 		"txHash":       txHash,
-		"guardianAddr": v.GuardianAddr,
+		"phylaxAddr":   v.PhylaxAddr,
 	}
 }
 

@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/fly
+module github.com/deltaswapio/deltaswap-explorer/fly
 
 go 1.19
 
@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.1.1
 	github.com/aws/aws-sdk-go-v2/credentials v1.1.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.20.2
-	github.com/certusone/wormhole/node v0.0.0-20230822170224-a9a0912f96cf
+	github.com/deltaswapio/deltaswap/node v0.0.0-20231121163344-bcc59b69f4af
 	github.com/dgraph-io/ristretto v0.1.1
 	github.com/eko/gocache/v3 v3.1.2
 	github.com/ethereum/go-ethereum v1.10.21
@@ -20,7 +20,7 @@ require (
 	github.com/sethvargo/go-envconfig v0.9.0
 	github.com/stretchr/testify v1.8.4
 	github.com/test-go/testify v1.1.4
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/zap v1.25.0
 	google.golang.org/protobuf v1.31.0
@@ -276,17 +276,17 @@ require (
 
 require (
 	github.com/mitchellh/colorstring v0.0.0-20190213212951-d06e56a500db // indirect
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-00010101000000-000000000000
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-00010101000000-000000000000
 )
 
 // Needed for cosmos-sdk based chains.  See
 // https://github.com/cosmos/cosmos-sdk/issues/10925 for more details.
 replace github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
 
-replace github.com/wormhole-foundation/wormchain => github.com/certusone/wormhole/wormchain v0.0.0-20230315165931-62bef9ffb441
+replace github.com/wormhole-foundation/wormchain => github.com/deltaswapio/deltaswap/wormchain v0.0.0-20231121163344-bcc59b69f4af
 
 replace github.com/CosmWasm/wasmd v0.30.0 => github.com/wormhole-foundation/wasmd v0.30.0-wormchain-1
 
 replace github.com/cosmos/cosmos-sdk => github.com/wormhole-foundation/cosmos-sdk v0.45.9-wormhole
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

@@ -4,11 +4,10 @@ package governor
 import (
 	"strconv"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/governor"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
-	_ "github.com/wormhole-foundation/wormhole-explorer/api/response" // needed by swaggo docs
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
+	_ "github.com/deltaswapio/deltaswap-explorer/api/response" // needed by swaggo docs
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 
@@ -37,11 +36,11 @@ type AvailableNotionalItemResponse struct {
 
 // GetAvailNotionByChain godoc
 // @Description Get available notional by chainID
-// @Description Since from the wormhole-explorer point of view it is not a node, but has the information of all nodes,
+// @Description Since from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,
 // @Description in order to build the endpoints it was assumed:
-// @Description There are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of guardians
+// @Description There are N number of remainingAvailableNotional values in the GovernorConfig collection. N = number of phylaxs
 // @Description for a chainID. The smallest remainingAvailableNotional value for a chainID is used for the endpoint response.
-// @Tags Guardian
+// @Tags Phylax
 // @ID governor-available-notional-by-chain
 // @Success 200 {object} AvailableNotionalResponse
 // @Failure 400
@@ -87,8 +86,8 @@ type EnqueuedVaaItemResponse struct {
 
 // GetEnqueuedVaas godoc
 // @Description Get enqueued VAAs
-// @Tags Guardian
-// @ID guardians-enqueued-vaas
+// @Tags Phylax
+// @ID phylaxs-enqueued-vaas
 // @Success 200 {object} EnqueuedVaaResponse
 // @Failure 400
 // @Failure 500
@@ -125,8 +124,8 @@ func (c *Controller) GetEnqueuedVaas(ctx *fiber.Ctx) error {
 
 // IsVaaEnqueued godoc
 // @Description Check if vaa is enqueued
-// @Tags Guardian
-// @ID guardians-is-vaa-enqueued
+// @Tags Phylax
+// @ID phylaxs-is-vaa-enqueued
 // @Param chain_id path integer true "id of the blockchain"
 // @Param emitter path string true "address of the emitter"
 // @Param seq path integer true "sequence of the vaa"
@@ -155,12 +154,12 @@ func (c *Controller) IsVaaEnqueued(ctx *fiber.Ctx) error {
 
 // GetTokenList godoc
 // @Description Get token list
-// @Description Since from the wormhole-explorer point of view it is not a node, but has the information of all nodes,
+// @Description Since from the deltaswap-explorer point of view it is not a node, but has the information of all nodes,
 // @Description in order to build the endpoints it was assumed:
 // @Description For tokens with the same originChainId and originAddress and different price values for each node,
 // @Description the price that has most occurrences in all the nodes for an originChainId and originAddress is returned.
-// @Tags Guardian
-// @ID guardians-token-list
+// @Tags Phylax
+// @ID phylaxs-token-list
 // @Success 200 {object} []governor.TokenList
 // @Failure 400
 // @Failure 500

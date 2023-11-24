@@ -7,11 +7,11 @@ import (
 	"time"
 
 	"github.com/avast/retry-go"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/config"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/evm"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/config"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/evm"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

@@ -3,8 +3,8 @@ package relays
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/api/types"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap-explorer/api/types"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

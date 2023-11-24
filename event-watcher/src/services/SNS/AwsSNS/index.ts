@@ -16,7 +16,7 @@ import BaseSNS from '../BaseSNS';
 import { env } from '../../../config';
 import { WHTransaction, WHTransferRedeemed } from '../../../databases/types';
 import { makeRedeemedTxSnsMessage, makeWhTxSnsMessage } from '../utils';
-import { ChainId, coalesceChainName } from '@certusone/wormhole-sdk';
+import { ChainId, coalesceChainName } from '@deltaswapio/deltaswap-sdk';
 
 const isDev = env.NODE_ENV !== 'production';
 
@@ -138,12 +138,12 @@ class AwsSNS extends BaseSNS {
                     emitterChain,
                     chainName,
                     txHash,
-                    message: 'Publish Wormhole Transaction Event Log to SNS',
+                    message: 'Publish Deltaswap Transaction Event Log to SNS',
                   });
                 }
                 if (eventType === 'redeemedTx') {
                   this.logger.info({
-                    message: 'Publish Wormhole Transfer Redeemed Event Log to SNS',
+                    message: 'Publish Deltaswap Transfer Redeemed Event Log to SNS',
                   });
                 }
               }

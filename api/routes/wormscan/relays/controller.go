@@ -4,9 +4,8 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/wormhole-foundation/wormhole-explorer/api/handlers/relays"
-	"github.com/wormhole-foundation/wormhole-explorer/api/middleware"
+	"github.com/deltaswapio/deltaswap-explorer/api/handlers/relays"
+	"github.com/deltaswapio/deltaswap-explorer/api/middleware"
 	"go.uber.org/zap"
 )
 
@@ -26,7 +25,7 @@ func NewController(srv *relays.Service, logger *zap.Logger) *Controller {
 
 // FindByVAA godoc
 // @Description Get a specific relay information by chainID, emitter address and sequence.
-// @Tags wormholescan
+// @Tags deltaswapscan
 // @ID find-relay-by-vaa-id
 // @Success 200 {object} relays.RelayResponse
 // @Failure 400

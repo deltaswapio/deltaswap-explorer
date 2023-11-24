@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strconv"
 
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"github.com/go-redis/redis/v8"
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
 )
 
 const LUA_SCRIPT = `

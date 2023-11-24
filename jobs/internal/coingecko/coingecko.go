@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	"github.com/shopspring/decimal"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
 )
 
 // CoingeckoAPI is a client for the coingecko API

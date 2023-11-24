@@ -10,7 +10,7 @@ import (
 	"os"
 	"strings"
 
-	sdk "github.com/wormhole-foundation/wormhole/sdk/vaa"
+	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
 )
 
 type vaaProcessor func(vaa *sdk.VAA) error

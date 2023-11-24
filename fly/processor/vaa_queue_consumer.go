@@ -3,11 +3,11 @@ package processor
 import (
 	"context"
 
-	"github.com/wormhole-foundation/wormhole-explorer/fly/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/queue"
-	"github.com/wormhole-foundation/wormhole-explorer/fly/storage"
+	"github.com/deltaswapio/deltaswap-explorer/fly/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/fly/queue"
+	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
 
-	"github.com/wormhole-foundation/wormhole/sdk/vaa"
+	"github.com/deltaswapio/deltaswap/sdk/vaa"
 	"go.uber.org/zap"
 )
 

@@ -1,4 +1,4 @@
-module github.com/wormhole-foundation/wormhole-explorer/contract-watcher
+module github.com/deltaswapio/deltaswap-explorer/contract-watcher
 
 go 1.19
 
@@ -14,8 +14,8 @@ require (
 	github.com/sethvargo/go-envconfig v0.9.0
 	github.com/spf13/cobra v1.1.1
 	github.com/stretchr/testify v1.8.2
-	github.com/wormhole-foundation/wormhole-explorer/common v0.0.0-20230307192542-867f1c29626a
-	github.com/wormhole-foundation/wormhole/sdk v0.0.0-20230426150516-e695fad0bed8
+	github.com/deltaswapio/deltaswap-explorer/common v0.0.0-20230307192542-867f1c29626a
+	github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5
 	go.mongodb.org/mongo-driver v1.11.2
 	go.uber.org/ratelimit v0.2.0
 	go.uber.org/zap v1.24.0
@@ -113,4 +113,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/wormhole-foundation/wormhole-explorer/common => ../common
+replace github.com/deltaswapio/deltaswap-explorer/common => ../common

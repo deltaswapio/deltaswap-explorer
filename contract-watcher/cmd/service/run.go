@@ -8,20 +8,20 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/wormhole-foundation/wormhole-explorer/common/client/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/common/dbutil"
-	"github.com/wormhole-foundation/wormhole-explorer/common/domain"
-	"github.com/wormhole-foundation/wormhole-explorer/common/health"
-	"github.com/wormhole-foundation/wormhole-explorer/common/logger"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/builder"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/config"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/http/infrastructure"
-	cwAlert "github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/alert"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/ankr"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/internal/metrics"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/processor"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/storage"
-	"github.com/wormhole-foundation/wormhole-explorer/contract-watcher/watcher"
+	"github.com/deltaswapio/deltaswap-explorer/common/client/alert"
+	"github.com/deltaswapio/deltaswap-explorer/common/dbutil"
+	"github.com/deltaswapio/deltaswap-explorer/common/domain"
+	"github.com/deltaswapio/deltaswap-explorer/common/health"
+	"github.com/deltaswapio/deltaswap-explorer/common/logger"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/builder"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/config"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/http/infrastructure"
+	cwAlert "github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/alert"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/ankr"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/processor"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/storage"
+	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/watcher"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.uber.org/ratelimit"
 	"go.uber.org/zap"
@@ -81,9 +81,9 @@ func Run() {
 		log.Fatal("Error creating config", err)
 	}
 
-	logger := logger.New("wormhole-explorer-contract-watcher", logger.WithLevel(config.LogLevel))
+	logger := logger.New("deltaswap-explorer-contract-watcher", logger.WithLevel(config.LogLevel))
 
-	logger.Info("Starting wormhole-explorer-contract-watcher ...")
+	logger.Info("Starting deltaswap-explorer-contract-watcher ...")
 
 	//setup DB connection
 	db, err := dbutil.Connect(rootCtx, logger, config.MongoURI, config.MongoDatabase, false)
@@ -117,7 +117,7 @@ func Run() {
 	server := infrastructure.NewServer(logger, config.Port, config.PprofEnabled, healthChecks...)
 	server.Start()
 
-	logger.Info("Started wormhole-explorer-contract-watcher")
+	logger.Info("Started deltaswap-explorer-contract-watcher")
 
 	// Waiting for signal
 	sigterm := make(chan os.Signal, 1)
@@ -141,7 +141,7 @@ func Run() {
 	logger.Info("Closing Http server ...")
 	server.Stop()
 
-	logger.Info("Finished wormhole-explorer-contract-watcher")
+	logger.Info("Finished deltaswap-explorer-contract-watcher")
 }
 
 func newHealthChecks(ctx context.Context, db *mongo.Database) ([]health.Check, error) {

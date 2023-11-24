@@ -1,7 +1,7 @@
 #!/bin/sh
 
 rm -rf generated_mainnet_tokens.go
-wget https://github.com/wormhole-foundation/wormhole/raw/main/node/pkg/governor/generated_mainnet_tokens.go
+wget https://github.com/deltaswapio/deltaswap/raw/main/node/pkg/governor/generated_mainnet_tokens.go
 sed -i 's/package\ governor/package\ domain/g' generated_mainnet_tokens.go
 sed -i 's/tokenConfigEntry/TokenMetadata/g' generated_mainnet_tokens.go
 sed -i 's/chain\:/TokenChain\:/g' generated_mainnet_tokens.go
