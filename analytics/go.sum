@@ -107,7 +107,7 @@ github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 h1:YLtO71vCjJRCBcrPMtQ9nqBsqpA1
 github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1/go.mod h1:hyedUtir6IdtD/7lIxGeCxkaw7y45JueMRL4DIyJDKs=
 github.com/deepmap/oapi-codegen v1.8.2 h1:SegyeYGcdi0jLLrpbCMoJxnUUn8GBXHsvr4rbzjuhfU=
 github.com/deepmap/oapi-codegen v1.8.2/go.mod h1:YLgSKSDv/bZQB7N4ws6luhozi3cEdRktEqrX88CvjIw=
-github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5 h1:lnRmENxP/tvIL5E216KmlyScER5+oMSZKTY8He8cjkk=
+github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5 h1:rrOyHd+H9a6Op1iUyZNCaI5v9D1syq8jDAYyX/2Q4L8=
 github.com/deltaswapio/deltaswap/sdk v0.0.0-20231121162544-d3c011362ea5/go.mod h1:jmbK+tPMlEdZQfYU7LP0vwDf6ADVZH5XgEAbfKFOT1I=
 github.com/dgrijalva/jwt-go v3.2.0+incompatible/go.mod h1:E3ru+11k8xSBh+hMPgOLZmtrrCbhqsmaPHjLKYnJCaQ=
 github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f h1:lO4WD4F/rVNCu3HqELle0jiPLLBs70cWOduZpkS1E78=
