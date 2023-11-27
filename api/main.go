@@ -19,6 +19,7 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/improbable-eng/grpc-web/go/grpcweb"
 
+	"github.com/ansrivas/fiberprometheus/v2"
 	"github.com/deltaswapio/deltaswap-explorer/api/handlers/address"
 	"github.com/deltaswapio/deltaswap-explorer/api/handlers/governor"
 	"github.com/deltaswapio/deltaswap-explorer/api/handlers/heartbeats"
@@ -40,6 +41,8 @@ import (
 	xlogger "github.com/deltaswapio/deltaswap-explorer/common/logger"
 	"github.com/deltaswapio/deltaswap-explorer/common/utils"
 	sdk "github.com/deltaswapio/deltaswap/sdk/vaa"
+	"github.com/go-redis/redis/v8"
+	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	influxdb2 "github.com/influxdata/influxdb-client-go/v2"
 	"go.uber.org/zap"

@@ -32,6 +32,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/fly/queue"
 	"github.com/deltaswapio/deltaswap-explorer/fly/server"
 	"github.com/deltaswapio/deltaswap-explorer/fly/storage"
+	"github.com/go-redis/redis/v8"
 	"google.golang.org/protobuf/proto"
 
 	"github.com/deltaswapio/deltaswap/node/pkg/common"
@@ -536,7 +537,33 @@ func main() {
 		components := p2p.DefaultComponents()
 		components.Port = cfg.P2pPort
 		if err := supervisor.Run(ctx, "p2p",
-			p2p.Run(obsvC, obsvReqC, nil, sendC, signedInC, priv, nil, gst, p2pNetworkConfig.P2pNetworkID, p2pNetworkConfig.P2pBootstrap, "", false, rootCtxCancel, nil, nil, govConfigC, govStatusC, components, nil, false)); err != nil {
+			p2p.Run(
+				obsvC,
+				obsvReqC,
+				nil,
+				sendC,
+				signedInC,
+				priv,
+				nil,
+				gst,
+				p2pNetworkConfig.P2pNetworkID,
+				p2pNetworkConfig.P2pBootstrap,
+				"",
+				false,
+				rootCtxCancel,
+				nil,
+				nil,
+				govConfigC,
+				govStatusC,
+				components,
+				nil,
+				false,
+				false,
+				nil,
+				nil,
+				"",
+				0,
+				"")); err != nil {
 			return err
 		}
 

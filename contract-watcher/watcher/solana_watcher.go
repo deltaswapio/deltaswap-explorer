@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/avast/retry-go"
 	"github.com/deltaswapio/deltaswap-explorer/common/domain"
 	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/metrics"
 	"github.com/deltaswapio/deltaswap-explorer/contract-watcher/internal/solana"

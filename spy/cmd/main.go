@@ -14,6 +14,7 @@ import (
 	"github.com/deltaswapio/deltaswap-explorer/spy/http/infraestructure"
 	"github.com/deltaswapio/deltaswap-explorer/spy/source"
 	"github.com/deltaswapio/deltaswap/node/pkg/supervisor"
+	"github.com/go-redis/redis/v8"
 	"go.uber.org/zap"
 )
 
