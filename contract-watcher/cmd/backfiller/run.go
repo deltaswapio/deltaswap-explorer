@@ -89,6 +89,8 @@ func newWatcherForMainnet(cfg *config.BackfillerConfiguration, repo *storage.Rep
 		watcher = builder.CreateEvmWatcher(cfg.RateLimitPerSecond, cfg.ChainUrl, config.OASIS_MAINNET, logger, repo, metrics)
 	case config.MOONBEAM_MAINNET.ChainID.String():
 		watcher = builder.CreateEvmWatcher(cfg.RateLimitPerSecond, cfg.ChainUrl, config.MOONBEAM_MAINNET, logger, repo, metrics)
+	case config.PLANQ_MAINNET.ChainID.String():
+		watcher = builder.CreateEvmWatcher(cfg.RateLimitPerSecond, cfg.ChainUrl, config.PLANQ_MAINNET, logger, repo, metrics)
 	case config.CELO_MAINNET.ChainID.String():
 		watcher = builder.CreateEvmWatcher(cfg.RateLimitPerSecond, cfg.ChainUrl, config.CELO_MAINNET, logger, repo, metrics)
 	case config.ARBITRUM_MAINNET.ChainID.String():

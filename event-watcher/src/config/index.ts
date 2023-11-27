@@ -44,6 +44,7 @@ export const env = {
   NEAR_RPC: process.env.NEAR_RPC,
   OASIS_RPC: process.env.OASIS_RPC,
   OPTIMISM_RPC: process.env.OPTIMISM_RPC,
+  PLANQ_RPC: process.env.PLANQ_RPC,
   POLYGON_RPC: process.env.POLYGON_RPC,
   SEI_RPC: process.env.SEI_RPC,
   SOLANA_RPC: process.env.SOLANA_RPC,
@@ -70,6 +71,7 @@ export const env = {
   NEAR_RPS: process.env.NEAR_RPS,
   OASIS_RPS: process.env.OASIS_RPS,
   OPTIMISM_RPS: process.env.OPTIMISM_RPS,
+  PLANQ_RPS: process.env.PLANQ_RPS,
   POLYGON_RPS: process.env.POLYGON_RPS,
   SEI_RPS: process.env.SEI_RPS,
   SOLANA_RPS: process.env.SOLANA_RPS,
@@ -97,6 +99,7 @@ export const evmChains: EVMChainName[] = [
   'moonbeam',
   'oasis',
   'optimism',
+  'planq',
   'polygon',
 ];
 

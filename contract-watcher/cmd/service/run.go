@@ -43,12 +43,14 @@ type watchersConfig struct {
 	aptos     *config.WatcherBlockchain
 	arbitrum  *config.WatcherBlockchainAddresses
 	avalanche *config.WatcherBlockchainAddresses
+	bsc       *config.WatcherBlockchainAddresses
 	base      *config.WatcherBlockchainAddresses
 	ethereum  *config.WatcherBlockchainAddresses
 	celo      *config.WatcherBlockchainAddresses
 	moonbeam  *config.WatcherBlockchainAddresses
 	oasis     *config.WatcherBlockchainAddresses
 	optimism  *config.WatcherBlockchainAddresses
+	planq     *config.WatcherBlockchainAddresses
 	polygon   *config.WatcherBlockchainAddresses
 	solana    *config.WatcherBlockchain
 	terra     *config.WatcherBlockchain
@@ -61,11 +63,13 @@ type rateLimitConfig struct {
 	arbitrum  int
 	avalanche int
 	base      int
+	bsc       int
 	celo      int
 	ethereum  int
 	moonbeam  int
 	oasis     int
 	optimism  int
+	planq     int
 	polygon   int
 	solana    int
 	terra     int
@@ -176,6 +180,16 @@ func newWatchers(config *config.ServiceConfiguration, repo *storage.Repository, 
 		result = append(result, ethereumWatcher)
 	}
 
+	if watchers.bsc != nil {
+		bscWatcher := builder.CreateEvmWatcher(watchers.rateLimit.bsc, config.BscUrl, *watchers.bsc, logger, repo, metrics)
+		result = append(result, bscWatcher)
+	}
+
+	if watchers.planq != nil {
+		planqWatcher := builder.CreateEvmWatcher(watchers.rateLimit.planq, config.PlanqUrl, *watchers.planq, logger, repo, metrics)
+		result = append(result, planqWatcher)
+	}
+
 	// add solana watcher
 	if watchers.solana != nil {
 		solanaWatcher := builder.CreateSolanaWatcher(watchers.rateLimit.solana, config.SolanaUrl, *watchers.solana, logger, repo, metrics)
@@ -255,11 +269,13 @@ func newWatchersForMainnet(cfg *config.ServiceConfiguration) *watchersConfig {
 		arbitrum:  &config.ARBITRUM_MAINNET,
 		avalanche: &config.AVALANCHE_MAINNET,
 		base:      &config.BASE_MAINNET,
+		bsc:       &config.BSC_MAINNET,
 		celo:      &config.CELO_MAINNET,
 		ethereum:  &config.ETHEREUM_MAINNET,
 		moonbeam:  &config.MOONBEAM_MAINNET,
 		oasis:     &config.OASIS_MAINNET,
 		optimism:  &config.OPTIMISM_MAINNET,
+		planq:     &config.PLANQ_MAINNET,
 		polygon:   &config.POLYGON_MAINNET,
 		solana:    &config.SOLANA_MAINNET,
 		terra:     &config.TERRA_MAINNET,
@@ -270,11 +286,13 @@ func newWatchersForMainnet(cfg *config.ServiceConfiguration) *watchersConfig {
 			aptos:     cfg.AptosRequestsPerSecond,
 			arbitrum:  cfg.ArbitrumRequestsPerSecond,
 			base:      cfg.BaseRequestsPerSecond,
+			bsc:       cfg.BscRequestsPerSecond,
 			celo:      cfg.CeloRequestsPerSecond,
 			ethereum:  cfg.EthereumRequestsPerSecond,
 			moonbeam:  cfg.MoonbeamRequestsPerSecond,
 			oasis:     cfg.OasisRequestsPerSecond,
 			optimism:  cfg.OptimismRequestsPerSecond,
+			planq:     cfg.PlanqRequestsPerSecond,
 			polygon:   cfg.PolygonRequestsPerSecond,
 			solana:    cfg.SolanaRequestsPerSecond,
 			terra:     cfg.TerraRequestsPerSecond,

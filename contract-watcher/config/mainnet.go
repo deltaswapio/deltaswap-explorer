@@ -40,6 +40,34 @@ var ETHEREUM_MAINNET = WatcherBlockchainAddresses{
 	},
 }
 
+var PLANQ_MAINNET = WatcherBlockchainAddresses{
+	ChainID:      vaa.ChainIDPlanq,
+	Name:         "planq",
+	SizeBlocks:   100,
+	WaitSeconds:  5,
+	InitialBlock: 6212657,
+	MethodsByAddress: map[string][]BlockchainMethod{
+		strings.ToLower("0x4FD8625cfE4B0034642140005b78291D26183df1"): {
+			{
+				ID:   MethodIDCompleteTransfer,
+				Name: MethodCompleteTransfer,
+			},
+			{
+				ID:   MethodIDCompleteAndUnwrapETH,
+				Name: MethodCompleteAndUnwrapETH,
+			},
+			{
+				ID:   MethodIDCreateWrapped,
+				Name: MethodCreateWrapped,
+			},
+			{
+				ID:   MethodIDUpdateWrapped,
+				Name: MethodUpdateWrapped,
+			},
+		},
+	},
+}
+
 var POLYGON_MAINNET = WatcherBlockchainAddresses{
 	ChainID:      vaa.ChainIDPolygon,
 	Name:         "polygon",

@@ -44,6 +44,7 @@ export const RPCS_BY_CHAIN_MAINNET: { [key in ChainName]?: string } = {
   near: env.NEAR_RPC || 'https://rpc.mainnet.near.org', // 'https://archival-rpc.mainnet.near.org' (older than 5 epochs or ~2.5 days) -> 'https://rpc.mainnet.near.org' [https://stackoverflow.com/questions/66839103/unable-to-get-near-protocol-transaction-status-via-rpc/67199078#67199078]
   oasis: env.OASIS_RPC || 'https://emerald.oasis.dev',
   optimism: env.OPTIMISM_RPC || 'https://rpc.ankr.com/optimism',
+  planq: env.PLANQ_RPC || 'https://evm-rpc.planq.network',
   polygon: env.POLYGON_RPC || 'https://rpc.ankr.com/polygon',
   sei: env.SEI_RPC || 'https://sei-rest.brocha.in', // https://docs.sei.io/develop/resources
   solana: env.SOLANA_RPC || 'https://api.mainnet-beta.solana.com',
@@ -137,6 +138,7 @@ export const RPS_BY_CHAIN_MAINNET: { [key in ChainName]?: number } = {
   moonbeam: Number(env.MOONBEAM_RPS) || DEFAULT_RPS,
   near: Number(env.NEAR_RPS) || DEFAULT_RPS,
   oasis: Number(env.OASIS_RPS) || DEFAULT_RPS,
+  planq: Number(env.PLANQ_RPS) || DEFAULT_RPS,
   polygon: Number(env.POLYGON_RPS) || DEFAULT_RPS,
   sei: Number(env.SEI_RPS) || DEFAULT_RPS,
   solana: Number(env.SOLANA_RPS) || DEFAULT_RPS,

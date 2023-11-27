@@ -13,6 +13,7 @@ import { EVMWatcher } from './EVMWatcher';
 import { InjectiveExplorerWatcher } from './InjectiveExplorerWatcher';
 import { MoonbeamWatcher } from './MoonbeamWatcher';
 import { NearWatcher } from './NearWatcher';
+import { PlanqWatcher } from './PlanqWatcher';
 import { PolygonWatcher } from './PolygonWatcher';
 import { SolanaWatcher } from './SolanaWatcher';
 import { TerraExplorerWatcher } from './TerraExplorerWatcher';
@@ -29,6 +30,8 @@ export function makeFinalizedWatcher(chainName: ChainName): WatcherOptionTypes {
     return new EVMWatcher(chainName as EVMChainName, 'finalized');
   } else if (chainName === 'bsc') {
     return new BSCWatcher();
+  } else if (chainName === 'planq') {
+    return new PlanqWatcher();
   } else if (chainName === 'polygon') {
     return new PolygonWatcher();
   } else if (
