@@ -29,6 +29,8 @@ type ServiceConfiguration struct {
 	AvalancheRequestsPerSecond int    `env:"AVALANCHE_REQUESTS_PER_SECOND,required"`
 	BaseUrl                    string `env:"BASE_URL,required"`
 	BaseRequestsPerSecond      int    `env:"BASE_REQUESTS_PER_SECOND,required"`
+	BscUrl                     string `env:"BSC_URL,required"`
+	BscRequestsPerSecond       int    `env:"BSC_REQUESTS_PER_SECOND,required"`
 	CeloUrl                    string `env:"CELO_URL,required"`
 	CeloRequestsPerSecond      int    `env:"CELO_REQUESTS_PER_SECOND,required"`
 	EthereumUrl                string `env:"ETHEREUM_URL,required"`
@@ -39,6 +41,8 @@ type ServiceConfiguration struct {
 	OptimismRequestsPerSecond  int    `env:"OPTIMISM_REQUESTS_PER_SECOND,required"`
 	OasisUrl                   string `env:"OASIS_URL,required"`
 	OasisRequestsPerSecond     int    `env:"OASIS_REQUESTS_PER_SECOND,required"`
+	PlanqUrl                   string `env:"PLANQ_URL,required"`
+	PlanqRequestsPerSecond     int    `env:"PLANQ_REQUESTS_PER_SECOND,required"`
 	PolygonUrl                 string `env:"POLYGON_URL,required"`
 	PolygonRequestsPerSecond   int    `env:"POLYGON_REQUESTS_PER_SECOND,required"`
 	SolanaUrl                  string `env:"SOLANA_URL,required"`
