@@ -4,14 +4,14 @@ import { LastBlockByChain, WHTransaction, WHTransferRedeemed } from './types';
 import * as mongoDB from 'mongodb';
 import { env } from '../config';
 
-const DELTASWAP_TX_COLLECTION: string = 'wormholeTxs';
+const DELTASWAP_TX_COLLECTION: string = 'deltaswapTxs';
 const GLOBAL_TX_COLLECTION: string = 'globalTransactions';
 const DELTASWAP_LAST_BLOCK_COLLECTION: string = 'lastBlocksByChain';
 
 export default class MongoDB extends BaseDB {
   private client: mongoDB.MongoClient | null = null;
   private db: mongoDB.Db | null = null;
-  private wormholeTxCollection: mongoDB.Collection | null = null;
+  private deltaswapTxCollection: mongoDB.Collection | null = null;
   private globalTxCollection: mongoDB.Collection | null = null;
   private lastTxBlockByChainCollection: mongoDB.Collection | null = null;
 
@@ -19,8 +19,8 @@ export default class MongoDB extends BaseDB {
     super('MongoDB');
     this.logger.info('Connecting...');
     this.client = new mongoDB.MongoClient(env.MONGODB_URI as string);
-    this.db = this.client.db(env.MONGODB_DATABASE ?? 'wormhole');
-    this.wormholeTxCollection = this.db.collection(DELTASWAP_TX_COLLECTION);
+    this.db = this.client.db(env.MONGODB_DATABASE ?? 'deltaswap');
+    this.deltaswapTxCollection = this.db.collection(DELTASWAP_TX_COLLECTION);
     this.globalTxCollection = this.db.collection(GLOBAL_TX_COLLECTION);
     this.lastTxBlockByChainCollection = this.db.collection(DELTASWAP_LAST_BLOCK_COLLECTION);
   }
@@ -67,12 +67,12 @@ export default class MongoDB extends BaseDB {
         const currentWhTx = whTxs[i];
         const { id, ...rest } = currentWhTx;
 
-        const whTxDocument = await this.wormholeTxCollection?.findOne({
+        const whTxDocument = await this.deltaswapTxCollection?.findOne({
           _id: id as unknown as mongoDB.ObjectId,
         });
 
         if (whTxDocument) {
-          await this.wormholeTxCollection?.findOneAndUpdate(
+          await this.deltaswapTxCollection?.findOneAndUpdate(
             { _id: id as unknown as mongoDB.ObjectId },
             {
               $set: { 'eventLog.updatedAt': new Date() },
@@ -83,7 +83,7 @@ export default class MongoDB extends BaseDB {
 
           message = `Update Deltaswap Transaction Event Log to ${DELTASWAP_TX_COLLECTION} collection`;
         } else {
-          await this.wormholeTxCollection?.insertOne({
+          await this.deltaswapTxCollection?.insertOne({
             _id: id as unknown as mongoDB.ObjectId,
             ...rest,
           });
@@ -116,7 +116,7 @@ export default class MongoDB extends BaseDB {
         const { id, destinationTx, ...rest } = currentWhRedeemedTx;
         const { status } = destinationTx;
 
-        const whTxResponse = await this.wormholeTxCollection?.findOneAndUpdate(
+        const whTxResponse = await this.deltaswapTxCollection?.findOneAndUpdate(
           { _id: id as unknown as mongoDB.ObjectId },
           {
             $set: {

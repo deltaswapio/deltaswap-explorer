@@ -9,7 +9,7 @@ export const env = {
 
   DB_SOURCE: process.env.DB_SOURCE || 'local',
 
-  JSON_WH_TXS_FILE: process.env.JSON_WH_TXS_FILE || './wormholeTxs.json',
+  JSON_WH_TXS_FILE: process.env.JSON_WH_TXS_FILE || './deltaswapTxs.json',
   JSON_GLOBAL_TXS_FILE: process.env.JSON_GLOBAL_TXS_FILE || './globalTxs.json',
   JSON_LAST_BLOCKS_FILE: process.env.JSON_LAST_BLOCKS_FILE || './lastBlocksByChain.json',
 
@@ -51,7 +51,7 @@ export const env = {
   SUI_RPC: process.env.SUI_RPC,
   TERRA_RPC: process.env.TERRA_RPC,
   TERRA2_RPC: process.env.TERRA2_RPC,
-  WORMCHAIN_RPC: process.env.WORMCHAIN_RPC,
+  DELTACHAIN_RPC: process.env.DELTACHAIN_RPC,
   XPLA_RPC: process.env.XPLA_RPC,
 
   ACALA_RPS: process.env.ACALA_RPS,
@@ -78,7 +78,7 @@ export const env = {
   SUI_RPS: process.env.SUI_RPS,
   TERRA_RPS: process.env.TERRA_RPS,
   TERRA2_RPS: process.env.TERRA2_RPS,
-  WORMCHAIN_RPS: process.env.WORMCHAIN_RPS,
+  DELTACHAIN_RPS: process.env.DELTACHAIN_RPS,
   XPLA_RPS: process.env.XPLA_RPS,
 } as const;
 

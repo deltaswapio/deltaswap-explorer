@@ -10,7 +10,7 @@ import {
   DeltaswapPublishEventLog,
 } from '../types/near';
 
-// The following is obtained by going to: https://explorer.near.org/accounts/contract.wormhole_crypto.near
+// The following is obtained by going to: https://explorer.near.org/accounts/contract.deltaswap_crypto.near
 // and watching the network tab in the browser to see where the explorer is going.
 const NEAR_EXPLORER_TRANSACTION_URL =
   'https://explorer-backend-mainnet-prod-24ktefolwq-uc.a.run.app/trpc/transaction.listByAccountId';
@@ -54,5 +54,5 @@ export const getTransactionsByAccountId = async (
 };
 
 export const isDeltaswapPublishEventLog = (log: EventLog): log is DeltaswapPublishEventLog => {
-  return log.standard === 'wormhole' && log.event === 'publish';
+  return log.standard === 'deltaswap' && log.event === 'publish';
 };

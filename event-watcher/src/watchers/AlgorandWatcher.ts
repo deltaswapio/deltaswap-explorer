@@ -180,7 +180,7 @@ export class AlgorandWatcher extends BaseWatcher {
         emitterAddress: emitter,
         sequence: parseSequence,
         payloadAsHex: parsePayload,
-        consistencyLevel: 0, // https://docs.wormhole.com/wormhole/blockchain-environments/consistency#algorand
+        consistencyLevel: 0, // https://docs.deltaswap.com/deltaswap/blockchain-environments/consistency#algorand
       });
       const unsignedVaaBuffer = Buffer.from(vaaSerialized, 'hex');
 

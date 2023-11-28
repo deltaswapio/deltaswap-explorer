@@ -11,6 +11,7 @@ test('getResumeBlockByChain', async () => {
       id: 'solana',
       blockNumber: fauxBlock,
       chainId: CHAIN_ID_SOLANA,
+      lastSequenceNumber: 0,
       createdAt: new Date(),
       updatedAt: new Date(),
     },

@@ -44,7 +44,7 @@ test('getMessagesForSequenceNumbers', async () => {
     const currKey = messageKeys[i];
     const [prevBlockNumber, prevTimestamp, prevEventSequenceNumber] = prevKey.split('/');
     const [blockNumber, timestamp, eventSequenceNumber] = currKey.split('/');
-    // blocks may contain multiple wormhole messages
+    // blocks may contain multiple deltaswap messages
     expect(Number(blockNumber)).toBeGreaterThanOrEqual(Number(prevBlockNumber));
     expect(Date.parse(timestamp)).toBeGreaterThanOrEqual(Date.parse(prevTimestamp));
     expect(Number(eventSequenceNumber)).toBeGreaterThan(Number(prevEventSequenceNumber));

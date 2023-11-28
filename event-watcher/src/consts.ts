@@ -51,7 +51,7 @@ export const RPCS_BY_CHAIN_MAINNET: { [key in ChainName]?: string } = {
   sui: env.SUI_RPC || 'https://rpc.mainnet.sui.io',
   terra: env.TERRA_RPC || 'https://terra-classic-fcd.publicnode.com', // 'https://columbus-fcd.terra.dev',
   terra2: env.TERRA2_RPC || 'https://phoenix-lcd.terra.dev',
-  deltachain: env.WORMCHAIN_RPC || 'https://deltachain.jumpisolated.com',
+  deltachain: env.DELTACHAIN_RPC || 'https://deltachain.jumpisolated.com',
   xpla: env.XPLA_RPC || 'https://dimension-lcd.xpla.dev',
 } as const;
 
@@ -79,7 +79,7 @@ export const RPCS_BY_CHAIN_TESTNET: { [key in ChainName]?: string } = {
   sui: env.SUI_RPC || 'https://sui-testnet-rpc.allthatnode.com',
   terra: env.TERRA_RPC || 'https://bombay.stakesystems.io:2053',
   terra2: env.TERRA2_RPC || 'https://pisco-lcd.terra.dev',
-  deltachain: env.WORMCHAIN_RPC || 'https://deltachain-testnet.jumpisolated.com',
+  deltachain: env.DELTACHAIN_RPC || 'https://deltachain-testnet.jumpisolated.com',
   xpla: env.XPLA_RPC || 'https://dimension-rpc.xpla.dev',
 } as const;
 
@@ -145,7 +145,7 @@ export const RPS_BY_CHAIN_MAINNET: { [key in ChainName]?: number } = {
   sui: Number(env.SUI_RPS) || DEFAULT_RPS,
   terra: Number(env.TERRA_RPS) || DEFAULT_RPS,
   terra2: Number(env.TERRA2_RPS) || DEFAULT_RPS,
-  deltachain: Number(env.WORMCHAIN_RPS) || DEFAULT_RPS,
+  deltachain: Number(env.DELTACHAIN_RPS) || DEFAULT_RPS,
   xpla: Number(env.XPLA_RPS) || DEFAULT_RPS,
 } as const;
 
@@ -170,7 +170,7 @@ export const RPS_BY_CHAIN_TESTNET: { [key in ChainName]?: number } = {
   sui: Number(env.SUI_RPS) || DEFAULT_RPS,
   terra: Number(env.TERRA_RPS) || DEFAULT_RPS,
   terra2: Number(env.TERRA2_RPS) || DEFAULT_RPS,
-  deltachain: Number(env.WORMCHAIN_RPS) || DEFAULT_RPS,
+  deltachain: Number(env.DELTACHAIN_RPS) || DEFAULT_RPS,
   xpla: Number(env.XPLA_RPS) || DEFAULT_RPS,
 } as const;
 

@@ -7,7 +7,7 @@ export type EventLog = {
 };
 
 export type DeltaswapPublishEventLog = {
-  standard: 'wormhole';
+  standard: 'deltaswap';
   event: 'publish';
   data: string;
   nonce: number;

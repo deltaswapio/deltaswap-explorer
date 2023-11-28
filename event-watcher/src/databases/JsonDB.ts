@@ -10,12 +10,12 @@ const GLOBAL_TX_FILE: string = env.JSON_GLOBAL_TXS_FILE;
 const DELTASWAP_LAST_BLOCKS_FILE: string = env.JSON_LAST_BLOCKS_FILE;
 
 export default class JsonDB extends BaseDB {
-  wormholeTxFile: WHTransaction[] = [];
+  deltaswapTxFile: WHTransaction[] = [];
   redeemedTxFile: WHTransferRedeemed[] = [];
 
   constructor() {
     super('JsonDB');
-    this.wormholeTxFile = [];
+    this.deltaswapTxFile = [];
     this.redeemedTxFile = [];
     this.lastBlocksByChain = [];
     this.logger.info('Connecting...');
@@ -24,11 +24,11 @@ export default class JsonDB extends BaseDB {
   async connect(): Promise<void> {
     try {
       const whTxsFileRawData = readFileSync(DELTASWAP_TX_FILE, ENCODING);
-      this.wormholeTxFile = whTxsFileRawData ? JSON.parse(whTxsFileRawData) : [];
+      this.deltaswapTxFile = whTxsFileRawData ? JSON.parse(whTxsFileRawData) : [];
       this.logger.info(`${DELTASWAP_TX_FILE} file ready`);
     } catch (e) {
       this.logger.warn(`${DELTASWAP_TX_FILE} file does not exists, creating new file`);
-      this.wormholeTxFile = [];
+      this.deltaswapTxFile = [];
     }
 
     try {
@@ -72,20 +72,20 @@ export default class JsonDB extends BaseDB {
           ? Buffer.from(currentWhTx.eventLog.unsignedVaa).toString('base64')
           : currentWhTx.eventLog.unsignedVaa;
 
-        const whTxIndex = this.wormholeTxFile?.findIndex((whTx) => whTx.id === id.toString());
+        const whTxIndex = this.deltaswapTxFile?.findIndex((whTx) => whTx.id === id.toString());
 
         if (whTxIndex >= 0) {
-          const whTx = this.wormholeTxFile[whTxIndex];
+          const whTx = this.deltaswapTxFile[whTxIndex];
 
           whTx.eventLog.updatedAt = new Date();
           whTx.eventLog.revision ? (whTx.eventLog.revision += 1) : (whTx.eventLog.revision = 1);
 
           message = 'Update Deltaswap Transaction Event Log to JSON file';
         } else {
-          this.wormholeTxFile.push(currentWhTx);
+          this.deltaswapTxFile.push(currentWhTx);
         }
 
-        writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
+        writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.deltaswapTxFile, null, 2), ENCODING);
 
         if (currentWhTx) {
           const { id, eventLog } = currentWhTx;
@@ -116,16 +116,16 @@ export default class JsonDB extends BaseDB {
         const { id, destinationTx } = currentRedeemedTx;
         const { method, status } = destinationTx;
 
-        const whTxIndex = this.wormholeTxFile?.findIndex((whTx) => whTx.id === id.toString());
+        const whTxIndex = this.deltaswapTxFile?.findIndex((whTx) => whTx.id === id.toString());
 
         if (whTxIndex >= 0) {
-          const whTx = this.wormholeTxFile[whTxIndex];
+          const whTx = this.deltaswapTxFile[whTxIndex];
 
           whTx.status = status;
           whTx.eventLog.updatedAt = new Date();
           whTx.eventLog.revision ? (whTx.eventLog.revision += 1) : (whTx.eventLog.revision = 1);
 
-          writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.wormholeTxFile, null, 2), ENCODING);
+          writeFileSync(DELTASWAP_TX_FILE, JSON.stringify(this.deltaswapTxFile, null, 2), ENCODING);
         }
 
         const whRedeemedTxIndex = this.redeemedTxFile?.findIndex(

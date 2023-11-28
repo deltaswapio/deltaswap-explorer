@@ -1,4 +1,4 @@
-import { getPostedMessage } from '@deltaswapio/deltaswap-sdk/lib/cjs/solana/wormhole';
+import { getPostedMessage } from '@deltaswapio/deltaswap-sdk/lib/cjs/solana/deltaswap';
 import {
   Commitment,
   ConfirmedSignatureInfo,

@@ -132,10 +132,10 @@ abstract class BaseWatcher implements WatcherImplementation {
             );
 
             if (whTxs?.length > 0) {
-              // Then store the wormhole txs logs processed in db
+              // Then store the deltaswap txs logs processed in db
               await this.db?.storeWhTxs(this.chain, whTxs);
 
-              // Then publish the wormhole txs logs processed in SNS
+              // Then publish the deltaswap txs logs processed in SNS
               await this.sns?.createMessages(whTxs, 'whTx', true);
             }
 

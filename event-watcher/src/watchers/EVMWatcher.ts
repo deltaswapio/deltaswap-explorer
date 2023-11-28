@@ -14,7 +14,7 @@ import {
 } from '../databases/utils';
 import { makeSerializedVAA } from './utils';
 
-export const wormholeInterface = Implementation__factory.createInterface();
+export const deltaswapInterface = Implementation__factory.createInterface();
 // This is the hash for topic[0] of the core contract event LogMessagePublished
 // https://github.com/deltaswapio/deltaswap/blob/main/ethereum/contracts/Implementation.sol#L12
 export const LOG_MESSAGE_PUBLISHED_TOPIC =
@@ -238,7 +238,7 @@ export class EVMWatcher extends BaseWatcher {
       const emitter = log.topics[1].slice(2);
       const {
         args: { sequence },
-      } = wormholeInterface.parseLog(log);
+      } = deltaswapInterface.parseLog(log);
       const vaaKey = makeVaaKey(log.transactionHash, this.chain, emitter, sequence.toString());
       const blockKey = makeBlockKey(blockNumber.toString(), timestampsByBlock[blockNumber]);
       vaasByBlock[blockKey] = [...(vaasByBlock[blockKey] || []), vaaKey];
@@ -304,9 +304,9 @@ export class EVMWatcher extends BaseWatcher {
     this.logger.debug(`processing ${txLogs.length} txLogs`);
     for (const txLog of txLogs) {
       // console.log('txLog', txLog);
-      // console.log('txLog::parseLog', wormholeInterface.parseLog(txLog));
+      // console.log('txLog::parseLog', deltaswapInterface.parseLog(txLog));
 
-      const { args } = wormholeInterface.parseLog(txLog);
+      const { args } = deltaswapInterface.parseLog(txLog);
       const { sequence, payload, nonce, consistencyLevel } = args || {};
       const blockNumber = txLog.blockNumber;
       const chainName = this.chain;

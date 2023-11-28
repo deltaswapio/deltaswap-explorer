@@ -289,7 +289,7 @@ export class InjectiveExplorerWatcher extends BaseWatcher {
                         emitterAddress: emitter!,
                         sequence: sequence!,
                         payloadAsHex: payload!,
-                        consistencyLevel: 0, // https://docs.wormhole.com/wormhole/blockchain-environments/consistency
+                        consistencyLevel: 0, // https://docs.deltaswap.com/deltaswap/blockchain-environments/consistency
                       });
                       const unsignedVaaBuffer = Buffer.from(vaaSerialized, 'hex');
 
