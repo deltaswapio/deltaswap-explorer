@@ -261,7 +261,7 @@ func newWatchers(config *config.ServiceConfiguration, repo *storage.Repository, 
 
 func newWatchersForMainnet(cfg *config.ServiceConfiguration) *watchersConfig {
 	return &watchersConfig{
-		ankr: []config.WatcherBlockchainAddresses{
+		/*ankr: []config.WatcherBlockchainAddresses{
 			config.BSC_MAINNET,
 			config.FANTOM_MAINNET,
 		},
@@ -278,7 +278,10 @@ func newWatchersForMainnet(cfg *config.ServiceConfiguration) *watchersConfig {
 		planq:     &config.PLANQ_MAINNET,
 		polygon:   &config.POLYGON_MAINNET,
 		solana:    &config.SOLANA_MAINNET,
-		terra:     &config.TERRA_MAINNET,
+		terra:     &config.TERRA_MAINNET,*/
+
+		bsc:   &config.BSC_MAINNET,
+		planq: &config.PLANQ_MAINNET,
 
 		rateLimit: rateLimitConfig{
 			ankr:      cfg.AnkrRequestsPerSecond,

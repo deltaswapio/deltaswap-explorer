@@ -115,7 +115,7 @@ var BSC_MAINNET = WatcherBlockchainAddresses{
 	WaitSeconds:  10,
 	InitialBlock: 26436320,
 	MethodsByAddress: map[string][]BlockchainMethod{
-		strings.ToLower("0xB6F6D86a8f9879A9c87f643768d9efc38c1Da6E7"): {
+		strings.ToLower("0xC891aBa0b42818fb4c975Bf6461033c62BCE75ff"): {
 			{
 				ID:   MethodIDCompleteTransfer,
 				Name: MethodCompleteTransfer,
@@ -131,12 +131,6 @@ var BSC_MAINNET = WatcherBlockchainAddresses{
 			{
 				ID:   MethodIDUpdateWrapped,
 				Name: MethodUpdateWrapped,
-			},
-		},
-		strings.ToLower("0xcafd2f0a35a4459fa40c0517e17e6fa2939441ca"): {
-			{
-				ID:   MetehodIDCompleteTransferWithRelay,
-				Name: MetehodCompleteTransferWithRelay,
 			},
 		},
 	},
