@@ -86,11 +86,10 @@ export const env = {
 // aurora, gnosis, neon, sepolia
 
 export const evmChains: EVMChainName[] = [
-  'acala',
+ /* 'acala',
   'arbitrum',
   'avalanche',
   'base',
-  'bsc',
   'celo',
   'ethereum',
   'fantom',
@@ -99,13 +98,14 @@ export const evmChains: EVMChainName[] = [
   'moonbeam',
   'oasis',
   'optimism',
+  'polygon',*/
   'planq',
-  'polygon',
+  'bsc',
 ];
 
 export const supportedChains: ChainName[] = [
   ...evmChains,
-  'algorand',
+ /* 'algorand',
   'aptos',
   'injective',
   'near',
@@ -114,5 +114,5 @@ export const supportedChains: ChainName[] = [
   'sui',
   'terra',
   'terra2',
-  'xpla',
+  'xpla',*/
 ];
