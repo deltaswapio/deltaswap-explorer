@@ -263,7 +263,8 @@ func NewCache(ctx context.Context, cfg *config.AppConfig, logger *zap.Logger) (d
 	}
 
 	// if we are not in development mode, use a distributed cache and for notional a pubsub to sync local cache.
-	redisClient := redis.NewClient(&redis.Options{Addr: cfg.Cache.URL})
+	opt, _ := redis.ParseURL(cfg.Cache.URL)
+	redisClient := redis.NewClient(opt)
 
 	// get cache client
 	cacheClient, err := deltaswapscanCache.NewCacheClient(redisClient, cfg.Cache.Enabled, cfg.Cache.Prefix, logger)
