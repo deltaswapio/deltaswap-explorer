@@ -59,41 +59,45 @@ func Initialize(cfg *config.RpcProviderSettings) {
 
 	// Initialize rate limiters for each chain
 	rateLimitersByChain = make(map[sdk.ChainID]*time.Ticker)
-	rateLimitersByChain[sdk.ChainIDAcala] = convertToRateLimiter(cfg.AcalaRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDArbitrum] = convertToRateLimiter(cfg.ArbitrumRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDAlgorand] = convertToRateLimiter(cfg.AlgorandRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDAptos] = convertToRateLimiter(cfg.AptosRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDAvalanche] = convertToRateLimiter(cfg.AvalancheRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDBase] = convertToRateLimiter(cfg.BaseRequestsPerMinute)
+	/*	rateLimitersByChain[sdk.ChainIDAcala] = convertToRateLimiter(cfg.AcalaRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDArbitrum] = convertToRateLimiter(cfg.ArbitrumRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDAlgorand] = convertToRateLimiter(cfg.AlgorandRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDAptos] = convertToRateLimiter(cfg.AptosRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDAvalanche] = convertToRateLimiter(cfg.AvalancheRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDBase] = convertToRateLimiter(cfg.BaseRequestsPerMinute)
+
+		rateLimitersByChain[sdk.ChainIDCelo] = convertToRateLimiter(cfg.CeloRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDEthereum] = convertToRateLimiter(cfg.EthereumRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDFantom] = convertToRateLimiter(cfg.FantomRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDInjective] = convertToRateLimiter(cfg.InjectiveRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDKarura] = convertToRateLimiter(cfg.KaruraRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDKlaytn] = convertToRateLimiter(cfg.KlaytnRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDMoonbeam] = convertToRateLimiter(cfg.MoonbeamRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDOasis] = convertToRateLimiter(cfg.OasisRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDOptimism] = convertToRateLimiter(cfg.OptimismRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDPolygon] = convertToRateLimiter(cfg.PolygonRequestsPerMinute)
+
+		rateLimitersByChain[sdk.ChainIDSolana] = convertToRateLimiter(cfg.SolanaRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDTerra] = convertToRateLimiter(cfg.TerraRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDTerra2] = convertToRateLimiter(cfg.Terra2RequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDSui] = convertToRateLimiter(cfg.SuiRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDXpla] = convertToRateLimiter(cfg.XplaRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDDeltachain] = convertToRateLimiter(cfg.DeltachainRequestsPerMinute)
+		rateLimitersByChain[ChainIDOsmosis] = convertToRateLimiter(cfg.OsmosisRequestsPerMinute)
+		rateLimitersByChain[sdk.ChainIDSei] = convertToRateLimiter(cfg.SeiRequestsPerMinute)*/
+
 	rateLimitersByChain[sdk.ChainIDBSC] = convertToRateLimiter(cfg.BscRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDCelo] = convertToRateLimiter(cfg.CeloRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDEthereum] = convertToRateLimiter(cfg.EthereumRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDFantom] = convertToRateLimiter(cfg.FantomRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDInjective] = convertToRateLimiter(cfg.InjectiveRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDKarura] = convertToRateLimiter(cfg.KaruraRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDKlaytn] = convertToRateLimiter(cfg.KlaytnRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDMoonbeam] = convertToRateLimiter(cfg.MoonbeamRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDOasis] = convertToRateLimiter(cfg.OasisRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDOptimism] = convertToRateLimiter(cfg.OptimismRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDPolygon] = convertToRateLimiter(cfg.PolygonRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDSolana] = convertToRateLimiter(cfg.SolanaRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDTerra] = convertToRateLimiter(cfg.TerraRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDTerra2] = convertToRateLimiter(cfg.Terra2RequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDSui] = convertToRateLimiter(cfg.SuiRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDXpla] = convertToRateLimiter(cfg.XplaRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDDeltachain] = convertToRateLimiter(cfg.DeltachainRequestsPerMinute)
-	rateLimitersByChain[ChainIDOsmosis] = convertToRateLimiter(cfg.OsmosisRequestsPerMinute)
-	rateLimitersByChain[sdk.ChainIDSei] = convertToRateLimiter(cfg.SeiRequestsPerMinute)
+	rateLimitersByChain[sdk.ChainIDPlanq] = convertToRateLimiter(cfg.PlanqRequestsPerMinute)
 
 	// Initialize the RPC base URLs for each chain
 	baseUrlsByChain = make(map[sdk.ChainID]string)
-	baseUrlsByChain[sdk.ChainIDAcala] = cfg.AcalaBaseUrl
+	/*baseUrlsByChain[sdk.ChainIDAcala] = cfg.AcalaBaseUrl
 	baseUrlsByChain[sdk.ChainIDArbitrum] = cfg.ArbitrumBaseUrl
 	baseUrlsByChain[sdk.ChainIDAlgorand] = cfg.AlgorandBaseUrl
 	baseUrlsByChain[sdk.ChainIDAptos] = cfg.AptosBaseUrl
 	baseUrlsByChain[sdk.ChainIDAvalanche] = cfg.AvalancheBaseUrl
 	baseUrlsByChain[sdk.ChainIDBase] = cfg.BaseBaseUrl
-	baseUrlsByChain[sdk.ChainIDBSC] = cfg.BscBaseUrl
+
 	baseUrlsByChain[sdk.ChainIDCelo] = cfg.CeloBaseUrl
 	baseUrlsByChain[sdk.ChainIDEthereum] = cfg.EthereumBaseUrl
 	baseUrlsByChain[sdk.ChainIDFantom] = cfg.FantomBaseUrl
@@ -103,6 +107,7 @@ func Initialize(cfg *config.RpcProviderSettings) {
 	baseUrlsByChain[sdk.ChainIDMoonbeam] = cfg.MoonbeamBaseUrl
 	baseUrlsByChain[sdk.ChainIDOasis] = cfg.OasisBaseUrl
 	baseUrlsByChain[sdk.ChainIDOptimism] = cfg.OptimismBaseUrl
+
 	baseUrlsByChain[sdk.ChainIDPolygon] = cfg.PolygonBaseUrl
 	baseUrlsByChain[sdk.ChainIDSolana] = cfg.SolanaBaseUrl
 	baseUrlsByChain[sdk.ChainIDTerra] = cfg.TerraBaseUrl
@@ -110,7 +115,9 @@ func Initialize(cfg *config.RpcProviderSettings) {
 	baseUrlsByChain[sdk.ChainIDSui] = cfg.SuiBaseUrl
 	baseUrlsByChain[sdk.ChainIDXpla] = cfg.XplaBaseUrl
 	baseUrlsByChain[sdk.ChainIDDeltachain] = cfg.DeltachainBaseUrl
-	baseUrlsByChain[sdk.ChainIDSei] = cfg.SeiBaseUrl
+	baseUrlsByChain[sdk.ChainIDSei] = cfg.SeiBaseUrl*/
+	baseUrlsByChain[sdk.ChainIDBSC] = cfg.BscBaseUrl
+	baseUrlsByChain[sdk.ChainIDPlanq] = cfg.PlanqBaseUrl
 }
 
 func FetchTx(
@@ -150,6 +157,7 @@ func FetchTx(
 		sdk.ChainIDMoonbeam,
 		sdk.ChainIDOasis,
 		sdk.ChainIDOptimism,
+		sdk.ChainIDPlanq,
 		sdk.ChainIDPolygon:
 		fetchFunc = fetchEthTx
 	case sdk.ChainIDDeltachain:

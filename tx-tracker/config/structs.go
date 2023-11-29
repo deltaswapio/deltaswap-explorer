@@ -100,6 +100,8 @@ type RpcProviderSettings struct {
 	OptimismRequestsPerMinute   uint16 `split_words:"true" required:"true"`
 	OsmosisBaseUrl              string `split_words:"true" required:"true"`
 	OsmosisRequestsPerMinute    uint16 `split_words:"true" required:"true"`
+	PlanqBaseUrl                string `split_words:"true" required:"true"`
+	PlanqRequestsPerMinute      uint16 `split_words:"true" required:"true"`
 	PolygonBaseUrl              string `split_words:"true" required:"true"`
 	PolygonRequestsPerMinute    uint16 `split_words:"true" required:"true"`
 	SeiBaseUrl                  string `split_words:"true" required:"true"`
